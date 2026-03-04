@@ -1,0 +1,995 @@
+/* ===== CSS Variables & Themes ===== */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #495057;
+    --accent-color: #8B4513;
+    --accent-light: #a65d2a;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-color: #f1f3f5;
+    --progress-bg: #e9ecef;
+    --progress-fill: #8B4513;
+    --nav-bg: #ffffff;
+    --card-bg: #ffffff;
+    --verse-border: #e9ecef;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --continue-bg: #f5f0e6;
+    --badge-bg: #8B4513;
+    --badge-text: #ffffff;
+    --back-btn-bg: #ffffff;
+    --back-btn-text: #333;
+    --next-btn-bg: #8B4513;
+    --next-btn-text: #ffffff;
+    --prev-btn-bg: #ffffff;
+    --prev-btn-text: #333;
+    --letter-spacing: 0.5px;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #1a1e2b;
+    --bg-secondary: #2d3349;
+    --text-primary: #e9ecef;
+    --text-secondary: #ced4da;
+    --accent-color: #d4a373;
+    --accent-light: #e9b384;
+    --border-color: #495057;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --hover-color: #3d435b;
+    --progress-bg: #3d435b;
+    --progress-fill: #d4a373;
+    --nav-bg: #2d3349;
+    --card-bg: #2d3349;
+    --verse-border: #495057;
+    --header-bg: rgba(45, 51, 73, 0.95);
+    --continue-bg: #3d435b;
+    --badge-bg: #d4a373;
+    --badge-text: #1a1e2b;
+    --back-btn-bg: #2d3349;
+    --back-btn-text: #e9ecef;
+    --next-btn-bg: #d4a373;
+    --next-btn-text: #1a1e2b;
+    --prev-btn-bg: #2d3349;
+    --prev-btn-text: #e9ecef;
+    --letter-spacing: 0.5px;
+}
+
+/* Sepia Theme */
+[data-theme="sepia"] {
+    --bg-primary: #f4ecd8;
+    --bg-secondary: #e8dccc;
+    --text-primary: #5b4636;
+    --text-secondary: #6b5a4a;
+    --accent-color: #9b6b43;
+    --accent-light: #b48a5a;
+    --border-color: #cbb89e;
+    --shadow-color: rgba(91, 70, 54, 0.1);
+    --hover-color: #e0d2be;
+    --progress-bg: #d6c6b2;
+    --progress-fill: #9b6b43;
+    --nav-bg: #e8dccc;
+    --card-bg: #faf0e2;
+    --verse-border: #d6c6b2;
+    --header-bg: rgba(232, 220, 204, 0.95);
+    --continue-bg: #e8dccc;
+    --badge-bg: #9b6b43;
+    --badge-text: #f4ecd8;
+    --back-btn-bg: #faf0e2;
+    --back-btn-text: #5b4636;
+    --next-btn-bg: #9b6b43;
+    --next-btn-text: #f4ecd8;
+    --prev-btn-bg: #faf0e2;
+    --prev-btn-text: #5b4636;
+    --letter-spacing: 0.5px;
+}
+
+/* Green Theme (Eye Comfort) */
+[data-theme="green"] {
+    --bg-primary: #e8f0e8;
+    --bg-secondary: #d0e0d0;
+    --text-primary: #1e3a2e;
+    --text-secondary: #2d5a3e;
+    --accent-color: #2e7d5e;
+    --accent-light: #3d9b78;
+    --border-color: #a8c9b0;
+    --shadow-color: rgba(30, 58, 46, 0.1);
+    --hover-color: #c0d9c0;
+    --progress-bg: #b8d0b8;
+    --progress-fill: #2e7d5e;
+    --nav-bg: #d0e0d0;
+    --card-bg: #f0f8f0;
+    --verse-border: #b8d0b8;
+    --header-bg: rgba(208, 224, 208, 0.95);
+    --continue-bg: #d0e0d0;
+    --badge-bg: #2e7d5e;
+    --badge-text: #e8f0e8;
+    --back-btn-bg: #f0f8f0;
+    --back-btn-text: #1e3a2e;
+    --next-btn-bg: #2e7d5e;
+    --next-btn-text: #e8f0e8;
+    --prev-btn-bg: #f0f8f0;
+    --prev-btn-text: #1e3a2e;
+    --letter-spacing: 0.5px;
+}
+
+/* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
+@font-face {
+    font-family: 'Amiri';
+    src: url('../fonts/Amiri-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Amiri';
+    src: url('../fonts/Amiri-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scheherazade';
+    src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scheherazade';
+    src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kufi';
+    src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kufi';
+    src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Naskh';
+    src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Naskh';
+    src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== Base Styles with Font Size Inheritance ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Default font size for root */
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Scheherazade', serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.8;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    letter-spacing: var(--letter-spacing);
+    font-size: 1.25rem; /* 20px default */
+}
+
+/* Ensure all text elements inherit font size */
+body, 
+body *,
+p, h1, h2, h3, h4, h5, h6,
+a, button, input, textarea,
+.nav-menu a,
+.nav-brand a,
+.huruf-item h3,
+.huruf-preview,
+.continue-card h4,
+.continue-preview,
+.continue-meta,
+.continue-badge,
+.theme-btn,
+.font-btn,
+.diwan-full-title,
+.chapter-header h2,
+.loading,
+.error {
+    font-size: inherit;
+    letter-spacing: inherit;
+}
+
+/* Specific elements that might need different sizes */
+.nav-brand a {
+    font-size: 1.5rem;
+}
+
+.nav-menu a {
+    font-size: 1.1rem;
+}
+
+.chapter-header h2 {
+    font-size: 1.8rem;
+}
+
+.diwan-full-title {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.huruf-item h3 {
+    font-size: 1.3rem;
+}
+
+.continue-card h4 {
+    font-size: 1.2rem;
+}
+
+.continue-preview {
+    font-size: 0.95rem;
+}
+
+.continue-meta {
+    font-size: 0.85rem;
+}
+
+.continue-badge {
+    font-size: 0.8rem;
+}
+
+.theme-btn, .font-btn {
+    font-size: 1rem;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Navbar Styles ===== */
+.navbar {
+    background-color: var(--nav-bg);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    direction: rtl;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    order: 1;
+    margin-left: auto;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    margin: 2px 0;
+    transition: 0.3s;
+}
+
+.nav-brand {
+    order: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.nav-brand a {
+    color: var(--accent-color);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    order: 3;
+    margin-right: auto;
+    z-index: 1000;
+}
+
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--accent-color);
+}
+
+/* ===== Arabic Text Alignment ===== */
+/* For Arabic language, align text to the right */
+html[lang="ar"] .chapter-header,
+html[lang="ar"] .chapter-header h2,
+html[lang="ar"] .diwan-full-title,
+html[lang="ar"] .huruf-item,
+html[lang="ar"] .huruf-item h3,
+html[lang="ar"] .huruf-preview,
+html[lang="ar"] .continue-reading,
+html[lang="ar"] .continue-reading h3,
+html[lang="ar"] .continue-card,
+html[lang="ar"] .continue-card h4,
+html[lang="ar"] .continue-preview,
+html[lang="ar"] .continue-meta,
+html[lang="ar"] .continue-badge,
+html[lang="ar"] .main-content,
+html[lang="ar"] p,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3 {
+    text-align: right;
+}
+
+/* For English/French, keep normal alignment (left for LTR) */
+html[lang="en"] .chapter-header,
+html[lang="en"] .chapter-header h2,
+html[lang="en"] .diwan-full-title,
+html[lang="en"] .huruf-item,
+html[lang="en"] .huruf-item h3,
+html[lang="en"] .huruf-preview,
+html[lang="en"] .continue-reading,
+html[lang="en"] .continue-reading h3,
+html[lang="en"] .continue-card,
+html[lang="en"] .continue-card h4,
+html[lang="en"] .continue-preview,
+html[lang="en"] .continue-meta,
+html[lang="en"] .continue-badge,
+html[lang="fr"] .chapter-header,
+html[lang="fr"] .chapter-header h2,
+html[lang="fr"] .diwan-full-title,
+html[lang="fr"] .huruf-item,
+html[lang="fr"] .huruf-item h3,
+html[lang="fr"] .huruf-preview,
+html[lang="fr"] .continue-reading,
+html[lang="fr"] .continue-reading h3,
+html[lang="fr"] .continue-card,
+html[lang="fr"] .continue-card h4,
+html[lang="fr"] .continue-preview,
+html[lang="fr"] .continue-meta,
+html[lang="fr"] .continue-badge {
+    text-align: right;
+}
+
+/* Center align specific elements regardless of language */
+.chapter-header {
+    text-align: center !important;
+}
+
+.chapter-header h2 {
+    text-align: center !important;
+}
+
+/* For the continue card badge - keep it as is */
+.continue-badge {
+    display: inline-block;
+    text-align: center;
+}
+
+/* ===== Theme Picker Styles ===== */
+.theme-picker {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 999;
+}
+
+.theme-picker.active {
+    display: block;
+}
+
+.theme-picker h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.theme-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.theme-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.theme-btn:hover,
+.theme-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Light theme button specific */
+.theme-btn.light-theme:hover,
+.theme-btn.light-theme.active {
+    background-color: #8B4513;
+    color: white;
+}
+
+/* Dark theme button specific */
+.theme-btn.dark-theme:hover,
+.theme-btn.dark-theme.active {
+    background-color: #d4a373;
+    color: #1a1e2b;
+}
+
+/* Sepia theme button specific */
+.theme-btn.sepia-theme:hover,
+.theme-btn.sepia-theme.active {
+    background-color: #9b6b43;
+    color: #f4ecd8;
+}
+
+/* Green theme button specific */
+.theme-btn.green-theme:hover,
+.theme-btn.green-theme.active {
+    background-color: #2e7d5e;
+    color: #e8f0e8;
+}
+
+/* ===== Font Picker Styles ===== */
+.font-picker {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 999;
+}
+
+.font-picker.active {
+    display: block;
+}
+
+.font-picker h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.font-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.font-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.font-btn:hover,
+.font-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Font size control */
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.font-size-control label {
+    color: var(--text-secondary);
+    min-width: 80px;
+}
+
+.font-size-control input[type="range"] {
+    flex: 1;
+    max-width: 300px;
+    height: 6px;
+    -webkit-appearance: none;
+    background: var(--progress-bg);
+    border-radius: 3px;
+    outline: none;
+}
+
+.font-size-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.font-size-control input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.font-size-value {
+    color: var(--accent-color);
+    font-weight: bold;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* ===== Font Family Styles ===== */
+/* Amiri Font */
+[data-font="amiri"] body,
+[data-font="amiri"] .verse-line,
+[data-font="amiri"] .diwan-title,
+[data-font="amiri"] .huruf-item h3,
+[data-font="amiri"] .continue-card h4,
+[data-font="amiri"] button,
+[data-font="amiri"] a,
+[data-font="amiri"] p,
+[data-font="amiri"] h1,
+[data-font="amiri"] h2,
+[data-font="amiri"] h3,
+[data-font="amiri"] .nav-menu a,
+[data-font="amiri"] .back-btn,
+[data-font="amiri"] .nav-arrow,
+[data-font="amiri"] .verse-item,
+[data-font="amiri"] .diwan-btn,
+[data-font="amiri"] .huruf-item,
+[data-font="amiri"] .continue-card {
+    font-family: 'Amiri', serif;
+}
+
+/* Scheherazade Font */
+[data-font="scheherazade"] body,
+[data-font="scheherazade"] .verse-line,
+[data-font="scheherazade"] .diwan-title,
+[data-font="scheherazade"] .huruf-item h3,
+[data-font="scheherazade"] .continue-card h4,
+[data-font="scheherazade"] button,
+[data-font="scheherazade"] a,
+[data-font="scheherazade"] p,
+[data-font="scheherazade"] h1,
+[data-font="scheherazade"] h2,
+[data-font="scheherazade"] h3,
+[data-font="scheherazade"] .nav-menu a,
+[data-font="scheherazade"] .back-btn,
+[data-font="scheherazade"] .nav-arrow,
+[data-font="scheherazade"] .verse-item,
+[data-font="scheherazade"] .diwan-btn,
+[data-font="scheherazade"] .huruf-item,
+[data-font="scheherazade"] .continue-card {
+    font-family: 'Scheherazade', serif;
+}
+
+/* Kufi Font */
+[data-font="kufi"] body,
+[data-font="kufi"] .verse-line,
+[data-font="kufi"] .diwan-title,
+[data-font="kufi"] .huruf-item h3,
+[data-font="kufi"] .continue-card h4,
+[data-font="kufi"] button,
+[data-font="kufi"] a,
+[data-font="kufi"] p,
+[data-font="kufi"] h1,
+[data-font="kufi"] h2,
+[data-font="kufi"] h3,
+[data-font="kufi"] .nav-menu a,
+[data-font="kufi"] .back-btn,
+[data-font="kufi"] .nav-arrow,
+[data-font="kufi"] .verse-item,
+[data-font="kufi"] .diwan-btn,
+[data-font="kufi"] .huruf-item,
+[data-font="kufi"] .continue-card {
+    font-family: 'Kufi', sans-serif;
+}
+
+/* Naskh Font */
+[data-font="naskh"] body,
+[data-font="naskh"] .verse-line,
+[data-font="naskh"] .diwan-title,
+[data-font="naskh"] .huruf-item h3,
+[data-font="naskh"] .continue-card h4,
+[data-font="naskh"] button,
+[data-font="naskh"] a,
+[data-font="naskh"] p,
+[data-font="naskh"] h1,
+[data-font="naskh"] h2,
+[data-font="naskh"] h3,
+[data-font="naskh"] .nav-menu a,
+[data-font="naskh"] .back-btn,
+[data-font="naskh"] .nav-arrow,
+[data-font="naskh"] .verse-item,
+[data-font="naskh"] .diwan-btn,
+[data-font="naskh"] .huruf-item,
+[data-font="naskh"] .continue-card {
+    font-family: 'Naskh', serif;
+}
+
+/* ===== Language Picker Styles ===== */
+.language-picker {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 999;
+}
+
+.language-picker.active {
+    display: block;
+}
+
+.language-picker h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.language-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.language-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    min-width: 120px;
+}
+
+.language-btn:hover,
+.language-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* ===== Main Content Styles ===== */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ===== Chapter Header Styles ===== */
+.chapter-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.chapter-header h2 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.diwan-full-title {
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    font-style: italic;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+/* ===== Continue Reading Section ===== */
+.continue-reading {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--continue-bg);
+    border-radius: 12px;
+    border-right: 4px solid var(--accent-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.continue-reading h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.continue-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.continue-card:hover {
+    transform: translateX(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.continue-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.continue-preview {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.continue-meta {
+    display: flex;
+    gap: 1rem;
+    color: var(--text-secondary);
+    align-items: center;
+}
+
+.continue-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--badge-bg);
+    color: var(--badge-text);
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== Huruf List Styles ===== */
+.huruf-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.huruf-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.huruf-item:hover {
+    border-color: var(--accent-color);
+    transform: translateX(-5px);
+}
+
+.huruf-item h3 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.huruf-preview {
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== Animations ===== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Loading States ===== */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid var(--accent-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ===== Error States ===== */
+.error {
+    text-align: center;
+    padding: 2rem;
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+    body {
+        font-size: 1.1rem;
+    }
+
+    .navbar {
+        padding: 1rem;
+        position: relative;
+    }
+
+    .hamburger {
+        display: flex;
+        order: 1;
+        margin-left: 0;
+    }
+
+    .nav-brand {
+        order: 2;
+        position: static;
+        transform: none;
+    }
+
+    .nav-brand a {
+        font-size: 1.2rem;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--nav-bg);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        box-shadow: 0 2px 5px var(--shadow-color);
+        order: 4;
+        margin-right: 0;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .chapter-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .diwan-full-title {
+        font-size: 1rem;
+    }
+
+    .continue-meta {
+        flex-wrap: wrap;
+    }
+
+    .theme-options,
+    .font-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .theme-btn,
+    .font-btn {
+        width: 100%;
+    }
+
+    .font-size-control {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .font-size-control label {
+        text-align: center;
+    }
+
+    .font-size-control input[type="range"] {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-brand a {
+        font-size: 1.1rem;
+    }
+}

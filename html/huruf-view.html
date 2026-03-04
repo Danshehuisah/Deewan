@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الْأَبْيَاتُ - دِيوانُ الشَّيْخِ</title>
+    <link rel="stylesheet" href="../css/verses.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-brand">
+                <a href="../index.html">ديوان الشيخ</a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" data-i18n="nav.home">الرئيسية</a>
+                <a href="#" id="themeToggle" data-i18n="nav.theme">المظهر</a>
+                <a href="#" id="fontToggle" data-i18n="nav.font">الخط</a>
+                <a href="#" id="languageToggle" data-i18n="nav.language">اللغة</a>
+                <a href="#" data-i18n="nav.community">المجتمع</a>
+            </div>
+        </nav>
+
+        <!-- Theme Picker -->
+        <div class="theme-picker" id="themePicker">
+            <h3 data-i18n="theme.title">اخْتَرِ الْمَظْهَرَ</h3>
+            <div class="theme-options">
+                <button class="theme-btn light-theme" data-theme="light" data-i18n="theme.light">🌞 فَاتِحٌ</button>
+                <button class="theme-btn dark-theme" data-theme="dark" data-i18n="theme.dark">🌙 دَاكِنٌ</button>
+                <button class="theme-btn sepia-theme" data-theme="sepia" data-i18n="theme.sepia">📜 سِيبِيَا</button>
+                <button class="theme-btn green-theme" data-theme="green" data-i18n="theme.green">🌿 أَخْضَرُ مُرِيحٌ</button>
+            </div>
+        </div>
+
+        <!-- Font Picker -->
+        <div class="font-picker" id="fontPicker">
+            <h3 data-i18n="font.title">اخْتَرِ الْخَطَّ الْعَرَبِيَّ</h3>
+            <div class="font-options">
+                <button class="font-btn" data-font="amiri" data-i18n="font.amiri">📝 أَمِيرِي</button>
+                <button class="font-btn" data-font="scheherazade" data-i18n="font.scheherazade">📖 شَهْرَزَادَ</button>
+                <button class="font-btn" data-font="kufi" data-i18n="font.kufi">🕌 كُوفِي</button>
+                <button class="font-btn" data-font="naskh" data-i18n="font.naskh">📜 نَسْخٌ</button>
+            </div>
+            <div class="font-size-control">
+                <label for="fontSizeSlider" data-i18n="font.size">حَجْمُ الْخَطِّ</label>
+                <input type="range" id="fontSizeSlider" min="14" max="32" value="20" step="1">
+                <span class="font-size-value" id="fontSizeValue">20</span>
+            </div>
+        </div>
+
+        <!-- Language Picker -->
+        <div class="language-picker" id="languagePicker">
+            <h3 data-i18n="language.title">اخْتَرِ اللُّغَةَ</h3>
+            <div class="language-options">
+                <button class="language-btn" data-lang="ar" data-i18n="language.arabic">🇸🇦 الْعَرَبِيَّةُ</button>
+                <button class="language-btn active" data-lang="en" data-i18n="language.english">🇬🇧 English</button>
+                <button class="language-btn" data-lang="fr" data-i18n="language.french">🇫🇷 Français</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <button class="back-btn" id="backToChapters">
+                    ← الْعَوْدَةُ لِلْفُصُولِ
+                </button>
+            </div>
+            
+            <!-- Verses Container -->
+            <div class="verses-container" id="versesContainer">
+                <!-- Verses will be loaded here -->
+            </div>
+
+            <!-- Chapter Navigation -->
+            <div class="verse-navigation" id="verseNavigation">
+                <button class="nav-arrow prev-btn" id="prevChapter" disabled>الْحِزْبُ السَّابِقُ</button>
+                <span id="currentPosition"></span>
+                <button class="nav-arrow next-btn" id="nextChapter">الْحِزْبُ التَّالِي</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/verses.js"></script>
+</body>
+</html>

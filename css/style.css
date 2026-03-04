@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== CSS Variables & Themes ===== */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #495057;
+    --accent-color: #8B4513;
+    --accent-light: #a65d2a;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-color: #f1f3f5;
+    --progress-bg: #e9ecef;
+    --progress-fill: #8B4513;
+    --nav-bg: #ffffff;
+    --card-bg: #ffffff;
+    --verse-border: #e9ecef;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --continue-bg: #f5f0e6;
+    --notification-bg: linear-gradient(135deg, #f5f0e6 0%, #fff 100%);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #1a1e2b;
+    --bg-secondary: #2d3349;
+    --text-primary: #e9ecef;
+    --text-secondary: #ced4da;
+    --accent-color: #d4a373;
+    --accent-light: #e9b384;
+    --border-color: #495057;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --hover-color: #3d435b;
+    --progress-bg: #3d435b;
+    --progress-fill: #d4a373;
+    --nav-bg: #2d3349;
+    --card-bg: #2d3349;
+    --verse-border: #495057;
+    --header-bg: rgba(45, 51, 73, 0.95);
+    --continue-bg: #3d435b;
+    --notification-bg: linear-gradient(135deg, #2d3349 0%, #1a1e2b 100%);
+}
+
+/* Sepia Theme */
+[data-theme="sepia"] {
+    --bg-primary: #f4ecd8;
+    --bg-secondary: #e8dccc;
+    --text-primary: #5b4636;
+    --text-secondary: #6b5a4a;
+    --accent-color: #9b6b43;
+    --accent-light: #b48a5a;
+    --border-color: #cbb89e;
+    --shadow-color: rgba(91, 70, 54, 0.1);
+    --hover-color: #e0d2be;
+    --progress-bg: #d6c6b2;
+    --progress-fill: #9b6b43;
+    --nav-bg: #e8dccc;
+    --card-bg: #faf0e2;
+    --verse-border: #d6c6b2;
+    --header-bg: rgba(232, 220, 204, 0.95);
+    --continue-bg: #e8dccc;
+    --notification-bg: linear-gradient(135deg, #f4ecd8 0%, #e8dccc 100%);
+}
+
+/* Green Theme (Eye Comfort) */
+[data-theme="green"] {
+    --bg-primary: #e8f0e8;
+    --bg-secondary: #d0e0d0;
+    --text-primary: #1e3a2e;
+    --text-secondary: #2d5a3e;
+    --accent-color: #2e7d5e;
+    --accent-light: #3d9b78;
+    --border-color: #a8c9b0;
+    --shadow-color: rgba(30, 58, 46, 0.1);
+    --hover-color: #c0d9c0;
+    --progress-bg: #b8d0b8;
+    --progress-fill: #2e7d5e;
+    --nav-bg: #d0e0d0;
+    --card-bg: #f0f8f0;
+    --verse-border: #b8d0b8;
+    --header-bg: rgba(208, 224, 208, 0.95);
+    --continue-bg: #d0e0d0;
+    --notification-bg: linear-gradient(135deg, #e8f0e8 0%, #d0e0d0 100%);
+}
+
+body {
+    font-family: 'Scheherazade', serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+    background-color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand h1 {
+    color: #8B4513;
+    font-size: 1.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #8B4513;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 2px 0;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.welcome-title {
+    text-align: center;
+    color: #8B4513;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.welcome-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+/* Diwan Grid */
+.diwan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.diwan-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.diwan-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-color: #8B4513;
+}
+
+.diwan-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #8B4513;
+    margin-bottom: 0.5rem;
+}
+
+.diwan-title {
+    color: #333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .diwan-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .diwan-grid {
+        grid-template-columns: 1fr;
+    }
+}

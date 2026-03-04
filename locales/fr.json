@@ -1,0 +1,52 @@
+{
+    "app": {
+        "title": "Diwan de Shehu Ibrahim Inyass",
+        "subtitle": "Sélectionnez Diwan à lire",
+        "footer": "Tous droits réservés © 2024 | Diwan de Shehu Ibrahim Inyass"
+    },
+    "nav": {
+        "home": "Accueil",
+        "theme": "Thème",
+        "font": "Police",
+        "language": "Langue",
+        "community": "Communauté"
+    },
+    "theme": {
+        "title": "Choisir le thème",
+        "light": "🌞 Clair",
+        "dark": "🌙 Sombre",
+        "sepia": "📜 Sépia",
+        "green": "🌿 Vert confort"
+    },
+    "font": {
+        "title": "Choisir la police arabe",
+        "amiri": "📝 Amiri",
+        "scheherazade": "📖 Scheherazade",
+        "kufi": "🕌 Kufi",
+        "naskh": "📜 Naskh",
+        "size": "Taille de police"
+    },
+    "language": {
+        "title": "Choisir la langue",
+        "arabic": "🇸🇦 العربية",
+        "english": "🇬🇧 English",
+        "french": "🇫🇷 Français"
+    },
+    "diwan": {
+        "title": "Diwan",
+        "chapter": "Chapitre",
+        "huruf": "Lettre",
+        "verses": "Versets",
+        "back": "← Retour aux chapitres",
+        "next": "Chapitre suivant",
+        "prev": "Précédent",
+        "loading": "Chargement...",
+        "error": "Échec du chargement",
+        "noVerses": "Aucun verset dans ce chapitre",
+        "progress": "de",
+        "continue": "📖 Continuer la lecture",
+        "continueBadge": "Dernière lecture",
+        "chapterNumber": "Chapitre",
+        "lastRead": "Dernière lecture"
+    }
+}

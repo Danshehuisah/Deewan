@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فُصُولُ الدِّيوَانِ</title>
+    <link rel="stylesheet" href="../css/chapter.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-brand">
+                <a href="../index.html">ديوان الشيخ</a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html">الرئيسية</a>
+                <a href="#" id="themeToggle">المظهر</a>
+                <a href="#" id="fontToggle">الخط</a>
+                <a href="#" id="languageToggle">اللغة</a>
+                <a href="#">المجتمع</a>
+            </div>
+        </nav>
+
+        <!-- Theme Picker -->
+        <div class="theme-picker" id="themePicker">
+            <h3>اخْتَرِ الْمَظْهَرَ</h3>
+            <div class="theme-options">
+                <button class="theme-btn light-theme" data-theme="light">🌞 فَاتِحٌ</button>
+                <button class="theme-btn dark-theme" data-theme="dark">🌙 دَاكِنٌ</button>
+                <button class="theme-btn sepia-theme" data-theme="sepia">📜 سِيبِيَا</button>
+                <button class="theme-btn green-theme" data-theme="green">🌿 أَخْضَرُ مُرِيحٌ</button>
+            </div>
+        </div>
+
+        <!-- Font Picker -->
+        <div class="font-picker" id="fontPicker">
+            <h3>اخْتَرِ الْخَطَّ الْعَرَبِيَّ</h3>
+            <div class="font-options">
+                <button class="font-btn" data-font="amiri">📝 أَمِيرِي</button>
+                <button class="font-btn" data-font="scheherazade">📖 شَهْرَزَادَ</button>
+                <button class="font-btn" data-font="kufi">🕌 كُوفِي</button>
+                <button class="font-btn" data-font="naskh">📜 نَسْخٌ</button>
+            </div>
+            <div class="font-size-control">
+                <label for="fontSizeSlider">حَجْمُ الْخَطِّ</label>
+                <input type="range" id="fontSizeSlider" min="14" max="32" value="20" step="1">
+                <span class="font-size-value" id="fontSizeValue">20</span>
+            </div>
+        </div>
+
+        <!-- Language Picker -->
+        <div class="language-picker" id="languagePicker">
+            <h3 data-i18n="language.title">اخْتَرِ اللُّغَةَ</h3>
+            <div class="language-options">
+                <button class="language-btn" data-lang="ar" data-i18n="language.arabic">🇸🇦 الْعَرَبِيَّةُ</button>
+                <button class="language-btn active" data-lang="en" data-i18n="language.english">🇬🇧 English</button>
+                <button class="language-btn" data-lang="fr" data-i18n="language.french">🇫🇷 Français</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Continue Reading Section (hidden by default) -->
+            <div class="continue-reading" id="continueReading" style="display: none;">
+                <h3>📖 مُتَابَعَةُ الْقِرَاءَةِ</h3>
+                <div class="continue-card" id="continueCard">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+
+            <div class="chapter-header">
+                <h2 id="diwanTitle">الديوان</h2>
+                <div class="diwan-full-title" id="diwanFullTitle"></div>
+            </div>
+            
+            <div class="huruf-list" id="hurufList">
+                <!-- Chapters will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/chapter.js"></script>
+</body>
+</html>

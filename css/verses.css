@@ -1,0 +1,1195 @@
+/* ===== CSS Variables & Themes ===== */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #495057;
+    --accent-color: #8B4513;
+    --accent-light: #a65d2a;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-color: #f1f3f5;
+    --progress-bg: #e9ecef;
+    --progress-fill: #8B4513;
+    --nav-bg: #ffffff;
+    --card-bg: #ffffff;
+    --verse-border: #e9ecef;
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --continue-bg: #f5f0e6;
+    --badge-bg: #8B4513;
+    --badge-text: #ffffff;
+    --back-btn-bg: #ffffff;
+    --back-btn-text: #333;
+    --next-btn-bg: #8B4513;
+    --next-btn-text: #ffffff;
+    --prev-btn-bg: #ffffff;
+    --prev-btn-text: #333;
+    --letter-spacing: 0.5px;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #1a1e2b;
+    --bg-secondary: #2d3349;
+    --text-primary: #e9ecef;
+    --text-secondary: #ced4da;
+    --accent-color: #d4a373;
+    --accent-light: #e9b384;
+    --border-color: #495057;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --hover-color: #3d435b;
+    --progress-bg: #3d435b;
+    --progress-fill: #d4a373;
+    --nav-bg: #2d3349;
+    --card-bg: #2d3349;
+    --verse-border: #495057;
+    --header-bg: rgba(45, 51, 73, 0.95);
+    --continue-bg: #3d435b;
+    --badge-bg: #d4a373;
+    --badge-text: #1a1e2b;
+    --back-btn-bg: #2d3349;
+    --back-btn-text: #e9ecef;
+    --next-btn-bg: #d4a373;
+    --next-btn-text: #1a1e2b;
+    --prev-btn-bg: #2d3349;
+    --prev-btn-text: #e9ecef;
+    --letter-spacing: 0.5px;
+}
+
+/* Sepia Theme */
+[data-theme="sepia"] {
+    --bg-primary: #f4ecd8;
+    --bg-secondary: #e8dccc;
+    --text-primary: #5b4636;
+    --text-secondary: #6b5a4a;
+    --accent-color: #9b6b43;
+    --accent-light: #b48a5a;
+    --border-color: #cbb89e;
+    --shadow-color: rgba(91, 70, 54, 0.1);
+    --hover-color: #e0d2be;
+    --progress-bg: #d6c6b2;
+    --progress-fill: #9b6b43;
+    --nav-bg: #e8dccc;
+    --card-bg: #faf0e2;
+    --verse-border: #d6c6b2;
+    --header-bg: rgba(232, 220, 204, 0.95);
+    --continue-bg: #e8dccc;
+    --badge-bg: #9b6b43;
+    --badge-text: #f4ecd8;
+    --back-btn-bg: #faf0e2;
+    --back-btn-text: #5b4636;
+    --next-btn-bg: #9b6b43;
+    --next-btn-text: #f4ecd8;
+    --prev-btn-bg: #faf0e2;
+    --prev-btn-text: #5b4636;
+    --letter-spacing: 0.5px;
+}
+
+/* Green Theme (Eye Comfort) */
+[data-theme="green"] {
+    --bg-primary: #e8f0e8;
+    --bg-secondary: #d0e0d0;
+    --text-primary: #1e3a2e;
+    --text-secondary: #2d5a3e;
+    --accent-color: #2e7d5e;
+    --accent-light: #3d9b78;
+    --border-color: #a8c9b0;
+    --shadow-color: rgba(30, 58, 46, 0.1);
+    --hover-color: #c0d9c0;
+    --progress-bg: #b8d0b8;
+    --progress-fill: #2e7d5e;
+    --nav-bg: #d0e0d0;
+    --card-bg: #f0f8f0;
+    --verse-border: #b8d0b8;
+    --header-bg: rgba(208, 224, 208, 0.95);
+    --continue-bg: #d0e0d0;
+    --badge-bg: #2e7d5e;
+    --badge-text: #e8f0e8;
+    --back-btn-bg: #f0f8f0;
+    --back-btn-text: #1e3a2e;
+    --next-btn-bg: #2e7d5e;
+    --next-btn-text: #e8f0e8;
+    --prev-btn-bg: #f0f8f0;
+    --prev-btn-text: #1e3a2e;
+    --letter-spacing: 0.5px;
+}
+
+/* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
+@font-face {
+    font-family: 'Amiri';
+    src: url('../fonts/Amiri-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Amiri';
+    src: url('../fonts/Amiri-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scheherazade';
+    src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scheherazade';
+    src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kufi';
+    src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kufi';
+    src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Naskh';
+    src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Naskh';
+    src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== Base Styles with Font Size Inheritance ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Default font size for root */
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Scheherazade', serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.8;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    letter-spacing: var(--letter-spacing);
+    font-size: 1.25rem; /* 20px default */
+}
+
+/* Ensure all text elements inherit font size */
+body, 
+body *,
+p, h1, h2, h3, h4, h5, h6,
+a, button, input, textarea,
+.nav-menu a,
+.nav-brand a,
+.verse-line,
+.verse-item,
+.back-btn,
+.nav-arrow,
+.theme-btn,
+.font-btn,
+#currentPosition,
+.loading,
+.error,
+.nav-brand .chapter-title-nav {
+    font-size: inherit;
+    letter-spacing: inherit;
+}
+
+/* Specific elements that might need different sizes */
+.nav-brand a {
+    font-size: 1.5rem;
+}
+
+.nav-brand .chapter-title-nav {
+    font-size: 1.2rem;
+}
+
+.nav-menu a {
+    font-size: 1.1rem;
+}
+
+.verse-line {
+    font-size: 1.3rem;
+    line-height: 2.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+}
+
+.back-btn {
+    font-size: 1rem;
+}
+
+.nav-arrow.prev-btn {
+    font-size: 0.9rem;
+}
+
+.nav-arrow.next-btn {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#currentPosition {
+    font-size: 0.95rem;
+}
+
+.theme-btn, .font-btn {
+    font-size: 1rem;
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Navbar Styles ===== */
+.navbar {
+    background-color: var(--nav-bg);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /* direction: rtl; */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    order: 1;
+    margin-right: 0;
+    margin-left: auto;
+    z-index: 1002;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    margin: 2px 0;
+    transition: 0.3s;
+}
+
+.nav-brand {
+    /* order: 2; */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    text-align: center;
+    z-index: 10001;
+}
+
+.nav-brand a {
+    color: var(--accent-color);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+/* Chapter title in navbar */
+.nav-brand .chapter-title-nav {
+    color: var(--text-secondary);
+    margin-right: 0.5rem;
+    font-weight: normal;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    /* order: 3; */
+    margin-right: auto;
+    margin-left: 0;
+    z-index: 1001;
+}
+
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--accent-color);
+}
+
+/* LTR override for English/French */
+html[lang="en"] .navbar,
+html[lang="fr"] .navbar {
+    direction: ltr;
+}
+
+html[lang="en"] .hamburger,
+html[lang="fr"] .hamburger {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+html[lang="en"] .nav-menu,
+html[lang="fr"] .nav-menu {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* Hide progress bar when navbar is active */
+.nav-menu.active ~ .main-content .progress-container,
+.navbar:has(.nav-menu.active) .progress-container {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Reading View - Hide menu items */
+.reading-view .nav-menu {
+    display: none;
+}
+
+.reading-view .navbar {
+    justify-content: flex-start;
+    gap: 1rem;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.reading-view .nav-brand {
+    position: static;
+    transform: none;
+    text-align: right;
+}
+
+.reading-view .nav-brand a {
+    color: var(--accent-color);
+}
+
+.reading-view .hamburger {
+    display: flex !important;
+}
+
+/* ===== Theme Picker Styles ===== */
+.theme-picker {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 999;
+}
+
+.theme-picker.active {
+    display: block;
+}
+
+.theme-picker h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.theme-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.theme-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.theme-btn:hover,
+.theme-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Light theme button specific */
+.theme-btn.light-theme:hover,
+.theme-btn.light-theme.active {
+    background-color: #8B4513;
+    color: white;
+}
+
+/* Dark theme button specific */
+.theme-btn.dark-theme:hover,
+.theme-btn.dark-theme.active {
+    background-color: #d4a373;
+    color: #1a1e2b;
+}
+
+/* Sepia theme button specific */
+.theme-btn.sepia-theme:hover,
+.theme-btn.sepia-theme.active {
+    background-color: #9b6b43;
+    color: #f4ecd8;
+}
+
+/* Green theme button specific */
+.theme-btn.green-theme:hover,
+.theme-btn.green-theme.active {
+    background-color: #2e7d5e;
+    color: #e8f0e8;
+}
+
+/* ===== Language Picker Styles ===== */
+.language-picker {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 999;
+}
+
+.language-picker.active {
+    display: block;
+}
+
+.language-picker h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.language-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.language-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    min-width: 120px;
+}
+
+.language-btn:hover,
+.language-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* ===== Font Picker Styles ===== */
+.font-picker {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+    animation: slideDown 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    z-index: 999;
+}
+
+.font-picker.active {
+    display: block;
+}
+
+.font-picker h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.font-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.font-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border-color);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.font-btn:hover,
+.font-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Font size control */
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.font-size-control label {
+    color: var(--text-secondary);
+    min-width: 80px;
+}
+
+.font-size-control input[type="range"] {
+    flex: 1;
+    max-width: 300px;
+    height: 6px;
+    -webkit-appearance: none;
+    background: var(--progress-bg);
+    border-radius: 3px;
+    outline: none;
+}
+
+.font-size-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.font-size-control input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.font-size-value {
+    color: var(--accent-color);
+    font-weight: bold;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* ===== Font Family Styles ===== */
+/* Amiri Font */
+[data-font="amiri"] body,
+[data-font="amiri"] .verse-line,
+[data-font="amiri"] .diwan-title,
+[data-font="amiri"] .huruf-item h3,
+[data-font="amiri"] .continue-card h4,
+[data-font="amiri"] button,
+[data-font="amiri"] a,
+[data-font="amiri"] p,
+[data-font="amiri"] h1,
+[data-font="amiri"] h2,
+[data-font="amiri"] h3,
+[data-font="amiri"] .nav-menu a,
+[data-font="amiri"] .back-btn,
+[data-font="amiri"] .nav-arrow,
+[data-font="amiri"] .verse-item,
+[data-font="amiri"] .diwan-btn,
+[data-font="amiri"] .huruf-item,
+[data-font="amiri"] .continue-card {
+    font-family: 'Amiri', serif;
+}
+
+/* Scheherazade Font */
+[data-font="scheherazade"] body,
+[data-font="scheherazade"] .verse-line,
+[data-font="scheherazade"] .diwan-title,
+[data-font="scheherazade"] .huruf-item h3,
+[data-font="scheherazade"] .continue-card h4,
+[data-font="scheherazade"] button,
+[data-font="scheherazade"] a,
+[data-font="scheherazade"] p,
+[data-font="scheherazade"] h1,
+[data-font="scheherazade"] h2,
+[data-font="scheherazade"] h3,
+[data-font="scheherazade"] .nav-menu a,
+[data-font="scheherazade"] .back-btn,
+[data-font="scheherazade"] .nav-arrow,
+[data-font="scheherazade"] .verse-item,
+[data-font="scheherazade"] .diwan-btn,
+[data-font="scheherazade"] .huruf-item,
+[data-font="scheherazade"] .continue-card {
+    font-family: 'Scheherazade', serif;
+}
+
+/* Kufi Font */
+[data-font="kufi"] body,
+[data-font="kufi"] .verse-line,
+[data-font="kufi"] .diwan-title,
+[data-font="kufi"] .huruf-item h3,
+[data-font="kufi"] .continue-card h4,
+[data-font="kufi"] button,
+[data-font="kufi"] a,
+[data-font="kufi"] p,
+[data-font="kufi"] h1,
+[data-font="kufi"] h2,
+[data-font="kufi"] h3,
+[data-font="kufi"] .nav-menu a,
+[data-font="kufi"] .back-btn,
+[data-font="kufi"] .nav-arrow,
+[data-font="kufi"] .verse-item,
+[data-font="kufi"] .diwan-btn,
+[data-font="kufi"] .huruf-item,
+[data-font="kufi"] .continue-card {
+    font-family: 'Kufi', sans-serif;
+}
+
+/* Naskh Font */
+[data-font="naskh"] body,
+[data-font="naskh"] .verse-line,
+[data-font="naskh"] .diwan-title,
+[data-font="naskh"] .huruf-item h3,
+[data-font="naskh"] .continue-card h4,
+[data-font="naskh"] button,
+[data-font="naskh"] a,
+[data-font="naskh"] p,
+[data-font="naskh"] h1,
+[data-font="naskh"] h2,
+[data-font="naskh"] h3,
+[data-font="naskh"] .nav-menu a,
+[data-font="naskh"] .back-btn,
+[data-font="naskh"] .nav-arrow,
+[data-font="naskh"] .verse-item,
+[data-font="naskh"] .diwan-btn,
+[data-font="naskh"] .huruf-item,
+[data-font="naskh"] .continue-card {
+    font-family: 'Naskh', serif;
+}
+
+/* ===== Main Content Styles ===== */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.reading-view .main-content {
+    padding-top: 0.5rem;
+}
+
+/* ===== Progress Bar Styles ===== */
+.progress-container {
+    position: sticky;
+    top: 3px;
+    width: calc(100% - 2rem);
+    height: 8px;
+    background-color: var(--progress-bg);
+    z-index: 999;
+    margin: 0.5rem auto 0 auto;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    max-width: 1200px;
+    transition: opacity 0.3s ease;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--progress-fill);
+    width: 0%;
+    transition: width 0.3s ease;
+    direction: ltr;
+    border-radius: 4px;
+}
+
+/* ===== Navigation Buttons Styles ===== */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.back-btn {
+    background: var(--back-btn-bg);
+    border: 1px solid var(--border-color);
+    color: var(--back-btn-text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* ===== Verses Container Styles ===== */
+.verses-container {
+    margin: 2rem 0;
+    direction: rtl;
+}
+
+.verse-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--verse-border);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.verse-line {
+    text-align: center;
+    line-height: 2.5;
+    padding: 0.75rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.verse-line:first-child {
+    border-bottom: 1px dashed var(--verse-border);
+    margin-bottom: 0.75rem;
+}
+
+/* ===== Holy Names Styling - Theme Aware ===== */
+.holy-name-allah,
+.holy-name-muhammad,
+.holy-name-ahmad,
+.holy-name-rasool,
+.holy-name-nabi {
+    font-weight: bold;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+/* Light Theme (Default) */
+.holy-name-allah[data-theme="light"],
+.holy-name-allah:not([data-theme]) {
+    color: #8B4513;
+}
+
+.holy-name-muhammad[data-theme="light"],
+.holy-name-muhammad:not([data-theme]) {
+    color: #2c5f2d;
+}
+
+.holy-name-ahmad[data-theme="light"],
+.holy-name-ahmad:not([data-theme]) {
+    color: #9d6b3e; /* Warm brown for Ahmad */
+}
+
+.holy-name-rasool[data-theme="light"],
+.holy-name-rasool:not([data-theme]) {
+    color: #b85e0e;
+}
+
+.holy-name-nabi[data-theme="light"],
+.holy-name-nabi:not([data-theme]) {
+    color: #7d5136;
+}
+
+/* Dark Theme */
+[data-theme="dark"] .holy-name-allah,
+.holy-name-allah[data-theme="dark"] {
+    color: #e6b17e !important;
+}
+
+[data-theme="dark"] .holy-name-muhammad,
+.holy-name-muhammad[data-theme="dark"] {
+    color: #8bc34a !important;
+}
+
+[data-theme="dark"] .holy-name-ahmad,
+.holy-name-ahmad[data-theme="dark"] {
+    color: #d4a373 !important; /* Light brown for Ahmad in dark mode */
+}
+
+[data-theme="dark"] .holy-name-rasool,
+.holy-name-rasool[data-theme="dark"] {
+    color: #ffb74d !important;
+}
+
+[data-theme="dark"] .holy-name-nabi,
+.holy-name-nabi[data-theme="dark"] {
+    color: #d4a373 !important;
+}
+
+/* Sepia Theme */
+[data-theme="sepia"] .holy-name-allah,
+.holy-name-allah[data-theme="sepia"] {
+    color: #9d6b3e !important;
+}
+
+[data-theme="sepia"] .holy-name-muhammad,
+.holy-name-muhammad[data-theme="sepia"] {
+    color: #5f7b4a !important;
+}
+
+[data-theme="sepia"] .holy-name-ahmad,
+.holy-name-ahmad[data-theme="sepia"] {
+    color: #b77b4a !important; /* Copper for Ahmad in sepia */
+}
+
+[data-theme="sepia"] .holy-name-rasool,
+.holy-name-rasool[data-theme="sepia"] {
+    color: #b77b4a !important;
+}
+
+[data-theme="sepia"] .holy-name-nabi,
+.holy-name-nabi[data-theme="sepia"] {
+    color: #8b6b4a !important;
+}
+
+/* Green Theme */
+[data-theme="green"] .holy-name-allah,
+.holy-name-allah[data-theme="green"] {
+    color: #c17b3d !important;
+}
+
+[data-theme="green"] .holy-name-muhammad,
+.holy-name-muhammad[data-theme="green"] {
+    color: #1e6b3e !important;
+}
+
+[data-theme="green"] .holy-name-ahmad,
+.holy-name-ahmad[data-theme="green"] {
+    color: #d98c4a !important; /* Bronze for Ahmad in green theme */
+}
+
+[data-theme="green"] .holy-name-rasool,
+.holy-name-rasool[data-theme="green"] {
+    color: #d98c4a !important;
+}
+
+[data-theme="green"] .holy-name-nabi,
+.holy-name-nabi[data-theme="green"] {
+    color: #4a7042 !important;
+}
+
+/* Optional: Add subtle effect on hover */
+.holy-name-allah:hover,
+.holy-name-muhammad:hover,
+.holy-name-ahmad:hover,
+.holy-name-rasool:hover,
+.holy-name-nabi:hover {
+    text-shadow: 0 0 8px currentColor;
+    transition: text-shadow 0.3s ease;
+}
+/* ===== Verse Navigation Styles ===== */
+.verse-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 1rem 0;
+    gap: 2rem;
+    direction: rtl;
+}
+
+.nav-arrow {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Previous button - smaller, on the right */
+.nav-arrow.prev-btn {
+    background-color: var(--prev-btn-bg);
+    color: var(--prev-btn-text);
+    padding: 0.4rem 1rem;
+    white-space: nowrap;
+    min-width: fit-content;
+    border: 1px solid var(--border-color);
+}
+
+/* Next button - larger, on the left */
+.nav-arrow.next-btn {
+    background-color: var(--next-btn-bg);
+    color: var(--next-btn-text);
+    padding: 0.75rem 3rem;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.nav-arrow.next-btn:hover:not(:disabled) {
+    background-color: var(--accent-light);
+    transform: scale(1.05);
+}
+
+.nav-arrow.prev-btn:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.nav-arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nav-arrow.next-btn:disabled {
+    background-color: var(--text-secondary);
+}
+
+#currentPosition {
+    color: var(--text-secondary);
+    margin: 0 1rem;
+    white-space: nowrap;
+}
+
+/* ===== Animations ===== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Loading States ===== */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid var(--accent-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ===== Error States ===== */
+.error {
+    text-align: center;
+    padding: 2rem;
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 768px) {
+    body {
+        font-size: 1.1rem;
+    }
+
+    .navbar {
+        padding: 1rem;
+        position: relative;
+    }
+
+    .hamburger {
+        display: flex;
+        order: 1;
+        margin-left: 0;
+    }
+
+    .nav-brand {
+        order: 2;
+        position: static;
+        transform: none;
+    }
+
+    .nav-brand a {
+        font-size: 1.2rem;
+    }
+
+    .nav-brand .chapter-title-nav {
+        font-size: 1rem;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--nav-bg);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        box-shadow: 0 2px 5px var(--shadow-color);
+        order: 4;
+        margin-right: 0;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .progress-container {
+        height: 8px;
+        width: calc(100% - 1rem);
+        margin: 0.25rem auto 0 auto;
+        border-radius: 4px;
+    }
+
+    .verse-line {
+        font-size: 1.2rem;
+        line-height: 2.2;
+    }
+
+    .verse-navigation {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .nav-arrow.prev-btn {
+        order: 1;
+        flex: 0 0 auto;
+    }
+    
+    .nav-arrow.next-btn {
+        order: 3;
+        padding: 0.75rem 2rem;
+        font-size: 1.2rem;
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    #currentPosition {
+        order: 2;
+        margin: 0;
+    }
+
+    .theme-options,
+    .font-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .theme-btn,
+    .font-btn {
+        width: 100%;
+    }
+
+    .font-size-control {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .font-size-control label {
+        text-align: center;
+    }
+
+    .font-size-control input[type="range"] {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-brand a {
+        font-size: 1.1rem;
+    }
+
+    .nav-brand .chapter-title-nav {
+        display: none;
+    }
+
+    .verse-line {
+        font-size: 1.1rem;
+        line-height: 2;
+    }
+
+    .nav-arrow.next-btn {
+        font-size: 1.1rem;
+        padding: 0.75rem 1.5rem;
+    }
+}
