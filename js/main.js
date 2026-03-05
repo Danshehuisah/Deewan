@@ -15,6 +15,11 @@ const fontBtns = document.querySelectorAll('.font-btn');
 const fontSizeSlider = document.getElementById('fontSizeSlider');
 const fontSizeValue = document.getElementById('fontSizeValue');
 
+// Language elements
+const languageToggle = document.getElementById('languageToggle');
+const languagePicker = document.getElementById('languagePicker');
+const languageBtns = document.querySelectorAll('.language-btn');
+
 // Diwan titles with proper Arabic vowels
 const diwanTitles = {
     1: "تَيْسِيرُ الْوُصُولِ إِلَىٰ حَضْرَةِ الرَّسُولِ",
@@ -27,14 +32,20 @@ const diwanTitles = {
     8: "سَيْرُ الْقَلْبِ"
 };
 
+// Translation cache
+let translations = {};
+
 // Load saved preferences from localStorage
 const savedTheme = localStorage.getItem('theme') || 'light';
-const savedFont = localStorage.getItem('font') || 'amiri';
+const savedFont = localStorage.getItem('font') || 'scheherazade';
 const savedFontSize = localStorage.getItem('fontSize') || 20;
+const savedLanguage = localStorage.getItem('language') || 'ar';
 
 // Apply saved preferences
 document.documentElement.setAttribute('data-theme', savedTheme);
 document.documentElement.setAttribute('data-font', savedFont);
+document.documentElement.setAttribute('lang', savedLanguage);
+document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
 document.body.style.fontSize = savedFontSize + 'px';
 if (fontSizeSlider) fontSizeSlider.value = savedFontSize;
 if (fontSizeValue) fontSizeValue.textContent = savedFontSize;
@@ -53,12 +64,72 @@ fontBtns.forEach(btn => {
     }
 });
 
+// Update active language button
+languageBtns.forEach(btn => {
+    if (btn.dataset.lang === savedLanguage) {
+        btn.classList.add('active');
+    }
+});
+
+// Load translations
+async function loadTranslations(lang) {
+    try {
+        const response = await fetch(`locales/${lang}.json`);
+        if (!response.ok) throw new Error(`Failed to load ${lang} translations`);
+        translations[lang] = await response.json();
+        return translations[lang];
+    } catch (error) {
+        console.error('Error loading translations:', error);
+        return {};
+    }
+}
+
+// Update text content based on language
+function updateTexts(lang) {
+    const elements = document.querySelectorAll('[data-i18n]');
+    
+    elements.forEach(element => {
+        const key = element.dataset.i18n;
+        const translation = getNestedTranslation(translations[lang], key);
+        
+        if (translation) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translation;
+            } else {
+                element.textContent = translation;
+            }
+        }
+    });
+}
+
+// Get nested translation (e.g., 'nav.home')
+function getNestedTranslation(obj, path) {
+    return path.split('.').reduce((current, key) => {
+        return current && current[key] ? current[key] : null;
+    }, obj);
+}
+
+// Initialize language
+async function initializeLanguage(lang) {
+    if (!translations[lang]) {
+        await loadTranslations(lang);
+    }
+    updateTexts(lang);
+}
+
 // Toggle mobile menu
 if (hamburger) {
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        
+        // Close pickers when opening menu
+        if (navMenu.classList.contains('active')) {
+            if (themePicker) themePicker.classList.remove('active');
+            if (fontPicker) fontPicker.classList.remove('active');
+            if (languagePicker) languagePicker.classList.remove('active');
+        }
     });
 }
 
@@ -72,6 +143,7 @@ if (themeToggle) {
         if (themePicker) {
             themePicker.classList.toggle('active');
             if (fontPicker) fontPicker.classList.remove('active');
+            if (languagePicker) languagePicker.classList.remove('active');
         }
         
         // Close mobile menu if open
@@ -92,6 +164,28 @@ if (fontToggle) {
         if (fontPicker) {
             fontPicker.classList.toggle('active');
             if (themePicker) themePicker.classList.remove('active');
+            if (languagePicker) languagePicker.classList.remove('active');
+        }
+        
+        // Close mobile menu if open
+        if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
+}
+
+// Language toggle click
+if (languageToggle) {
+    languageToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Toggle language picker, close others
+        if (languagePicker) {
+            languagePicker.classList.toggle('active');
+            if (themePicker) themePicker.classList.remove('active');
+            if (fontPicker) fontPicker.classList.remove('active');
         }
         
         // Close mobile menu if open
@@ -142,6 +236,30 @@ fontBtns.forEach(btn => {
     });
 });
 
+// Language button clicks
+languageBtns.forEach(btn => {
+    btn.addEventListener('click', async () => {
+        const lang = btn.dataset.lang;
+        
+        // Set language
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        localStorage.setItem('language', lang);
+        
+        // Update active states
+        languageBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Load translations and update texts
+        await initializeLanguage(lang);
+        
+        // Close language picker
+        if (languagePicker) {
+            languagePicker.classList.remove('active');
+        }
+    });
+});
+
 // Font size slider
 if (fontSizeSlider) {
     fontSizeSlider.addEventListener('input', (e) => {
@@ -151,25 +269,6 @@ if (fontSizeSlider) {
         if (fontSizeValue) fontSizeValue.textContent = size;
     });
 }
-
-// Nav menu link clicks - close menu after click
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        // Don't close if it's theme or font toggle (handled separately)
-        if (link.id === 'themeToggle' || link.id === 'fontToggle') {
-            e.preventDefault();
-            return;
-        }
-        
-        // Close mobile menu
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        
-        // Close pickers
-        if (themePicker) themePicker.classList.remove('active');
-        if (fontPicker) fontPicker.classList.remove('active');
-    });
-});
 
 // Close pickers when clicking outside
 document.addEventListener('click', (e) => {
@@ -183,6 +282,12 @@ document.addEventListener('click', (e) => {
         !e.target.closest('#fontToggle') && 
         fontPicker?.classList.contains('active')) {
         fontPicker.classList.remove('active');
+    }
+    
+    if (!e.target.closest('.language-picker') && 
+        !e.target.closest('#languageToggle') && 
+        languagePicker?.classList.contains('active')) {
+        languagePicker.classList.remove('active');
     }
     
     if (!e.target.closest('.navbar') && navMenu?.classList.contains('active')) {
@@ -214,6 +319,44 @@ function loadDiwanGrid() {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     loadDiwanGrid();
+    await initializeLanguage(savedLanguage);
+});  
+
+// ===== HOME LINK SPECIFIC HANDLER =====
+// This makes the nav menu disappear when Home is clicked
+
+// Get all nav menu links
+const navLinks = document.querySelectorAll('.nav-menu a');
+
+// Loop through each link
+navLinks.forEach(link => {
+    // Check if this is the Home link (by text content or data-i18n attribute)
+    if (link.textContent.includes('الرئيسية') || 
+        link.textContent.includes('Home') || 
+        link.textContent.includes('Accueil') ||
+        link.dataset.i18n === 'nav.home') {
+        
+        // Add click event to this specific link
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Stop any page refresh
+            
+            // Close the mobile menu if it's open
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+            
+            // Fix the hamburger icon (turn it back to normal)
+            if (hamburger && hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+            }
+            
+            // Close any open pickers (theme, font, language)
+            if (themePicker) themePicker.classList.remove('active');
+            if (fontPicker) fontPicker.classList.remove('active');
+            if (languagePicker) languagePicker.classList.remove('active');
+            
+        });
+    }
 });

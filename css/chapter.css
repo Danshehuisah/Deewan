@@ -288,13 +288,52 @@ a, button, input, textarea,
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* RTL for Arabic - Hamburger on RIGHT, menu on LEFT */
+html[lang="ar"] .navbar {
+    direction: rtl;
+}
+
+html[lang="ar"] .hamburger {
+    margin-left: auto;
+    margin-right: 0;
+    order: 1;
+}
+
+html[lang="ar"] .nav-menu {
+    margin-right: auto;
+    margin-left: 0;
+    order: 3;
+}
+
+/* LTR for English/French - Hamburger on LEFT, menu on RIGHT */
+html[lang="en"] .navbar,
+html[lang="fr"] .navbar {
+    direction: ltr;
+}
+
+html[lang="en"] .hamburger,
+html[lang="fr"] .hamburger {
+    margin-right: auto;
+    margin-left: 0;
+    order: 1;
+}
+
+html[lang="en"] .nav-menu,
+html[lang="fr"] .nav-menu {
+    margin-left: auto;
+    margin-right: 0;
+    order: 3;
+}
+
+
+
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
-    order: 1;
-    margin-left: auto;
+    /* order: 1; */
+    /* margin-left: auto; */
     z-index: 1001;
 }
 
@@ -312,6 +351,7 @@ a, button, input, textarea,
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
+    text-align: center;
     z-index: 1000;
 }
 
@@ -325,14 +365,15 @@ a, button, input, textarea,
 .nav-menu {
     display: flex;
     gap: 2rem;
-    order: 3;
-    margin-right: auto;
+    /* order: 3; */
+    /* margin-right: auto; */
     z-index: 1000;
 }
 
 .nav-menu a {
     color: var(--text-secondary);
     text-decoration: none;
+    font-size: 1rem;
     cursor: pointer;
     white-space: nowrap;
     transition: color 0.3s ease;
@@ -901,12 +942,12 @@ html[lang="fr"] .continue-badge {
 
     .hamburger {
         display: flex;
-        order: 1;
-        margin-left: 0;
+        /* order: 1; */
+        /* margin-left: 0; */
     }
 
     .nav-brand {
-        order: 2;
+        /* order: 2; */
         position: static;
         transform: none;
     }
@@ -926,8 +967,8 @@ html[lang="fr"] .continue-badge {
         padding: 1rem;
         gap: 1rem;
         box-shadow: 0 2px 5px var(--shadow-color);
-        order: 4;
-        margin-right: 0;
+        /* order: 4; */
+        /* margin-right: 0; */
         z-index: 999;
     }
 

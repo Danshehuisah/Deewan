@@ -116,6 +116,7 @@
 }
 
 /* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
+/* CORRECTED: Using relative path from CSS to fonts folder */
 @font-face {
     font-family: 'Amiri';
     src: url('../fonts/Amiri-Regular.ttf') format('truetype');
@@ -180,115 +181,34 @@
     font-display: swap;
 }
 
-/* ===== Base Styles with Font Size Inheritance ===== */
+/* ===== Base Styles ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Default font size for root */
 html {
     font-size: 16px;
 }
 
 body {
-    font-family: 'Scheherazade', serif;
+    font-family: 'Scheherazade', 'Traditional Arabic', 'Times New Roman', serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.8;
     transition: background-color 0.3s ease, color 0.3s ease;
     letter-spacing: var(--letter-spacing);
-    font-size: 1.25rem; /* 20px default */
+    font-size: 1.25rem;
 }
 
-/* Ensure all text elements inherit font size */
-body, 
-body *,
-p, h1, h2, h3, h4, h5, h6,
-a, button, input, textarea,
-.nav-menu a,
-.nav-brand h1,
-.diwan-title,
-.diwan-number,
-.huruf-item h3,
-.huruf-preview,
-.continue-card h4,
-.continue-preview,
-.continue-meta,
-.continue-badge,
-.theme-btn,
-.font-btn,
-.back-btn,
-.nav-arrow,
-.welcome-title,
-.welcome-subtitle,
-.loading,
-.error,
-.verse-line,
-.verse-item,
-.huruf-list,
-.chapter-header,
-.diwan-full-title {
-    font-size: inherit;
-    letter-spacing: inherit;
+/* RTL/LTR Direction Handling */
+html[lang="ar"] {
+    direction: rtl;
 }
 
-/* Specific elements that might need different sizes */
-.nav-brand h1 {
-    font-size: 1.5rem;
-}
-
-.nav-menu a {
-    font-size: 1.1rem;
-}
-
-.diwan-number {
-    font-size: 2rem;
-}
-
-.diwan-title {
-    font-size: 1.2rem;
-}
-
-.huruf-item h3 {
-    font-size: 1.3rem;
-}
-
-.verse-line {
-    font-size: 1.3rem;
-    line-height: 2.2;
-}
-
-.welcome-title {
-    font-size: 2rem;
-}
-
-.welcome-subtitle {
-    font-size: 1.2rem;
-}
-
-.theme-btn, .font-btn {
-    font-size: 1rem;
-}
-
-.back-btn {
-    font-size: 1rem;
-}
-
-.nav-arrow.prev-btn {
-    font-size: 0.9rem;
-}
-
-.nav-arrow.next-btn {
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-
-.app-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+html[lang="en"], html[lang="fr"] {
+    direction: ltr;
 }
 
 /* ===== Navbar Styles ===== */
@@ -302,7 +222,6 @@ a, button, input, textarea,
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* direction: rtl; */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -311,8 +230,6 @@ a, button, input, textarea,
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
-    order: 1;
-    margin-left: auto;
     z-index: 1001;
 }
 
@@ -325,34 +242,25 @@ a, button, input, textarea,
 }
 
 .nav-brand {
-    /* order: 2; */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
+    text-align: center;
     z-index: 1000;
 }
 
-.nav-brand h1, .nav-brand a {
+.nav-brand h1 {
     color: var(--accent-color);
     text-decoration: none;
+    font-size: 1.5rem;
     white-space: nowrap;
     transition: color 0.3s ease;
-}
-
-/* Chapter title in navbar for verses page */
-.nav-brand .chapter-title-nav {
-    color: var(--text-secondary);
-    margin-right: 0.5rem;
-    font-weight: normal;
-    display: inline-block;
 }
 
 .nav-menu {
     display: flex;
     gap: 2rem;
-    /* order: 3; */
-    margin-right: auto;
     z-index: 1000;
 }
 
@@ -360,6 +268,7 @@ a, button, input, textarea,
     color: var(--text-secondary);
     text-decoration: none;
     cursor: pointer;
+    font-size: 1.1rem;
     white-space: nowrap;
     transition: color 0.3s ease;
 }
@@ -370,7 +279,9 @@ a, button, input, textarea,
 }
 
 /* ===== Theme Picker Styles ===== */
-.theme-picker {
+.theme-picker,
+.font-picker,
+.language-picker {
     background-color: var(--bg-secondary);
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
@@ -381,24 +292,32 @@ a, button, input, textarea,
     z-index: 999;
 }
 
-.theme-picker.active {
+.theme-picker.active,
+.font-picker.active,
+.language-picker.active {
     display: block;
 }
 
-.theme-picker h3 {
+.theme-picker h3,
+.font-picker h3,
+.language-picker h3 {
     margin-bottom: 1rem;
     color: var(--accent-color);
     text-align: center;
 }
 
-.theme-options {
+.theme-options,
+.font-options,
+.language-options {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.theme-btn {
+.theme-btn,
+.font-btn,
+.language-btn {
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--border-color);
     background: none;
@@ -407,86 +326,15 @@ a, button, input, textarea,
     border-radius: 8px;
     transition: all 0.3s ease;
     min-width: 120px;
+    font-size: 1rem;
 }
 
 .theme-btn:hover,
-.theme-btn.active {
-    background-color: var(--accent-color);
-    color: white;
-    border-color: var(--accent-color);
-}
-
-/* Light theme button specific */
-.theme-btn.light-theme:hover,
-.theme-btn.light-theme.active {
-    background-color: #8B4513;
-    color: white;
-}
-
-/* Dark theme button specific */
-.theme-btn.dark-theme:hover,
-.theme-btn.dark-theme.active {
-    background-color: #d4a373;
-    color: #1a1e2b;
-}
-
-/* Sepia theme button specific */
-.theme-btn.sepia-theme:hover,
-.theme-btn.sepia-theme.active {
-    background-color: #9b6b43;
-    color: #f4ecd8;
-}
-
-/* Green theme button specific */
-.theme-btn.green-theme:hover,
-.theme-btn.green-theme.active {
-    background-color: #2e7d5e;
-    color: #e8f0e8;
-}
-
-/* ===== Font Picker Styles ===== */
-.font-picker {
-    background-color: var(--bg-secondary);
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    display: none;
-    animation: slideDown 0.3s ease;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    z-index: 999;
-}
-
-.font-picker.active {
-    display: block;
-}
-
-.font-picker h3 {
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-    text-align: center;
-}
-
-.font-options {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.font-btn {
-    padding: 0.75rem 1.5rem;
-    border: 1px solid var(--border-color);
-    background: none;
-    color: var(--text-primary);
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    min-width: 120px;
-}
-
+.theme-btn.active,
 .font-btn:hover,
-.font-btn.active {
+.font-btn.active,
+.language-btn:hover,
+.language-btn.active {
     background-color: var(--accent-color);
     color: white;
     border-color: var(--accent-color);
@@ -544,92 +392,60 @@ a, button, input, textarea,
 }
 
 /* ===== Font Family Styles ===== */
-/* Amiri Font */
 [data-font="amiri"] body,
 [data-font="amiri"] .verse-line,
 [data-font="amiri"] .diwan-title,
 [data-font="amiri"] .huruf-item h3,
-[data-font="amiri"] .continue-card h4,
 [data-font="amiri"] button,
 [data-font="amiri"] a,
 [data-font="amiri"] p,
 [data-font="amiri"] h1,
 [data-font="amiri"] h2,
 [data-font="amiri"] h3,
-[data-font="amiri"] .nav-menu a,
-[data-font="amiri"] .back-btn,
-[data-font="amiri"] .nav-arrow,
-[data-font="amiri"] .verse-item,
-[data-font="amiri"] .diwan-btn,
-[data-font="amiri"] .huruf-item,
-[data-font="amiri"] .continue-card {
-    font-family: 'Amiri', serif;
+[data-font="amiri"] .nav-menu a {
+    font-family: 'Amiri', serif !important;
 }
 
-/* Scheherazade Font */
 [data-font="scheherazade"] body,
 [data-font="scheherazade"] .verse-line,
 [data-font="scheherazade"] .diwan-title,
 [data-font="scheherazade"] .huruf-item h3,
-[data-font="scheherazade"] .continue-card h4,
 [data-font="scheherazade"] button,
 [data-font="scheherazade"] a,
 [data-font="scheherazade"] p,
 [data-font="scheherazade"] h1,
 [data-font="scheherazade"] h2,
 [data-font="scheherazade"] h3,
-[data-font="scheherazade"] .nav-menu a,
-[data-font="scheherazade"] .back-btn,
-[data-font="scheherazade"] .nav-arrow,
-[data-font="scheherazade"] .verse-item,
-[data-font="scheherazade"] .diwan-btn,
-[data-font="scheherazade"] .huruf-item,
-[data-font="scheherazade"] .continue-card {
-    font-family: 'Scheherazade', serif;
+[data-font="scheherazade"] .nav-menu a {
+    font-family: 'Scheherazade', serif !important;
 }
 
-/* Kufi Font */
 [data-font="kufi"] body,
 [data-font="kufi"] .verse-line,
 [data-font="kufi"] .diwan-title,
 [data-font="kufi"] .huruf-item h3,
-[data-font="kufi"] .continue-card h4,
 [data-font="kufi"] button,
 [data-font="kufi"] a,
 [data-font="kufi"] p,
 [data-font="kufi"] h1,
 [data-font="kufi"] h2,
 [data-font="kufi"] h3,
-[data-font="kufi"] .nav-menu a,
-[data-font="kufi"] .back-btn,
-[data-font="kufi"] .nav-arrow,
-[data-font="kufi"] .verse-item,
-[data-font="kufi"] .diwan-btn,
-[data-font="kufi"] .huruf-item,
-[data-font="kufi"] .continue-card {
-    font-family: 'Kufi', sans-serif;
+[data-font="kufi"] .nav-menu a {
+    font-family: 'Kufi', sans-serif !important;
 }
 
-/* Naskh Font */
 [data-font="naskh"] body,
 [data-font="naskh"] .verse-line,
 [data-font="naskh"] .diwan-title,
 [data-font="naskh"] .huruf-item h3,
-[data-font="naskh"] .continue-card h4,
 [data-font="naskh"] button,
 [data-font="naskh"] a,
 [data-font="naskh"] p,
 [data-font="naskh"] h1,
 [data-font="naskh"] h2,
 [data-font="naskh"] h3,
-[data-font="naskh"] .nav-menu a,
-[data-font="naskh"] .back-btn,
-[data-font="naskh"] .nav-arrow,
-[data-font="naskh"] .verse-item,
-[data-font="naskh"] .diwan-btn,
-[data-font="naskh"] .huruf-item,
-[data-font="naskh"] .continue-card {
-    font-family: 'Naskh', serif;
+[data-font="naskh"] .nav-menu a {
+    font-family: 'Naskh', serif !important;
 }
 
 /* ===== Main Content Styles ===== */
@@ -645,6 +461,7 @@ a, button, input, textarea,
     text-align: center;
     color: var(--accent-color);
     margin-bottom: 1rem;
+    font-size: 2rem;
     transition: color 0.3s ease;
 }
 
@@ -652,6 +469,7 @@ a, button, input, textarea,
     text-align: center;
     color: var(--text-secondary);
     margin-bottom: 3rem;
+    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
@@ -683,6 +501,7 @@ a, button, input, textarea,
 }
 
 .diwan-number {
+    font-size: 2rem;
     font-weight: bold;
     color: var(--accent-color);
     margin-bottom: 0.5rem;
@@ -691,11 +510,22 @@ a, button, input, textarea,
 }
 
 .diwan-title {
+    font-size: 1.2rem;
     color: var(--text-primary);
     text-align: center;
     line-height: 1.6;
     word-break: break-word;
     transition: color 0.3s ease;
+}
+
+/* ===== Footer ===== */
+.footer {
+    background-color: var(--nav-bg);
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ===== Animations ===== */
@@ -708,39 +538,6 @@ a, button, input, textarea,
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ===== Loading States ===== */
-.loading {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-secondary);
-}
-
-.loading::after {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 2px solid var(--accent-color);
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-/* ===== Error States ===== */
-.error {
-    text-align: center;
-    padding: 2rem;
-    color: #dc3545;
-    background-color: rgba(220, 53, 69, 0.1);
-    border-radius: 8px;
-    margin: 1rem 0;
 }
 
 /* ===== Mobile Responsive ===== */
@@ -756,12 +553,9 @@ a, button, input, textarea,
 
     .hamburger {
         display: flex;
-        order: 1;
-        margin-left: 0;
     }
 
     .nav-brand {
-        order: 2;
         position: static;
         transform: none;
     }
@@ -781,9 +575,7 @@ a, button, input, textarea,
         padding: 1rem;
         gap: 1rem;
         box-shadow: 0 2px 5px var(--shadow-color);
-        order: 4;
-        margin-right: 0;
-        z-index: 999;
+        z-index: 1100;
     }
 
     .nav-menu.active {
@@ -810,19 +602,16 @@ a, button, input, textarea,
         max-width: 100%;
     }
 
-    .verse-line {
-        font-size: 1.2rem;
-        line-height: 2;
-    }
-
     .theme-options,
-    .font-options {
+    .font-options,
+    .language-options {
         flex-direction: column;
         align-items: stretch;
     }
 
     .theme-btn,
-    .font-btn {
+    .font-btn,
+    .language-btn {
         width: 100%;
     }
 
@@ -851,10 +640,5 @@ a, button, input, textarea,
 
     .nav-brand h1 {
         font-size: 1.1rem;
-    }
-
-    .verse-line {
-        font-size: 1.1rem;
-        line-height: 1.8;
     }
 }

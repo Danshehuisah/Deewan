@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container" id="home">
         <!-- Navbar -->
         <nav class="navbar">
             <div class="hamburger" id="hamburger">
@@ -16,53 +16,68 @@
                 <span></span>
             </div>
             <div class="nav-brand">
-                <h1>ديوان الشيخ إبراهيم إنياس</h1>
+                <h1 data-i18n="app.title">ديوان الشيخ إبراهيم إنياس</h1>
             </div>
             <div class="nav-menu" id="navMenu">
-                <a href="#" class="active">الرئيسية</a>
-                <a href="#" id="themeToggle">المظهر</a>
-                <a href="#" id="fontToggle">الخط</a>
-                <a href="#" id="languageToggle">اللغة</a>
-                <a href="#">المجتمع</a>
+                <a href="#" class="active" data-i18n="nav.home">الرئيسية</a>
+                <a href="#" id="themeToggle" data-i18n="nav.theme">المظهر</a>
+                <a href="#" id="fontToggle" data-i18n="nav.font">الخط</a>
+                <a href="#" id="languageToggle" data-i18n="nav.language">اللغة</a>
+                <a href="#" data-i18n="nav.community">المجتمع</a>
             </div>
         </nav>
 
         <!-- Theme Picker -->
         <div class="theme-picker" id="themePicker">
-            <h3>اخْتَرِ الْمَظْهَرَ</h3>
+            <h3 data-i18n="theme.title">اخْتَرِ الْمَظْهَرَ</h3>
             <div class="theme-options">
-                <button class="theme-btn light-theme" data-theme="light">🌞 فَاتِحٌ</button>
-                <button class="theme-btn dark-theme" data-theme="dark">🌙 دَاكِنٌ</button>
-                <button class="theme-btn sepia-theme" data-theme="sepia">📜 سِيبِيَا</button>
-                <button class="theme-btn green-theme" data-theme="green">🌿 أَخْضَرُ مُرِيحٌ</button>
+                <button class="theme-btn light-theme" data-theme="light" data-i18n="theme.light">🌞 فَاتِحٌ</button>
+                <button class="theme-btn dark-theme" data-theme="dark" data-i18n="theme.dark">🌙 دَاكِنٌ</button>
+                <button class="theme-btn sepia-theme" data-theme="sepia" data-i18n="theme.sepia">📜 سِيبِيَا</button>
+                <button class="theme-btn green-theme" data-theme="green" data-i18n="theme.green">🌿 أَخْضَرُ مُرِيحٌ</button>
             </div>
         </div>
 
         <!-- Font Picker -->
         <div class="font-picker" id="fontPicker">
-            <h3>اخْتَرِ الْخَطَّ الْعَرَبِيَّ</h3>
+            <h3 data-i18n="font.title">اخْتَرِ الْخَطَّ الْعَرَبِيَّ</h3>
             <div class="font-options">
-                <button class="font-btn" data-font="amiri">📝 أَمِيرِي</button>
-                <button class="font-btn" data-font="scheherazade">📖 شَهْرَزَادَ</button>
-                <button class="font-btn" data-font="kufi">🕌 كُوفِي</button>
-                <button class="font-btn" data-font="naskh">📜 نَسْخٌ</button>
+                <button class="font-btn" data-font="amiri" data-i18n="font.amiri">📝 أَمِيرِي</button>
+                <button class="font-btn" data-font="scheherazade" data-i18n="font.scheherazade">📖 شَهْرَزَادَ</button>
+                <button class="font-btn" data-font="kufi" data-i18n="font.kufi">🕌 كُوفِي</button>
+                <button class="font-btn" data-font="naskh" data-i18n="font.naskh">📜 نَسْخٌ</button>
             </div>
             <div class="font-size-control">
-                <label for="fontSizeSlider">حَجْمُ الْخَطِّ</label>
+                <label for="fontSizeSlider" data-i18n="font.size">حَجْمُ الْخَطِّ</label>
                 <input type="range" id="fontSizeSlider" min="14" max="32" value="20" step="1">
                 <span class="font-size-value" id="fontSizeValue">20</span>
             </div>
         </div>
 
+        <!-- Language Picker -->
+        <div class="language-picker" id="languagePicker">
+            <h3 data-i18n="language.title">اخْتَرِ اللُّغَةَ</h3>
+            <div class="language-options">
+                <button class="language-btn" data-lang="ar" data-i18n="language.arabic">🇸🇦 الْعَرَبِيَّةُ</button>
+                <button class="language-btn" data-lang="en" data-i18n="language.english">🇬🇧 English</button>
+                <button class="language-btn" data-lang="fr" data-i18n="language.french">🇫🇷 Français</button>
+            </div>
+        </div>
+
         <!-- Main Content -->
         <main class="main-content">
-            <h2 class="welcome-title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
-            <p class="welcome-subtitle">اخْتَرِ الدِّيوَانَ لِلْقِرَاءَةِ</p>
+            <h2 class="welcome-title" data-i18n="welcome.title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
+            <p class="welcome-subtitle" data-i18n="welcome.subtitle">اخْتَرِ الدِّيوَانَ لِلْقِرَاءَةِ</p>
             
             <div class="diwan-grid" id="diwanGrid">
                 <!-- Diwan buttons will be added by JavaScript -->
             </div>
         </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p data-i18n="app.footer">جميع الحقوق محفوظة © 2024 | ديوان الشيخ إبراهيم إنياس</p>
+        </footer>
     </div>
 
     <script src="js/main.js"></script>
