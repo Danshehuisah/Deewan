@@ -59,5 +59,21 @@
       "type": "image/webp",
       "purpose": "any maskable"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "الصفحة الرئيسية - Home screen with diwan grid"
+    },
+    {
+      "src": "/screenshots/chapters.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "قائمة الفصول - Chapters list view"
+    }
   ]
 }
