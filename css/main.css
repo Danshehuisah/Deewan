@@ -204,6 +204,131 @@ body {
     font-size: 1rem;
 }
 
+/* ===== Language Selection Modal ===== */
+.language-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.language-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px var(--shadow-color);
+    animation: modalPop 0.4s ease;
+    border: 2px solid var(--accent-color);
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.modal-content h3 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.modal-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem !important;
+}
+
+.modal-language-options {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modal-language-btn {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-language-btn:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.modal-language-btn .flag {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.modal-language-btn .lang-name {
+    font-weight: bold;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.modal-language-btn .lang-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.modal-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+.modal-note-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+
 /* Make all elements use relative units */
 body, 
 body *,
@@ -734,6 +859,29 @@ html[lang="fr"] .nav-menu {
 }
 
 @media (max-width: 480px) {
+    .modal-content {
+        padding: 1.5rem;
+    }
+    
+    .modal-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .modal-language-options {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .modal-language-btn {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0.75rem;
+    }
+    
+    .modal-language-btn .flag {
+        font-size: 1.8rem;
+        width: 40px;
+    }
     .diwan-btn {
         padding: 1.2rem;
     }

@@ -20,6 +20,10 @@ const languageToggle = document.getElementById('languageToggle');
 const languagePicker = document.getElementById('languagePicker');
 const languageBtns = document.querySelectorAll('.language-btn');
 
+// Language Modal elements
+const languageModal = document.getElementById('languageModal');
+const modalLanguageBtns = document.querySelectorAll('.modal-language-btn');
+
 // Create overlay element
 const overlay = document.createElement('div');
 overlay.className = 'picker-overlay';
@@ -44,13 +48,42 @@ let translations = {};
 const savedTheme = localStorage.getItem('theme') || 'light';
 const savedFont = localStorage.getItem('font') || 'scheherazade';
 const savedFontSize = localStorage.getItem('fontSize') || 20;
-let savedLanguage = localStorage.getItem('language') || 'ar';
 
-// Apply saved preferences
+// Validate language before using it
+function validateLanguage() {
+    const savedLang = localStorage.getItem('language');
+    const validLanguages = ['ar', 'en', 'fr'];
+    
+    if (!savedLang || !validLanguages.includes(savedLang)) {
+        // Invalid or missing language, clear it
+        localStorage.removeItem('language');
+        localStorage.removeItem('hasVisited');
+        return false;
+    }
+    return true;
+}
+
+// Set initial language based on validation
+let savedLanguage = 'en'; // Default
+if (validateLanguage()) {
+    savedLanguage = localStorage.getItem('language');
+} else {
+    localStorage.setItem('language', 'en');
+    savedLanguage = 'en';
+}
+
+// Check if user has visited before
+const hasVisited = localStorage.getItem('hasVisited');
+
+// Apply saved preferences (but don't apply language yet if first time)
 document.documentElement.setAttribute('data-theme', savedTheme);
 document.documentElement.setAttribute('data-font', savedFont);
-document.documentElement.setAttribute('lang', savedLanguage);
-document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
+
+// Only apply language if user has visited before
+if (hasVisited) {
+    document.documentElement.setAttribute('lang', savedLanguage);
+    document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
+}
 
 // Apply saved font size to root element
 document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
@@ -73,12 +106,75 @@ fontBtns.forEach(btn => {
     }
 });
 
-// Update active language button
-languageBtns.forEach(btn => {
-    if (btn.dataset.lang === savedLanguage) {
-        btn.classList.add('active');
+// Only update language button active state if user has visited
+if (hasVisited) {
+    languageBtns.forEach(btn => {
+        if (btn.dataset.lang === savedLanguage) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// ===== LANGUAGE MODAL FOR FIRST TIME USERS =====
+
+// Show language selection modal
+function showLanguageModal() {
+    if (languageModal) {
+        languageModal.classList.add('active');
+        // Prevent scrolling when modal is open
+        document.body.style.overflow = 'hidden';
     }
-});
+}
+
+// Initialize app function
+async function initializeApp() {
+    // Load translations and update texts
+    await initializeLanguage(savedLanguage);
+    
+    // Load diwan grid
+    loadDiwanGrid();
+    
+    // Update active language button
+    languageBtns.forEach(btn => {
+        if (btn.dataset.lang === savedLanguage) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Handle language selection from modal
+if (modalLanguageBtns) {
+    modalLanguageBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const selectedLang = btn.dataset.lang;
+            
+            // Save that user has visited
+            localStorage.setItem('hasVisited', 'true');
+            
+            // Save selected language
+            localStorage.setItem('language', selectedLang);
+            
+            // Update savedLanguage variable
+            savedLanguage = selectedLang;
+            
+            // Update HTML attributes
+            document.documentElement.setAttribute('lang', selectedLang);
+            document.documentElement.setAttribute('dir', selectedLang === 'ar' ? 'rtl' : 'ltr');
+            
+            // Hide modal
+            if (languageModal) {
+                languageModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Initialize app with selected language
+            await initializeLanguage(selectedLang);
+            
+            // Load diwan grid
+            loadDiwanGrid();
+        });
+    });
+}
 
 // ===== FUNCTION: Close All Menus and Pickers =====
 function closeAllMenus() {
@@ -278,7 +374,7 @@ fontBtns.forEach(btn => {
     });
 });
 
-// Language button clicks
+// Language button clicks (for navbar)
 languageBtns.forEach(btn => {
     btn.addEventListener('click', async () => {
         const lang = btn.dataset.lang;
@@ -287,6 +383,7 @@ languageBtns.forEach(btn => {
         document.documentElement.setAttribute('lang', lang);
         document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
         localStorage.setItem('language', lang);
+        localStorage.setItem('hasVisited', 'true'); // Ensure visited flag is set
         
         // Update savedLanguage variable
         savedLanguage = lang;
@@ -305,15 +402,18 @@ languageBtns.forEach(btn => {
 
 // Font size slider - UPDATED to affect all elements
 if (fontSizeSlider) {
+    let timeout;
     fontSizeSlider.addEventListener('input', (e) => {
         const size = e.target.value;
+        fontSizeValue.textContent = size;
         
-        // Apply to root element and CSS variable
-        document.documentElement.style.setProperty('--base-font-size', size + 'px');
-        document.documentElement.style.fontSize = size + 'px';
-        
-        localStorage.setItem('fontSize', size);
-        if (fontSizeValue) fontSizeValue.textContent = size;
+        // Debounce the actual resize to prevent layout thrashing
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            document.documentElement.style.setProperty('--base-font-size', size + 'px');
+            document.documentElement.style.fontSize = size + 'px';
+            localStorage.setItem('fontSize', size);
+        }, 50);
     });
 }
 
@@ -383,8 +483,17 @@ function loadDiwanGrid() {
     }
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', async () => {
-    loadDiwanGrid();
-    await initializeLanguage(savedLanguage);
+// Initialize - Start the app with first-time modal check
+document.addEventListener('DOMContentLoaded', () => {
+    // Validate language and check first time
+    if (!validateLanguage()) {
+        showLanguageModal();
+    } else {
+        const hasVisited = localStorage.getItem('hasVisited');
+        if (!hasVisited) {
+            showLanguageModal();
+        } else {
+            initializeApp();
+        }
+    }
 });

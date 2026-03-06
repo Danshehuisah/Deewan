@@ -1,20 +1,117 @@
-{
-  "name": "Deewan App",
-  "short_name": "Deewan",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1e1e1e",
-  "icons": [
-    {
-      "src": "/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
+// {
+//   "name": "ديوان الشيخ إبراهيم إنياس",
+//   "short_name": "ديوان إنياس",
+//   "description": "مجموعة دواوين الشيخ إبراهيم إنياس رحمه الله",
+//   "start_url": "/index.html",
+//   "display": "standalone",
+//   "orientation": "portrait",
+//   "background_color": "#8B4513",
+//   "theme_color": "#8B4513",
+//   "dir": "rtl",
+//   "lang": "ar",
+//   "icons": [
+//     {
+//       "src": "/icons/icon-72x72.png",
+//       "sizes": "72x72",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-96x96.png",
+//       "sizes": "96x96",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-128x128.png",
+//       "sizes": "128x128",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-144x144.png",
+//       "sizes": "144x144",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-152x152.png",
+//       "sizes": "152x152",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-192x192.png",
+//       "sizes": "192x192",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-384x384.png",
+//       "sizes": "384x384",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     },
+//     {
+//       "src": "/icons/icon-512x512.png",
+//       "sizes": "512x512",
+//       "type": "image/png",
+//       "purpose": "any maskable"
+//     }
+//   ],
+//   "shortcuts": [
+//     {
+//       "name": "الديوان الأول",
+//       "short_name": "الديوان ١",
+//       "description": "تيسير الوصول إلى حضرة الرسول",
+//       "url": "/html/chapter-index.html?diwan=1",
+//       "icons": [
+//         {
+//           "src": "/icons/shortcut-1.png",
+//           "sizes": "96x96"
+//         }
+//       ]
+//     },
+//     {
+//       "name": "الديوان الثاني",
+//       "short_name": "الديوان ٢",
+//       "description": "إكسير السعادة",
+//       "url": "/html/chapter-index.html?diwan=2",
+//       "icons": [
+//         {
+//           "src": "/icons/shortcut-2.png",
+//           "sizes": "96x96"
+//         }
+//       ]
+//     },
+//     {
+//       "name": "الديوان الثالث",
+//       "short_name": "الديوان ٣",
+//       "description": "سلوى المشجون",
+//       "url": "/html/chapter-index.html?diwan=3",
+//       "icons": [
+//         {
+//           "src": "/icons/shortcut-3.png",
+//           "sizes": "96x96"
+//         }
+//       ]
+//     }
+//   ],
+//   "categories": ["books", "religion", "islamic"],
+//   "screenshots": [
+//     {
+//       "src": "/screenshots/home.jpg",
+//       "sizes": "1080x1920",
+//       "type": "image/jpeg",
+//       "platform": "wide",
+//       "label": "الصفحة الرئيسية للديوان"
+//     },
+//     {
+//       "src": "/screenshots/chapters.jpg",
+//       "sizes": "1080x1920",
+//       "type": "image/jpeg",
+//       "platform": "wide",
+//       "label": "قائمة الفصول"
+//     }
+//   ]
+// }

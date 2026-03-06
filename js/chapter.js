@@ -342,17 +342,20 @@ languageBtns.forEach(btn => {
     });
 });
 
-// Font size slider - UPDATED to affect all elements
+// Font size slider 
 if (fontSizeSlider) {
+    let timeout;
     fontSizeSlider.addEventListener('input', (e) => {
         const size = e.target.value;
+        fontSizeValue.textContent = size;
         
-        // Apply to root element and CSS variable
-        document.documentElement.style.setProperty('--base-font-size', size + 'px');
-        document.documentElement.style.fontSize = size + 'px';
-        
-        localStorage.setItem('fontSize', size);
-        if (fontSizeValue) fontSizeValue.textContent = size;
+        // Debounce the actual resize to prevent layout thrashing
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            document.documentElement.style.setProperty('--base-font-size', size + 'px');
+            document.documentElement.style.fontSize = size + 'px';
+            localStorage.setItem('fontSize', size);
+        }, 50);
     });
 }
 
