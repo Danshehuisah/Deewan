@@ -39,7 +39,7 @@
         "verses": "Versets",
         "back": "← Retour aux chapitres",
         "next": "Chapitre suivant",
-        "prev": "Précédent",
+        "prev": "← Précédent  ",
         "loading": "Chargement...",
         "error": "Échec du chargement",
         "noVerses": "Aucun verset dans ce chapitre",

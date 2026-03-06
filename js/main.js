@@ -20,6 +20,11 @@ const languageToggle = document.getElementById('languageToggle');
 const languagePicker = document.getElementById('languagePicker');
 const languageBtns = document.querySelectorAll('.language-btn');
 
+// Create overlay element
+const overlay = document.createElement('div');
+overlay.className = 'picker-overlay';
+document.body.appendChild(overlay);
+
 // Diwan titles with proper Arabic vowels
 const diwanTitles = {
     1: "تَيْسِيرُ الْوُصُولِ إِلَىٰ حَضْرَةِ الرَّسُولِ",
@@ -39,14 +44,18 @@ let translations = {};
 const savedTheme = localStorage.getItem('theme') || 'light';
 const savedFont = localStorage.getItem('font') || 'scheherazade';
 const savedFontSize = localStorage.getItem('fontSize') || 20;
-const savedLanguage = localStorage.getItem('language') || 'ar';
+let savedLanguage = localStorage.getItem('language') || 'ar';
 
 // Apply saved preferences
 document.documentElement.setAttribute('data-theme', savedTheme);
 document.documentElement.setAttribute('data-font', savedFont);
 document.documentElement.setAttribute('lang', savedLanguage);
 document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
-document.body.style.fontSize = savedFontSize + 'px';
+
+// Apply saved font size to root element
+document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
+document.documentElement.style.fontSize = savedFontSize + 'px';
+
 if (fontSizeSlider) fontSizeSlider.value = savedFontSize;
 if (fontSizeValue) fontSizeValue.textContent = savedFontSize;
 
@@ -70,6 +79,68 @@ languageBtns.forEach(btn => {
         btn.classList.add('active');
     }
 });
+
+// ===== FUNCTION: Close All Menus and Pickers =====
+function closeAllMenus() {
+    // Close mobile menu
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+    }
+    if (hamburger && hamburger.classList.contains('active')) {
+        hamburger.classList.remove('active');
+    }
+    
+    // Close all pickers
+    if (themePicker && themePicker.classList.contains('active')) {
+        themePicker.classList.remove('active');
+    }
+    if (fontPicker && fontPicker.classList.contains('active')) {
+        fontPicker.classList.remove('active');
+    }
+    if (languagePicker && languagePicker.classList.contains('active')) {
+        languagePicker.classList.remove('active');
+    }
+    
+    // Hide overlay
+    overlay.classList.remove('active');
+}
+
+// ===== FUNCTION: Close Pickers When Nav Opens =====
+function closePickersWhenNavOpens() {
+    if (navMenu && navMenu.classList.contains('active')) {
+        if (themePicker) themePicker.classList.remove('active');
+        if (fontPicker) fontPicker.classList.remove('active');
+        if (languagePicker) languagePicker.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+}
+
+// ===== FUNCTION: Show Overlay =====
+function showOverlay() {
+    overlay.classList.add('active');
+}
+
+// ===== FUNCTION: Handle Picker Toggle =====
+function togglePicker(pickerToShow) {
+    // Close all pickers first
+    if (themePicker) themePicker.classList.remove('active');
+    if (fontPicker) fontPicker.classList.remove('active');
+    if (languagePicker) languagePicker.classList.remove('active');
+    
+    // Close nav menu if open
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    
+    // Show the selected picker
+    if (pickerToShow) {
+        pickerToShow.classList.add('active');
+        showOverlay();
+    } else {
+        overlay.classList.remove('active');
+    }
+}
 
 // Load translations
 async function loadTranslations(lang) {
@@ -117,86 +188,61 @@ async function initializeLanguage(lang) {
     updateTexts(lang);
 }
 
-// Toggle mobile menu
+// Toggle mobile menu - CLOSE PICKERS WHEN NAV OPENS
 if (hamburger) {
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         
-        // Close pickers when opening menu
-        if (navMenu.classList.contains('active')) {
-            if (themePicker) themePicker.classList.remove('active');
-            if (fontPicker) fontPicker.classList.remove('active');
-            if (languagePicker) languagePicker.classList.remove('active');
-        }
+        // Close all pickers when nav menu opens
+        closePickersWhenNavOpens();
     });
 }
 
-// Theme toggle click
+// Theme toggle click - CLOSE NAV AND OTHER PICKERS
 if (themeToggle) {
     themeToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Toggle theme picker, close others
-        if (themePicker) {
-            themePicker.classList.toggle('active');
-            if (fontPicker) fontPicker.classList.remove('active');
-            if (languagePicker) languagePicker.classList.remove('active');
-        }
-        
-        // Close mobile menu if open
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+        if (themePicker && !themePicker.classList.contains('active')) {
+            togglePicker(themePicker);
+        } else {
+            togglePicker(null);
         }
     });
 }
 
-// Font toggle click
+// Font toggle click - CLOSE NAV AND OTHER PICKERS
 if (fontToggle) {
     fontToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Toggle font picker, close others
-        if (fontPicker) {
-            fontPicker.classList.toggle('active');
-            if (themePicker) themePicker.classList.remove('active');
-            if (languagePicker) languagePicker.classList.remove('active');
-        }
-        
-        // Close mobile menu if open
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+        if (fontPicker && !fontPicker.classList.contains('active')) {
+            togglePicker(fontPicker);
+        } else {
+            togglePicker(null);
         }
     });
 }
 
-// Language toggle click
+// Language toggle click - CLOSE NAV AND OTHER PICKERS
 if (languageToggle) {
     languageToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Toggle language picker, close others
-        if (languagePicker) {
-            languagePicker.classList.toggle('active');
-            if (themePicker) themePicker.classList.remove('active');
-            if (fontPicker) fontPicker.classList.remove('active');
-        }
-        
-        // Close mobile menu if open
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+        if (languagePicker && !languagePicker.classList.contains('active')) {
+            togglePicker(languagePicker);
+        } else {
+            togglePicker(null);
         }
     });
 }
 
-// Theme button clicks
+// Theme button clicks - CLOSE PICKER AFTER SELECTION
 themeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const theme = btn.dataset.theme;
@@ -209,14 +255,12 @@ themeBtns.forEach(btn => {
         themeBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Close theme picker after selection
-        if (themePicker) {
-            themePicker.classList.remove('active');
-        }
+        // Close picker after selection
+        closeAllMenus();
     });
 });
 
-// Font button clicks
+// Font button clicks - CLOSE PICKER AFTER SELECTION
 fontBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const font = btn.dataset.font;
@@ -229,10 +273,8 @@ fontBtns.forEach(btn => {
         fontBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Close font picker after selection
-        if (fontPicker) {
-            fontPicker.classList.remove('active');
-        }
+        // Close picker after selection
+        closeAllMenus();
     });
 });
 
@@ -246,6 +288,9 @@ languageBtns.forEach(btn => {
         document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
         localStorage.setItem('language', lang);
         
+        // Update savedLanguage variable
+        savedLanguage = lang;
+        
         // Update active states
         languageBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -254,45 +299,65 @@ languageBtns.forEach(btn => {
         await initializeLanguage(lang);
         
         // Close language picker
-        if (languagePicker) {
-            languagePicker.classList.remove('active');
-        }
+        closeAllMenus();
     });
 });
 
-// Font size slider
+// Font size slider - UPDATED to affect all elements
 if (fontSizeSlider) {
     fontSizeSlider.addEventListener('input', (e) => {
         const size = e.target.value;
-        document.body.style.fontSize = size + 'px';
+        
+        // Apply to root element and CSS variable
+        document.documentElement.style.setProperty('--base-font-size', size + 'px');
+        document.documentElement.style.fontSize = size + 'px';
+        
         localStorage.setItem('fontSize', size);
         if (fontSizeValue) fontSizeValue.textContent = size;
     });
 }
 
-// Close pickers when clicking outside
+// Overlay click handler
+overlay.addEventListener('click', () => {
+    closeAllMenus();
+});
+
+// Nav menu link clicks - close menu after click
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        if (link.id === 'themeToggle' || link.id === 'fontToggle' || link.id === 'languageToggle') {
+            e.preventDefault();
+            return;
+        }
+        
+        // Close everything
+        closeAllMenus();
+        
+        // Handle home link specially (stay on same page)
+        if (link.dataset.i18n === 'nav.home') {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Close pickers when clicking outside - SIMPLIFIED
 document.addEventListener('click', (e) => {
-    if (!e.target.closest('.theme-picker') && 
-        !e.target.closest('#themeToggle') && 
-        themePicker?.classList.contains('active')) {
-        themePicker.classList.remove('active');
+    // Close nav menu if clicking outside navbar
+    if (!e.target.closest('.navbar') && 
+        !e.target.closest('.nav-menu a') &&
+        navMenu?.classList.contains('active')) {
+        closeAllMenus();
     }
-    
-    if (!e.target.closest('.font-picker') && 
-        !e.target.closest('#fontToggle') && 
-        fontPicker?.classList.contains('active')) {
-        fontPicker.classList.remove('active');
-    }
-    
-    if (!e.target.closest('.language-picker') && 
-        !e.target.closest('#languageToggle') && 
-        languagePicker?.classList.contains('active')) {
-        languagePicker.classList.remove('active');
-    }
-    
-    if (!e.target.closest('.navbar') && navMenu?.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+});
+
+// Close nav menu when scrolling
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 10 && navMenu?.classList.contains('active')) {
+        closeAllMenus();
     }
 });
 
@@ -322,41 +387,4 @@ function loadDiwanGrid() {
 document.addEventListener('DOMContentLoaded', async () => {
     loadDiwanGrid();
     await initializeLanguage(savedLanguage);
-});  
-
-// ===== HOME LINK SPECIFIC HANDLER =====
-// This makes the nav menu disappear when Home is clicked
-
-// Get all nav menu links
-const navLinks = document.querySelectorAll('.nav-menu a');
-
-// Loop through each link
-navLinks.forEach(link => {
-    // Check if this is the Home link (by text content or data-i18n attribute)
-    if (link.textContent.includes('الرئيسية') || 
-        link.textContent.includes('Home') || 
-        link.textContent.includes('Accueil') ||
-        link.dataset.i18n === 'nav.home') {
-        
-        // Add click event to this specific link
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // Stop any page refresh
-            
-            // Close the mobile menu if it's open
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-            }
-            
-            // Fix the hamburger icon (turn it back to normal)
-            if (hamburger && hamburger.classList.contains('active')) {
-                hamburger.classList.remove('active');
-            }
-            
-            // Close any open pickers (theme, font, language)
-            if (themePicker) themePicker.classList.remove('active');
-            if (fontPicker) fontPicker.classList.remove('active');
-            if (languagePicker) languagePicker.classList.remove('active');
-            
-        });
-    }
 });

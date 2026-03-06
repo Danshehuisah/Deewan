@@ -39,7 +39,7 @@
         "verses": "Verses",
         "back": "← Back to Chapters",
         "next": "Next Chapter",
-        "prev": "Previous",
+        "prev": "← Previous",
         "loading": "Loading...",
         "error": "Failed to load content",
         "noVerses": "No verses in this chapter",

@@ -1,5 +1,8 @@
 /* ===== CSS Variables & Themes ===== */
 :root {
+    /* Base font size control */
+    --base-font-size: 20px; /* Default */
+    
     /* Light Theme (Default) */
     --bg-primary: #f8f9fa;
     --bg-secondary: #ffffff;
@@ -116,7 +119,6 @@
 }
 
 /* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
-/* CORRECTED: Using relative path from CSS to fonts folder */
 @font-face {
     font-family: 'Amiri';
     src: url('../fonts/Amiri-Regular.ttf') format('truetype');
@@ -189,7 +191,7 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: var(--base-font-size, 20px);
 }
 
 body {
@@ -199,7 +201,57 @@ body {
     line-height: 1.8;
     transition: background-color 0.3s ease, color 0.3s ease;
     letter-spacing: var(--letter-spacing);
-    font-size: 1.25rem;
+    font-size: 1rem;
+}
+
+/* Make all elements use relative units */
+body, 
+body *,
+p, h1, h2, h3, h4, h5, h6,
+a, button, input, textarea,
+.nav-menu a,
+.nav-brand h1,
+.diwan-title,
+.diwan-number,
+.theme-btn,
+.font-btn,
+.language-btn,
+.welcome-title,
+.welcome-subtitle,
+.footer p,
+.loading,
+.error {
+    font-size: 1rem;
+    letter-spacing: inherit;
+}
+
+/* Specific elements that might need different sizes */
+.nav-brand h1 {
+    font-size: 1.5rem;
+}
+
+.nav-menu a {
+    font-size: 1.1rem;
+}
+
+.diwan-number {
+    font-size: 2rem;
+}
+
+.diwan-title {
+    font-size: 1.2rem;
+}
+
+.welcome-title {
+    font-size: 2rem;
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+}
+
+.theme-btn, .font-btn, .language-btn {
+    font-size: 1rem;
 }
 
 /* RTL/LTR Direction Handling */
@@ -207,8 +259,39 @@ html[lang="ar"] {
     direction: rtl;
 }
 
+html[lang="ar"] .navbar {
+    direction: rtl;
+}
+
+html[lang="ar"] .hamburger {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+html[lang="ar"] .nav-menu {
+    margin-right: auto;
+    margin-left: 0;
+}
+
 html[lang="en"], html[lang="fr"] {
     direction: ltr;
+}
+
+html[lang="en"] .navbar,
+html[lang="fr"] .navbar {
+    direction: ltr;
+}
+
+html[lang="en"] .hamburger,
+html[lang="fr"] .hamburger {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+html[lang="en"] .nav-menu,
+html[lang="fr"] .nav-menu {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 /* ===== Navbar Styles ===== */
@@ -230,7 +313,7 @@ html[lang="en"], html[lang="fr"] {
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
-    z-index: 1001;
+    z-index: 1002;
 }
 
 .hamburger span {
@@ -247,13 +330,12 @@ html[lang="en"], html[lang="fr"] {
     transform: translateX(-50%);
     white-space: nowrap;
     text-align: center;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .nav-brand h1 {
     color: var(--accent-color);
     text-decoration: none;
-    font-size: 1.5rem;
     white-space: nowrap;
     transition: color 0.3s ease;
 }
@@ -261,14 +343,13 @@ html[lang="en"], html[lang="fr"] {
 .nav-menu {
     display: flex;
     gap: 2rem;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .nav-menu a {
     color: var(--text-secondary);
     text-decoration: none;
     cursor: pointer;
-    font-size: 1.1rem;
     white-space: nowrap;
     transition: color 0.3s ease;
 }
@@ -288,8 +369,14 @@ html[lang="en"], html[lang="fr"] {
     display: none;
     animation: slideDown 0.3s ease;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    z-index: 999;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 1500;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .theme-picker.active,
@@ -326,7 +413,6 @@ html[lang="en"], html[lang="fr"] {
     border-radius: 8px;
     transition: all 0.3s ease;
     min-width: 120px;
-    font-size: 1rem;
 }
 
 .theme-btn:hover,
@@ -461,7 +547,6 @@ html[lang="en"], html[lang="fr"] {
     text-align: center;
     color: var(--accent-color);
     margin-bottom: 1rem;
-    font-size: 2rem;
     transition: color 0.3s ease;
 }
 
@@ -469,7 +554,6 @@ html[lang="en"], html[lang="fr"] {
     text-align: center;
     color: var(--text-secondary);
     margin-bottom: 3rem;
-    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
@@ -501,7 +585,6 @@ html[lang="en"], html[lang="fr"] {
 }
 
 .diwan-number {
-    font-size: 2rem;
     font-weight: bold;
     color: var(--accent-color);
     margin-bottom: 0.5rem;
@@ -510,7 +593,6 @@ html[lang="en"], html[lang="fr"] {
 }
 
 .diwan-title {
-    font-size: 1.2rem;
     color: var(--text-primary);
     text-align: center;
     line-height: 1.6;
@@ -528,6 +610,22 @@ html[lang="en"], html[lang="fr"] {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ===== Overlay ===== */
+.picker-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1400;
+}
+
+.picker-overlay.active {
+    display: block;
+}
+
 /* ===== Animations ===== */
 @keyframes slideDown {
     from {
@@ -542,13 +640,16 @@ html[lang="en"], html[lang="fr"] {
 
 /* ===== Mobile Responsive ===== */
 @media (max-width: 768px) {
-    body {
-        font-size: 1.1rem;
-    }
-
     .navbar {
         padding: 1rem;
-        position: relative;
+        position: sticky;
+        top: 0;
+    }
+
+    .theme-picker,
+    .font-picker,
+    .language-picker {
+        top: 70px;
     }
 
     .hamburger {
@@ -574,8 +675,11 @@ html[lang="en"], html[lang="fr"] {
         flex-direction: column;
         padding: 1rem;
         gap: 1rem;
-        box-shadow: 0 2px 5px var(--shadow-color);
+        box-shadow: 0 5px 10px var(--shadow-color);
         z-index: 1100;
+        border: 1px solid var(--border-color);
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     .nav-menu.active {
@@ -640,5 +744,11 @@ html[lang="en"], html[lang="fr"] {
 
     .nav-brand h1 {
         font-size: 1.1rem;
+    }
+
+    .theme-picker,
+    .font-picker,
+    .language-picker {
+        top: 60px;
     }
 }

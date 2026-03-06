@@ -25,6 +25,11 @@ const languageToggle = document.getElementById('languageToggle');
 const languagePicker = document.getElementById('languagePicker');
 const languageBtns = document.querySelectorAll('.language-btn');
 
+// Create overlay element
+const overlay = document.createElement('div');
+overlay.className = 'picker-overlay';
+document.body.appendChild(overlay);
+
 // Diwan titles with proper Arabic vowels
 const diwanTitles = {
     1: "تَيْسِيرُ الْوُصُولِ إِلَىٰ حَضْرَةِ الرَّسُولِ",
@@ -51,14 +56,18 @@ const getStorageKey = () => `diwan_${diwanId}_last_read`;
 const savedTheme = localStorage.getItem('theme') || 'light';
 const savedFont = localStorage.getItem('font') || 'scheherazade';
 const savedFontSize = localStorage.getItem('fontSize') || 20;
-const savedLanguage = localStorage.getItem('language') || 'en';
+let savedLanguage = localStorage.getItem('language') || 'en';
 
 // Apply saved preferences
 document.documentElement.setAttribute('data-theme', savedTheme);
 document.documentElement.setAttribute('data-font', savedFont);
 document.documentElement.setAttribute('lang', savedLanguage);
 document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
-document.body.style.fontSize = savedFontSize + 'px';
+
+// Apply saved font size to root element
+document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
+document.documentElement.style.fontSize = savedFontSize + 'px';
+
 if (fontSizeSlider) fontSizeSlider.value = savedFontSize;
 if (fontSizeValue) fontSizeValue.textContent = savedFontSize;
 
@@ -83,14 +92,78 @@ languageBtns.forEach(btn => {
     }
 });
 
+// ===== FUNCTION: Close All Menus and Pickers =====
+function closeAllMenus() {
+    // Close mobile menu
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+    }
+    if (hamburger && hamburger.classList.contains('active')) {
+        hamburger.classList.remove('active');
+    }
+    
+    // Close all pickers
+    if (themePicker && themePicker.classList.contains('active')) {
+        themePicker.classList.remove('active');
+    }
+    if (fontPicker && fontPicker.classList.contains('active')) {
+        fontPicker.classList.remove('active');
+    }
+    if (languagePicker && languagePicker.classList.contains('active')) {
+        languagePicker.classList.remove('active');
+    }
+    
+    // Hide overlay
+    overlay.classList.remove('active');
+}
+
+// ===== FUNCTION: Close Pickers When Nav Opens =====
+function closePickersWhenNavOpens() {
+    if (navMenu && navMenu.classList.contains('active')) {
+        if (themePicker) themePicker.classList.remove('active');
+        if (fontPicker) fontPicker.classList.remove('active');
+        if (languagePicker) languagePicker.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+}
+
+// ===== FUNCTION: Show Overlay =====
+function showOverlay() {
+    overlay.classList.add('active');
+}
+
+// ===== FUNCTION: Handle Picker Toggle =====
+function togglePicker(pickerToShow) {
+    // Close all pickers first
+    if (themePicker) themePicker.classList.remove('active');
+    if (fontPicker) fontPicker.classList.remove('active');
+    if (languagePicker) languagePicker.classList.remove('active');
+    
+    // Close nav menu if open
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    
+    // Show the selected picker
+    if (pickerToShow) {
+        pickerToShow.classList.add('active');
+        showOverlay();
+    } else {
+        overlay.classList.remove('active');
+    }
+}
+
 // Load translations
 async function loadTranslations() {
     try {
-        const path = window.location.pathname.includes('html/') ? '../locales/' : 'locales/';
+        const path = window.location.pathname.includes('/html/') ? '../locales/' : 'locales/';
         const response = await fetch(`${path}${savedLanguage}.json`);
         if (!response.ok) throw new Error('Failed to load translations');
         translations = await response.json();
+        console.log('Translations loaded:', translations);
         applyTranslations();
+        return translations;
     } catch (error) {
         console.error('Error loading translations:', error);
         translations = {};
@@ -102,94 +175,96 @@ function applyTranslations() {
     const t = translations;
     if (!t) return;
     
+    console.log('Applying translations, found elements:', document.querySelectorAll('[data-i18n]').length);
+    
+    // Update ALL elements with data-i18n attributes
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.dataset.i18n;
+        const keys = key.split('.');
+        let value = t;
+        
+        // Navigate through the nested keys
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
+            } else {
+                value = null;
+                break;
+            }
+        }
+        
+        if (value) {
+            element.textContent = value;
+            console.log(`Updated ${key} to:`, value);
+        } else {
+            console.warn(`Translation missing for key: ${key}`);
+        }
+    });
+    
     // Update continue reading heading
     if (continueHeading) {
-        continueHeading.innerHTML = t.diwan.continue;
+        continueHeading.innerHTML = t.diwan?.continue || continueHeading.innerHTML;
     }
     
     // Update the continue card if it exists
     updateContinueCard();
 }
 
-// Toggle mobile menu
+// Toggle mobile menu - CLOSE PICKERS WHEN NAV OPENS
 if (hamburger) {
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        
+        // Close all pickers when nav menu opens
+        closePickersWhenNavOpens();
     });
 }
 
-// Theme toggle click
+// Theme toggle click - CLOSE NAV AND OTHER PICKERS
 if (themeToggle) {
     themeToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Close other pickers
-        if (fontPicker) fontPicker.classList.remove('active');
-        if (languagePicker) languagePicker.classList.remove('active');
-        
-        // Toggle theme picker
-        if (themePicker) {
-            themePicker.classList.toggle('active');
-        }
-        
-        // Close mobile menu if open
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+        if (themePicker && !themePicker.classList.contains('active')) {
+            togglePicker(themePicker);
+        } else {
+            togglePicker(null);
         }
     });
 }
 
-// Font toggle click
+// Font toggle click - CLOSE NAV AND OTHER PICKERS
 if (fontToggle) {
     fontToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Close other pickers
-        if (themePicker) themePicker.classList.remove('active');
-        if (languagePicker) languagePicker.classList.remove('active');
-        
-        // Toggle font picker
-        if (fontPicker) {
-            fontPicker.classList.toggle('active');
-        }
-        
-        // Close mobile menu if open
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+        if (fontPicker && !fontPicker.classList.contains('active')) {
+            togglePicker(fontPicker);
+        } else {
+            togglePicker(null);
         }
     });
 }
 
-// Language toggle click
+// Language toggle click - CLOSE NAV AND OTHER PICKERS
 if (languageToggle) {
     languageToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Close other pickers
-        if (themePicker) themePicker.classList.remove('active');
-        if (fontPicker) fontPicker.classList.remove('active');
-        
-        // Toggle language picker
-        if (languagePicker) {
-            languagePicker.classList.toggle('active');
-        }
-        
-        // Close mobile menu if open
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+        if (languagePicker && !languagePicker.classList.contains('active')) {
+            togglePicker(languagePicker);
+        } else {
+            togglePicker(null);
         }
     });
 }
 
-// Theme button clicks
+// Theme button clicks - CLOSE PICKER AFTER SELECTION
 themeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const theme = btn.dataset.theme;
@@ -202,14 +277,12 @@ themeBtns.forEach(btn => {
         themeBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Close theme picker after selection
-        if (themePicker) {
-            themePicker.classList.remove('active');
-        }
+        // Close picker after selection
+        closeAllMenus();
     });
 });
 
-// Font button clicks
+// Font button clicks - CLOSE PICKER AFTER SELECTION
 fontBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const font = btn.dataset.font;
@@ -222,42 +295,71 @@ fontBtns.forEach(btn => {
         fontBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Close font picker after selection
-        if (fontPicker) {
-            fontPicker.classList.remove('active');
-        }
+        // Close picker after selection
+        closeAllMenus();
     });
 });
 
-// Language button clicks
+// Language button clicks - SINGLE HANDLER
 languageBtns.forEach(btn => {
-    btn.addEventListener('click', async () => {
-        const lang = btn.dataset.lang;
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         
-        // Set language
-        localStorage.setItem('language', lang);
-        document.documentElement.setAttribute('lang', lang);
-        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        const lang = btn.dataset.lang;
+        console.log('Language button clicked:', lang);
         
         // Update active states
         languageBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        // Reload translations and refresh
+        // Set language in localStorage
+        localStorage.setItem('language', lang);
+        
+        // Update HTML attributes
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        
+        // Update savedLanguage variable
+        savedLanguage = lang;
+        
+        // Load translations and apply them
         await loadTranslations();
-        window.location.reload();
+        
+        // Close language picker
+        closeAllMenus();
+        
+        // Force update of any dynamic content
+        if (diwanId) {
+            // Update diwan title with new translation
+            if (diwanTitle) {
+                diwanTitle.textContent = `${translations.diwan?.title || 'الديوان'} ${diwanId}`;
+            }
+        }
+        
+        // Force update of the continue card if it exists
+        loadLastRead();
     });
 });
 
-// Font size slider
+// Font size slider - UPDATED to affect all elements
 if (fontSizeSlider) {
     fontSizeSlider.addEventListener('input', (e) => {
         const size = e.target.value;
-        document.body.style.fontSize = size + 'px';
+        
+        // Apply to root element and CSS variable
+        document.documentElement.style.setProperty('--base-font-size', size + 'px');
+        document.documentElement.style.fontSize = size + 'px';
+        
         localStorage.setItem('fontSize', size);
         if (fontSizeValue) fontSizeValue.textContent = size;
     });
 }
+
+// Overlay click handler
+overlay.addEventListener('click', () => {
+    closeAllMenus();
+});
 
 // Nav menu link clicks - close menu after click
 document.querySelectorAll('.nav-menu a').forEach(link => {
@@ -267,8 +369,8 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
             return;
         }
         
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+        // Close everything
+        closeAllMenus();
         
         if (link.getAttribute('href') === '../index.html') {
             window.location.href = '../index.html';
@@ -276,29 +378,20 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
-// Close pickers when clicking outside
+// Close pickers when clicking outside - SIMPLIFIED
 document.addEventListener('click', (e) => {
-    if (!e.target.closest('.theme-picker') && 
-        !e.target.closest('#themeToggle') && 
-        themePicker?.classList.contains('active')) {
-        themePicker.classList.remove('active');
+    // Close nav menu if clicking outside navbar
+    if (!e.target.closest('.navbar') && 
+        !e.target.closest('.nav-menu a') &&
+        navMenu?.classList.contains('active')) {
+        closeAllMenus();
     }
-    
-    if (!e.target.closest('.font-picker') && 
-        !e.target.closest('#fontToggle') && 
-        fontPicker?.classList.contains('active')) {
-        fontPicker.classList.remove('active');
-    }
-    
-    if (!e.target.closest('.language-picker') && 
-        !e.target.closest('#languageToggle') && 
-        languagePicker?.classList.contains('active')) {
-        languagePicker.classList.remove('active');
-    }
-    
-    if (!e.target.closest('.navbar') && navMenu?.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+});
+
+// Close nav menu when scrolling
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 10 && navMenu?.classList.contains('active')) {
+        closeAllMenus();
     }
 });
 
@@ -359,8 +452,6 @@ function updateContinueCard(chapterIndex, chapterTitle, versePreview) {
         newCard.addEventListener('click', () => {
             window.location.href = `huruf-view.html?diwan=${diwanId}&chapter=${chapterIndex}`;
         });
-    } else {
-        // Just update the heading (already done in applyTranslations)
     }
 }
 
@@ -374,6 +465,9 @@ async function loadChapters() {
     try {
         // Load translations first
         await loadTranslations();
+        
+        // APPLY TRANSLATIONS TO NAV AND ALL ELEMENTS
+        applyTranslations();
         
         if (diwanTitle) {
             diwanTitle.textContent = `${translations.diwan?.title || 'الديوان'} ${diwanId}`;

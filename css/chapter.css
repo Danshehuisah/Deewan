@@ -1,5 +1,8 @@
 /* ===== CSS Variables & Themes ===== */
 :root {
+    /* Base font size control */
+    --base-font-size: 20px; /* Default */
+    
     /* Light Theme (Default) */
     --bg-primary: #f8f9fa;
     --bg-secondary: #ffffff;
@@ -189,7 +192,7 @@
 
 /* Default font size for root */
 html {
-    font-size: 16px;
+    font-size: var(--base-font-size, 20px);
 }
 
 body {
@@ -199,10 +202,10 @@ body {
     line-height: 1.8;
     transition: background-color 0.3s ease, color 0.3s ease;
     letter-spacing: var(--letter-spacing);
-    font-size: 1.25rem; /* 20px default */
+    font-size: 1rem; /* Relative to root */
 }
 
-/* Ensure all text elements inherit font size */
+/* Make all elements use relative units */
 body, 
 body *,
 p, h1, h2, h3, h4, h5, h6,
@@ -217,11 +220,12 @@ a, button, input, textarea,
 .continue-badge,
 .theme-btn,
 .font-btn,
+.language-btn,
 .diwan-full-title,
 .chapter-header h2,
 .loading,
 .error {
-    font-size: inherit;
+    font-size: 1rem;
     letter-spacing: inherit;
 }
 
@@ -263,7 +267,7 @@ a, button, input, textarea,
     font-size: 0.8rem;
 }
 
-.theme-btn, .font-btn {
+.theme-btn, .font-btn, .language-btn {
     font-size: 1rem;
 }
 
@@ -284,7 +288,6 @@ a, button, input, textarea,
     position: sticky;
     top: 0;
     z-index: 1000;
-    direction: rtl;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -296,13 +299,11 @@ html[lang="ar"] .navbar {
 html[lang="ar"] .hamburger {
     margin-left: auto;
     margin-right: 0;
-    order: 1;
 }
 
 html[lang="ar"] .nav-menu {
     margin-right: auto;
     margin-left: 0;
-    order: 3;
 }
 
 /* LTR for English/French - Hamburger on LEFT, menu on RIGHT */
@@ -315,26 +316,20 @@ html[lang="en"] .hamburger,
 html[lang="fr"] .hamburger {
     margin-right: auto;
     margin-left: 0;
-    order: 1;
 }
 
 html[lang="en"] .nav-menu,
 html[lang="fr"] .nav-menu {
     margin-left: auto;
     margin-right: 0;
-    order: 3;
 }
-
-
 
 .hamburger {
     display: none;
     flex-direction: column;
     cursor: pointer;
     padding: 5px;
-    /* order: 1; */
-    /* margin-left: auto; */
-    z-index: 1001;
+    z-index: 1002;
 }
 
 .hamburger span {
@@ -346,13 +341,12 @@ html[lang="fr"] .nav-menu {
 }
 
 .nav-brand {
-    order: 2;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     text-align: center;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .nav-brand a {
@@ -365,15 +359,12 @@ html[lang="fr"] .nav-menu {
 .nav-menu {
     display: flex;
     gap: 2rem;
-    /* order: 3; */
-    /* margin-right: auto; */
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .nav-menu a {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 1rem;
     cursor: pointer;
     white-space: nowrap;
     transition: color 0.3s ease;
@@ -433,7 +424,7 @@ html[lang="fr"] .continue-card h4,
 html[lang="fr"] .continue-preview,
 html[lang="fr"] .continue-meta,
 html[lang="fr"] .continue-badge {
-    text-align: right;
+    text-align: left;
 }
 
 /* Center align specific elements regardless of language */
@@ -452,35 +443,51 @@ html[lang="fr"] .continue-badge {
 }
 
 /* ===== Theme Picker Styles ===== */
-.theme-picker {
+.theme-picker,
+.font-picker,
+.language-picker {
     background-color: var(--bg-secondary);
     padding: 1.5rem;
     border-bottom: 1px solid var(--border-color);
     display: none;
     animation: slideDown 0.3s ease;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    z-index: 999;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 1500;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-.theme-picker.active {
+.theme-picker.active,
+.font-picker.active,
+.language-picker.active {
     display: block;
 }
 
-.theme-picker h3 {
+.theme-picker h3,
+.font-picker h3,
+.language-picker h3 {
     margin-bottom: 1rem;
     color: var(--accent-color);
     text-align: center;
 }
 
-.theme-options {
+.theme-options,
+.font-options,
+.language-options {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.theme-btn {
+.theme-btn,
+.font-btn,
+.language-btn {
     padding: 0.75rem 1.5rem;
     border: 1px solid var(--border-color);
     background: none;
@@ -492,7 +499,11 @@ html[lang="fr"] .continue-badge {
 }
 
 .theme-btn:hover,
-.theme-btn.active {
+.theme-btn.active,
+.font-btn:hover,
+.font-btn.active,
+.language-btn:hover,
+.language-btn.active {
     background-color: var(--accent-color);
     color: white;
     border-color: var(--accent-color);
@@ -524,54 +535,6 @@ html[lang="fr"] .continue-badge {
 .theme-btn.green-theme.active {
     background-color: #2e7d5e;
     color: #e8f0e8;
-}
-
-/* ===== Font Picker Styles ===== */
-.font-picker {
-    background-color: var(--bg-secondary);
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    display: none;
-    animation: slideDown 0.3s ease;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    z-index: 999;
-}
-
-.font-picker.active {
-    display: block;
-}
-
-.font-picker h3 {
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-    text-align: center;
-}
-
-.font-options {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.font-btn {
-    padding: 0.75rem 1.5rem;
-    border: 1px solid var(--border-color);
-    background: none;
-    color: var(--text-primary);
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    min-width: 120px;
-}
-
-.font-btn:hover,
-.font-btn.active {
-    background-color: var(--accent-color);
-    color: white;
-    border-color: var(--accent-color);
 }
 
 /* Font size control */
@@ -714,54 +677,6 @@ html[lang="fr"] .continue-badge {
     font-family: 'Naskh', serif;
 }
 
-/* ===== Language Picker Styles ===== */
-.language-picker {
-    background-color: var(--bg-secondary);
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    display: none;
-    animation: slideDown 0.3s ease;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    position: relative;
-    z-index: 999;
-}
-
-.language-picker.active {
-    display: block;
-}
-
-.language-picker h3 {
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-    text-align: center;
-}
-
-.language-options {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.language-btn {
-    padding: 0.75rem 1.5rem;
-    border: 1px solid var(--border-color);
-    background: none;
-    color: var(--text-primary);
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    min-width: 120px;
-}
-
-.language-btn:hover,
-.language-btn.active {
-    background-color: var(--accent-color);
-    color: white;
-    border-color: var(--accent-color);
-}
-
 /* ===== Main Content Styles ===== */
 .main-content {
     flex: 1;
@@ -856,6 +771,7 @@ html[lang="fr"] .continue-badge {
     flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;
+    
 }
 
 .huruf-item {
@@ -865,6 +781,7 @@ html[lang="fr"] .continue-badge {
     padding: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-right: 4px solid var(--accent-color);
 }
 
 .huruf-item:hover {
@@ -882,6 +799,22 @@ html[lang="fr"] .continue-badge {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* ===== Overlay ===== */
+.picker-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1400;
+}
+
+.picker-overlay.active {
+    display: block;
 }
 
 /* ===== Animations ===== */
@@ -932,22 +865,26 @@ html[lang="fr"] .continue-badge {
 /* ===== Mobile Responsive ===== */
 @media (max-width: 768px) {
     body {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .navbar {
         padding: 1rem;
-        position: relative;
+        position: sticky;
+        top: 0;
+    }
+
+    .theme-picker,
+    .font-picker,
+    .language-picker {
+        top: 70px;
     }
 
     .hamburger {
         display: flex;
-        /* order: 1; */
-        /* margin-left: 0; */
     }
 
     .nav-brand {
-        /* order: 2; */
         position: static;
         transform: none;
     }
@@ -966,10 +903,11 @@ html[lang="fr"] .continue-badge {
         flex-direction: column;
         padding: 1rem;
         gap: 1rem;
-        box-shadow: 0 2px 5px var(--shadow-color);
-        /* order: 4; */
-        /* margin-right: 0; */
-        z-index: 999;
+        box-shadow: 0 5px 10px var(--shadow-color);
+        z-index: 1100;
+        border: 1px solid var(--border-color);
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     .nav-menu.active {
@@ -1005,13 +943,15 @@ html[lang="fr"] .continue-badge {
     }
 
     .theme-options,
-    .font-options {
+    .font-options,
+    .language-options {
         flex-direction: column;
         align-items: stretch;
     }
 
     .theme-btn,
-    .font-btn {
+    .font-btn,
+    .language-btn {
         width: 100%;
     }
 
@@ -1032,5 +972,11 @@ html[lang="fr"] .continue-badge {
 @media (max-width: 480px) {
     .nav-brand a {
         font-size: 1.1rem;
+    }
+
+    .theme-picker,
+    .font-picker,
+    .language-picker {
+        top: 60px;
     }
 }
