@@ -1,9 +1,7 @@
 /* ===== CSS Variables & Themes ===== */
 :root {
-    /* Base font size control */
-    --base-font-size: 20px; /* Default */
-    
-    /* Light Theme (Default) */
+    --base-font-size: 20px;
+
     --bg-primary: #f8f9fa;
     --bg-secondary: #ffffff;
     --text-primary: #2c3e50;
@@ -18,7 +16,6 @@
     --nav-bg: #ffffff;
     --card-bg: #ffffff;
     --verse-border: #e9ecef;
-    --header-bg: rgba(255, 255, 255, 0.95);
     --continue-bg: #f5f0e6;
     --badge-bg: #8B4513;
     --badge-text: #ffffff;
@@ -31,7 +28,6 @@
     --letter-spacing: 0.5px;
 }
 
-/* Dark Theme */
 [data-theme="dark"] {
     --bg-primary: #1a1e2b;
     --bg-secondary: #2d3349;
@@ -47,7 +43,6 @@
     --nav-bg: #2d3349;
     --card-bg: #2d3349;
     --verse-border: #495057;
-    --header-bg: rgba(45, 51, 73, 0.95);
     --continue-bg: #3d435b;
     --badge-bg: #d4a373;
     --badge-text: #1a1e2b;
@@ -57,10 +52,8 @@
     --next-btn-text: #1a1e2b;
     --prev-btn-bg: #2d3349;
     --prev-btn-text: #e9ecef;
-    --letter-spacing: 0.5px;
 }
 
-/* Sepia Theme */
 [data-theme="sepia"] {
     --bg-primary: #f4ecd8;
     --bg-secondary: #e8dccc;
@@ -76,7 +69,6 @@
     --nav-bg: #e8dccc;
     --card-bg: #faf0e2;
     --verse-border: #d6c6b2;
-    --header-bg: rgba(232, 220, 204, 0.95);
     --continue-bg: #e8dccc;
     --badge-bg: #9b6b43;
     --badge-text: #f4ecd8;
@@ -86,10 +78,8 @@
     --next-btn-text: #f4ecd8;
     --prev-btn-bg: #faf0e2;
     --prev-btn-text: #5b4636;
-    --letter-spacing: 0.5px;
 }
 
-/* Green Theme (Eye Comfort) */
 [data-theme="green"] {
     --bg-primary: #e8f0e8;
     --bg-secondary: #d0e0d0;
@@ -105,7 +95,6 @@
     --nav-bg: #d0e0d0;
     --card-bg: #f0f8f0;
     --verse-border: #b8d0b8;
-    --header-bg: rgba(208, 224, 208, 0.95);
     --continue-bg: #d0e0d0;
     --badge-bg: #2e7d5e;
     --badge-text: #e8f0e8;
@@ -115,85 +104,22 @@
     --next-btn-text: #e8f0e8;
     --prev-btn-bg: #f0f8f0;
     --prev-btn-text: #1e3a2e;
-    --letter-spacing: 0.5px;
 }
 
-/* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
-@font-face {
-    font-family: 'Amiri';
-    src: url('../fonts/Amiri-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+/* ===== Fonts ===== */
+@font-face { font-family: 'Amiri'; src: url('../fonts/Amiri-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Amiri'; src: url('../fonts/Amiri-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Scheherazade'; src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Scheherazade'; src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Kufi'; src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Kufi'; src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Naskh'; src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Naskh'; src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
 
-@font-face {
-    font-family: 'Amiri';
-    src: url('../fonts/Amiri-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
+/* ===== Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-@font-face {
-    font-family: 'Scheherazade';
-    src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Scheherazade';
-    src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kufi';
-    src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kufi';
-    src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Naskh';
-    src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Naskh';
-    src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* ===== Base Styles with Font Size Inheritance ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Default font size for root */
-html {
-    font-size: var(--base-font-size, 20px);
-}
+html { font-size: var(--base-font-size, 20px); }
 
 body {
     font-family: 'Scheherazade', serif;
@@ -202,88 +128,30 @@ body {
     line-height: 1.8;
     transition: background-color 0.3s ease, color 0.3s ease;
     letter-spacing: var(--letter-spacing);
-    font-size: 1rem; /* Relative to root */
+    font-size: 1rem;
+    min-height: 100vh;
 }
 
-/* Make all elements use relative units */
-body, 
-body *,
-p, h1, h2, h3, h4, h5, h6,
-a, button, input, textarea,
-.nav-menu a,
-.nav-brand a,
-.verse-line,
-.verse-item,
-.back-btn,
-.nav-arrow,
-.theme-btn,
-.font-btn,
-.language-btn,
-#currentPosition,
-.loading,
-.error,
-.nav-brand .chapter-title-nav,
-.diwan-title-nav,
-.huruf-title-nav,
-.theme-picker h3,
-.font-picker h3,
-.language-picker h3,
-.font-size-control label,
-.font-size-value {
-    font-size: 1rem;
+body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea {
     letter-spacing: inherit;
 }
 
-/* Specific elements that need different relative sizes */
-.nav-brand a {
-    font-size: 1.5rem; /* 1.5 x base size */
-}
+.nav-brand a { font-size: 1.4rem; }
+.nav-menu a { font-size: 1.1rem; }
+.back-btn { font-size: 1rem; }
+.nav-arrow.prev-btn { font-size: 0.9rem; }
+.nav-arrow.next-btn { font-size: 1.3rem; font-weight: bold; }
+#currentPosition { font-size: 0.95rem; }
+.theme-btn, .font-btn, .language-btn { font-size: 1rem; }
 
-.nav-brand .chapter-title-nav {
-    font-size: 1.2rem;
-}
-
-.nav-menu a {
-    font-size: 1.1rem;
-}
-
-.verse-line {
-    font-size: 1.3rem;
-    line-height: 2.5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
-    text-rendering: optimizeLegibility;
-}
-
-.back-btn {
-    font-size: 1rem;
-}
-
-.nav-arrow.prev-btn {
-    font-size: 0.9rem;
-}
-
-.nav-arrow.next-btn {
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-
-#currentPosition {
-    font-size: 0.95rem;
-}
-
-.theme-btn, .font-btn, .language-btn {
-    font-size: 1rem;
-}
-
+/* ===== App Shell ===== */
 .app-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ===== Navbar Styles ===== */
+/* ===== Navbar (matches index + chapter) ===== */
 .navbar {
     background-color: var(--nav-bg);
     padding: 1rem 2rem;
@@ -295,34 +163,19 @@ a, button, input, textarea,
     top: 0;
     z-index: 1000;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
-    order: 1;
-    margin-right: 0;
-    margin-left: auto;
-    z-index: 1002;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-primary);
-    margin: 2px 0;
-    transition: 0.3s;
+    flex-direction: row;
+    direction: ltr;
 }
 
 .nav-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    order: 1;
+    text-align: left;
     white-space: nowrap;
-    text-align: center;
     z-index: 1001;
+    margin: 0;
+    max-width: 75%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nav-brand a {
@@ -330,35 +183,65 @@ a, button, input, textarea,
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.3s ease;
-    display: flex;
-    gap: 1rem;
+    unicode-bidi: plaintext;
+    display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
 }
 
-/* Chapter title in navbar */
 .diwan-title-nav {
     font-weight: bold;
     color: var(--accent-color);
-    padding: 0.2rem 0.8rem;
+    padding: 0.15rem 0.6rem;
     background-color: var(--bg-secondary);
     border-radius: 20px;
     border: 1px solid var(--accent-color);
+    white-space: nowrap;
 }
 
-/* Huruf title in navbar */
 .huruf-title-nav {
     font-weight: normal;
     color: var(--text-secondary);
-    background-color: var(--bg-secondary);
-    margin: 0 1rem;
+    white-space: nowrap;
+    unicode-bidi: plaintext;
 }
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px;
+    margin: 0;
+    background: transparent;
+    border: none;
+    order: 3;
+    z-index: 1002;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .nav-menu {
     display: flex;
     gap: 2rem;
-    margin-right: auto;
-    margin-left: 0;
+    order: 2;
     z-index: 1001;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .nav-menu a {
@@ -369,62 +252,14 @@ a, button, input, textarea,
     transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: var(--accent-color);
-}
+.nav-menu a:hover,
+.nav-menu a.active { color: var(--accent-color); }
 
-/* LTR override for English/French */
-html[lang="en"] .navbar,
-html[lang="fr"] .navbar {
-    direction: ltr;
-}
-
-html[lang="en"] .hamburger,
-html[lang="fr"] .hamburger {
-    margin-left: 0;
-    margin-right: auto;
-}
-
+html[lang="ar"] .nav-menu { text-align: right; }
 html[lang="en"] .nav-menu,
-html[lang="fr"] .nav-menu {
-    margin-left: auto;
-    margin-right: 0;
-}
+html[lang="fr"] .nav-menu { text-align: left; }
 
-/* Hide progress bar when navbar is active */
-.nav-menu.active ~ .main-content .progress-container,
-.navbar:has(.nav-menu.active) .progress-container {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Reading View - Hide menu items */
-.reading-view .nav-menu {
-    display: none;
-}
-
-.reading-view .navbar {
-    justify-content: flex-start;
-    gap: 1rem;
-    background-color: transparent;
-    box-shadow: none;
-}
-
-.reading-view .nav-brand {
-    position: static;
-    transform: none;
-    text-align: right;
-}
-
-.reading-view .nav-brand a {
-    color: var(--accent-color);
-}
-
-.reading-view .hamburger {
-    display: flex !important;
-}
-
-/* ===== Theme Picker Styles ===== */
+/* ===== Pickers ===== */
 .theme-picker,
 .font-picker,
 .language-picker {
@@ -446,9 +281,7 @@ html[lang="fr"] .nav-menu {
 
 .theme-picker.active,
 .font-picker.active,
-.language-picker.active {
-    display: block;
-}
+.language-picker.active { display: block; }
 
 .theme-picker h3,
 .font-picker h3,
@@ -478,6 +311,7 @@ html[lang="fr"] .nav-menu {
     border-radius: 8px;
     transition: all 0.3s ease;
     min-width: 120px;
+    font-family: inherit;
 }
 
 .theme-btn:hover,
@@ -491,35 +325,15 @@ html[lang="fr"] .nav-menu {
     border-color: var(--accent-color);
 }
 
-/* Light theme button specific */
 .theme-btn.light-theme:hover,
-.theme-btn.light-theme.active {
-    background-color: #8B4513;
-    color: white;
-}
-
-/* Dark theme button specific */
+.theme-btn.light-theme.active { background-color: #8B4513; color: white; }
 .theme-btn.dark-theme:hover,
-.theme-btn.dark-theme.active {
-    background-color: #d4a373;
-    color: #1a1e2b;
-}
-
-/* Sepia theme button specific */
+.theme-btn.dark-theme.active { background-color: #d4a373; color: #1a1e2b; }
 .theme-btn.sepia-theme:hover,
-.theme-btn.sepia-theme.active {
-    background-color: #9b6b43;
-    color: #f4ecd8;
-}
-
-/* Green theme button specific */
+.theme-btn.sepia-theme.active { background-color: #9b6b43; color: #f4ecd8; }
 .theme-btn.green-theme:hover,
-.theme-btn.green-theme.active {
-    background-color: #2e7d5e;
-    color: #e8f0e8;
-}
+.theme-btn.green-theme.active { background-color: #2e7d5e; color: #e8f0e8; }
 
-/* Font size control */
 .font-size-control {
     display: flex;
     align-items: center;
@@ -529,10 +343,7 @@ html[lang="fr"] .nav-menu {
     margin-top: 1rem;
 }
 
-.font-size-control label {
-    color: var(--text-secondary);
-    min-width: 80px;
-}
+.font-size-control label { color: var(--text-secondary); min-width: 80px; }
 
 .font-size-control input[type="range"] {
     flex: 1;
@@ -551,7 +362,6 @@ html[lang="fr"] .nav-menu {
     background: var(--accent-color);
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .font-size-control input[type="range"]::-moz-range-thumb {
@@ -570,13 +380,8 @@ html[lang="fr"] .nav-menu {
     text-align: center;
 }
 
-/* ===== Font Family Styles ===== */
-/* Amiri Font */
+/* ===== Font families ===== */
 [data-font="amiri"] body,
-[data-font="amiri"] .verse-line,
-[data-font="amiri"] .diwan-title,
-[data-font="amiri"] .huruf-item h3,
-[data-font="amiri"] .continue-card h4,
 [data-font="amiri"] button,
 [data-font="amiri"] a,
 [data-font="amiri"] p,
@@ -584,21 +389,9 @@ html[lang="fr"] .nav-menu {
 [data-font="amiri"] h2,
 [data-font="amiri"] h3,
 [data-font="amiri"] .nav-menu a,
-[data-font="amiri"] .back-btn,
-[data-font="amiri"] .nav-arrow,
-[data-font="amiri"] .verse-item,
-[data-font="amiri"] .diwan-btn,
-[data-font="amiri"] .huruf-item,
-[data-font="amiri"] .continue-card {
-    font-family: 'Amiri', serif;
-}
+[data-font="amiri"] .verse-line { font-family: 'Amiri', serif !important; }
 
-/* Scheherazade Font */
 [data-font="scheherazade"] body,
-[data-font="scheherazade"] .verse-line,
-[data-font="scheherazade"] .diwan-title,
-[data-font="scheherazade"] .huruf-item h3,
-[data-font="scheherazade"] .continue-card h4,
 [data-font="scheherazade"] button,
 [data-font="scheherazade"] a,
 [data-font="scheherazade"] p,
@@ -606,21 +399,9 @@ html[lang="fr"] .nav-menu {
 [data-font="scheherazade"] h2,
 [data-font="scheherazade"] h3,
 [data-font="scheherazade"] .nav-menu a,
-[data-font="scheherazade"] .back-btn,
-[data-font="scheherazade"] .nav-arrow,
-[data-font="scheherazade"] .verse-item,
-[data-font="scheherazade"] .diwan-btn,
-[data-font="scheherazade"] .huruf-item,
-[data-font="scheherazade"] .continue-card {
-    font-family: 'Scheherazade', serif;
-}
+[data-font="scheherazade"] .verse-line { font-family: 'Scheherazade', serif !important; }
 
-/* Kufi Font */
 [data-font="kufi"] body,
-[data-font="kufi"] .verse-line,
-[data-font="kufi"] .diwan-title,
-[data-font="kufi"] .huruf-item h3,
-[data-font="kufi"] .continue-card h4,
 [data-font="kufi"] button,
 [data-font="kufi"] a,
 [data-font="kufi"] p,
@@ -628,21 +409,9 @@ html[lang="fr"] .nav-menu {
 [data-font="kufi"] h2,
 [data-font="kufi"] h3,
 [data-font="kufi"] .nav-menu a,
-[data-font="kufi"] .back-btn,
-[data-font="kufi"] .nav-arrow,
-[data-font="kufi"] .verse-item,
-[data-font="kufi"] .diwan-btn,
-[data-font="kufi"] .huruf-item,
-[data-font="kufi"] .continue-card {
-    font-family: 'Kufi', sans-serif;
-}
+[data-font="kufi"] .verse-line { font-family: 'Kufi', sans-serif !important; }
 
-/* Naskh Font */
 [data-font="naskh"] body,
-[data-font="naskh"] .verse-line,
-[data-font="naskh"] .diwan-title,
-[data-font="naskh"] .huruf-item h3,
-[data-font="naskh"] .continue-card h4,
 [data-font="naskh"] button,
 [data-font="naskh"] a,
 [data-font="naskh"] p,
@@ -650,41 +419,20 @@ html[lang="fr"] .nav-menu {
 [data-font="naskh"] h2,
 [data-font="naskh"] h3,
 [data-font="naskh"] .nav-menu a,
-[data-font="naskh"] .back-btn,
-[data-font="naskh"] .nav-arrow,
-[data-font="naskh"] .verse-item,
-[data-font="naskh"] .diwan-btn,
-[data-font="naskh"] .huruf-item,
-[data-font="naskh"] .continue-card {
-    font-family: 'Naskh', serif;
-}
+[data-font="naskh"] .verse-line { font-family: 'Naskh', serif !important; }
 
-/* ===== Main Content Styles ===== */
-.main-content {
-    flex: 1;
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.reading-view .main-content {
-    padding-top: 0.5rem;
-}
-
-/* ===== Progress Bar Styles ===== */
+/* ===== Progress bar — fixed at top:0, LTR growth, above navbar ===== */
 .progress-container {
-    position: sticky;
-    top: 70px;
-    width: calc(100% - 2rem);
-    height: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
     background-color: var(--progress-bg);
-    z-index: 998;
-    margin: 0.35rem auto 10px auto;
+    z-index: 2000;
     overflow: hidden;
-    border-radius: 4px;
-    max-width: 1200px;
-    transition: opacity 0.3s ease;
+    direction: ltr;
+    pointer-events: none;
 }
 
 .progress-bar {
@@ -693,15 +441,24 @@ html[lang="fr"] .nav-menu {
     width: 0%;
     transition: width 0.3s ease;
     direction: ltr;
-    border-radius: 4px;
 }
 
-/* ===== Navigation Buttons Styles ===== */
+.main-content {
+    flex: 1;
+    padding: 1.5rem 2rem 2rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* ===== Back to chapters — always LEFT ===== */
 .nav-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    direction: ltr;
 }
 
 .back-btn {
@@ -711,10 +468,12 @@ html[lang="fr"] .nav-menu {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
+    font-family: inherit;
+    unicode-bidi: plaintext;
 }
 
 .back-btn:hover {
@@ -723,36 +482,51 @@ html[lang="fr"] .nav-menu {
     border-color: var(--accent-color);
 }
 
-/* ===== Verses Container Styles ===== */
+/* ===== Verses — no wrap, in-card horizontal scroll ===== */
 .verses-container {
-    margin: 2rem 0;
+    margin: 1.5rem 0 2rem;
     direction: rtl;
 }
 
 .verse-item {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1.25rem;
     background-color: var(--card-bg);
     border-radius: 12px;
     border: 1px solid var(--verse-border);
     box-shadow: 0 2px 5px var(--shadow-color);
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.verse-item::-webkit-scrollbar { height: 6px; }
+.verse-item::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+    opacity: 0.6;
 }
 
 .verse-line {
     text-align: center;
-    line-height: 2.5;
-    padding: 0.75rem;
+    line-height: 2.3;
+    padding: 0.4rem 0.25rem;
     color: var(--text-primary);
     transition: color 0.3s ease;
+    white-space: nowrap;
+    font-size: 1.3rem;
 }
 
 .verse-line:first-child {
     border-bottom: 1px dashed var(--verse-border);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.6rem;
 }
 
-/* ===== Holy Names Styling - Theme Aware ===== */
+/* ============================================================
+   HOLY NAME STYLING — Version A (5 classes, per-theme colors)
+   ============================================================ */
 .holy-name-allah,
 .holy-name-muhammad,
 .holy-name-ahmad,
@@ -763,111 +537,70 @@ html[lang="fr"] .nav-menu {
     transition: color 0.3s ease;
 }
 
-/* Light Theme (Default) */
+/* Light (default) */
 .holy-name-allah[data-theme="light"],
-.holy-name-allah:not([data-theme]) {
-    color: #8B4513;
-}
+.holy-name-allah:not([data-theme]) { color: #8B4513; }
 
 .holy-name-muhammad[data-theme="light"],
-.holy-name-muhammad:not([data-theme]) {
-    color: #2c5f2d;
-}
+.holy-name-muhammad:not([data-theme]) { color: #2c5f2d; }
 
 .holy-name-ahmad[data-theme="light"],
-.holy-name-ahmad:not([data-theme]) {
-    color: #9d6b3e;
-}
+.holy-name-ahmad:not([data-theme]) { color: #9d6b3e; }
 
 .holy-name-rasool[data-theme="light"],
-.holy-name-rasool:not([data-theme]) {
-    color: #b85e0e;
-}
+.holy-name-rasool:not([data-theme]) { color: #b85e0e; }
 
 .holy-name-nabi[data-theme="light"],
-.holy-name-nabi:not([data-theme]) {
-    color: #7d5136;
-}
+.holy-name-nabi:not([data-theme]) { color: #7d5136; }
 
-/* Dark Theme */
+/* Dark */
 [data-theme="dark"] .holy-name-allah,
-.holy-name-allah[data-theme="dark"] {
-    color: #e6b17e !important;
-}
+.holy-name-allah[data-theme="dark"] { color: #e6b17e !important; }
 
 [data-theme="dark"] .holy-name-muhammad,
-.holy-name-muhammad[data-theme="dark"] {
-    color: #8bc34a !important;
-}
+.holy-name-muhammad[data-theme="dark"] { color: #8bc34a !important; }
 
 [data-theme="dark"] .holy-name-ahmad,
-.holy-name-ahmad[data-theme="dark"] {
-    color: #d4a373 !important;
-}
+.holy-name-ahmad[data-theme="dark"] { color: #d4a373 !important; }
 
 [data-theme="dark"] .holy-name-rasool,
-.holy-name-rasool[data-theme="dark"] {
-    color: #ffb74d !important;
-}
+.holy-name-rasool[data-theme="dark"] { color: #ffb74d !important; }
 
 [data-theme="dark"] .holy-name-nabi,
-.holy-name-nabi[data-theme="dark"] {
-    color: #d4a373 !important;
-}
+.holy-name-nabi[data-theme="dark"] { color: #d4a373 !important; }
 
-/* Sepia Theme */
+/* Sepia */
 [data-theme="sepia"] .holy-name-allah,
-.holy-name-allah[data-theme="sepia"] {
-    color: #9d6b3e !important;
-}
+.holy-name-allah[data-theme="sepia"] { color: #9d6b3e !important; }
 
 [data-theme="sepia"] .holy-name-muhammad,
-.holy-name-muhammad[data-theme="sepia"] {
-    color: #5f7b4a !important;
-}
+.holy-name-muhammad[data-theme="sepia"] { color: #5f7b4a !important; }
 
 [data-theme="sepia"] .holy-name-ahmad,
-.holy-name-ahmad[data-theme="sepia"] {
-    color: #b77b4a !important;
-}
+.holy-name-ahmad[data-theme="sepia"] { color: #b77b4a !important; }
 
 [data-theme="sepia"] .holy-name-rasool,
-.holy-name-rasool[data-theme="sepia"] {
-    color: #b77b4a !important;
-}
+.holy-name-rasool[data-theme="sepia"] { color: #b77b4a !important; }
 
 [data-theme="sepia"] .holy-name-nabi,
-.holy-name-nabi[data-theme="sepia"] {
-    color: #8b6b4a !important;
-}
+.holy-name-nabi[data-theme="sepia"] { color: #8b6b4a !important; }
 
-/* Green Theme */
+/* Green */
 [data-theme="green"] .holy-name-allah,
-.holy-name-allah[data-theme="green"] {
-    color: #c17b3d !important;
-}
+.holy-name-allah[data-theme="green"] { color: #c17b3d !important; }
 
 [data-theme="green"] .holy-name-muhammad,
-.holy-name-muhammad[data-theme="green"] {
-    color: #1e6b3e !important;
-}
+.holy-name-muhammad[data-theme="green"] { color: #1e6b3e !important; }
 
 [data-theme="green"] .holy-name-ahmad,
-.holy-name-ahmad[data-theme="green"] {
-    color: #d98c4a !important;
-}
+.holy-name-ahmad[data-theme="green"] { color: #d98c4a !important; }
 
 [data-theme="green"] .holy-name-rasool,
-.holy-name-rasool[data-theme="green"] {
-    color: #d98c4a !important;
-}
+.holy-name-rasool[data-theme="green"] { color: #d98c4a !important; }
 
 [data-theme="green"] .holy-name-nabi,
-.holy-name-nabi[data-theme="green"] {
-    color: #4a7042 !important;
-}
+.holy-name-nabi[data-theme="green"] { color: #4a7042 !important; }
 
-/* Optional: Add subtle effect on hover */
 .holy-name-allah:hover,
 .holy-name-muhammad:hover,
 .holy-name-ahmad:hover,
@@ -877,15 +610,16 @@ html[lang="fr"] .nav-menu {
     transition: text-shadow 0.3s ease;
 }
 
-/* ===== Verse Navigation Styles ===== */
+/* ===== Verse navigation (prev / next / position) ===== */
 .verse-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
     padding: 1rem 0;
-    gap: 2rem;
-    direction: rtl;
+    gap: 1rem;
+    direction: ltr;
+    flex-wrap: wrap;
 }
 
 .nav-arrow {
@@ -893,23 +627,22 @@ html[lang="fr"] .nav-menu {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: inherit;
+    unicode-bidi: plaintext;
 }
 
-/* Previous button - smaller, on the right */
 .nav-arrow.prev-btn {
     background-color: var(--prev-btn-bg);
     color: var(--prev-btn-text);
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
     white-space: nowrap;
-    min-width: fit-content;
     border: 1px solid var(--border-color);
 }
 
-/* Next button - larger, on the left */
 .nav-arrow.next-btn {
     background-color: var(--next-btn-bg);
     color: var(--next-btn-text);
-    padding: 0.75rem 3rem;
+    padding: 0.75rem 2.5rem;
     font-weight: bold;
     border: none;
     box-shadow: 0 4px 10px var(--shadow-color);
@@ -917,7 +650,7 @@ html[lang="fr"] .nav-menu {
 
 .nav-arrow.next-btn:hover:not(:disabled) {
     background-color: var(--accent-light);
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .nav-arrow.prev-btn:hover:not(:disabled) {
@@ -926,38 +659,35 @@ html[lang="fr"] .nav-menu {
     border-color: var(--accent-color);
 }
 
-.nav-arrow:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.nav-arrow.next-btn:disabled {
-    background-color: var(--text-secondary);
-}
+.nav-arrow:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav-arrow.next-btn:disabled { background-color: var(--text-secondary); }
 
 #currentPosition {
     color: var(--text-secondary);
     margin: 0 1rem;
     white-space: nowrap;
+    unicode-bidi: plaintext;
 }
 
-/* ===== Animations ===== */
+/* ===== Overlay ===== */
+.picker-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1400;
+}
+
+.picker-overlay.active { display: block; }
+
+/* ===== Animations / states ===== */
 @keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* ===== Loading States ===== */
 .loading {
     text-align: center;
     padding: 2rem;
@@ -976,7 +706,6 @@ html[lang="fr"] .nav-menu {
     animation: spin 1s linear infinite;
 }
 
-/* ===== Error States ===== */
 .error {
     text-align: center;
     padding: 2rem;
@@ -986,58 +715,9 @@ html[lang="fr"] .nav-menu {
     margin: 1rem 0;
 }
 
-/* ===== Overlay ===== */
-.picker-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1400;
-}
-
-.picker-overlay.active {
-    display: block;
-}
-
-/* ===== Mobile Responsive ===== */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 1rem;
-        position: sticky;
-        top: 0;
-    }
-
-    .theme-picker,
-    .font-picker,
-    .language-picker {
-        top: 70px;
-    }
-
-    .hamburger {
-        display: flex;
-        order: 1;
-        margin-left: 0;
-    }
-
-    .nav-brand {
-        order: 2;
-        position: static;
-        transform: none;
-        max-width: 100%;
-        padding: 0 0.5rem;
-    }
-    
-    .nav-brand a {
-        font-size: 1.1rem;
-        white-space: normal;
-        word-break: break-word;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+/* ===== Tablet / Mobile ≤ 1024px ===== */
+@media (max-width: 1024px) {
+    .hamburger { display: flex; }
 
     .nav-menu {
         display: none;
@@ -1047,68 +727,47 @@ html[lang="fr"] .nav-menu {
         right: 0;
         background-color: var(--nav-bg);
         flex-direction: column;
+        align-items: stretch;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0;
         box-shadow: 0 5px 10px var(--shadow-color);
-        order: 4;
-        margin-right: 0;
-        margin-left: 0;
         z-index: 1100;
         border: 1px solid var(--border-color);
         max-height: 80vh;
         overflow-y: auto;
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    .main-content {
-        padding: 1rem;
-    }
-
-    .progress-container {
-        top: 60px;
-        width: calc(100% - 2rem);
-    }
-
-    .verse-line {
-        font-size: 1.2rem;
-        line-height: 2.2;
-    }
-
-    .verse-navigation {
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-    }
-
-    .nav-arrow.prev-btn {
-        flex: 0 0 auto;
-    }
-    
-    .nav-arrow.next-btn {
-        padding: 0.75rem 2rem;
-        font-size: 1.2rem;
-        flex: 1;
-        min-width: 200px;
-    }
-    
-    #currentPosition {
         margin: 0;
     }
+
+    .nav-menu a {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .nav-menu a:last-child { border-bottom: none; }
+
+    html[lang="ar"] .nav-menu a { text-align: right; }
+    html[lang="en"] .nav-menu a,
+    html[lang="fr"] .nav-menu a { text-align: left; }
+
+    .nav-menu.active { display: flex; }
+
+    .theme-picker,
+    .font-picker,
+    .language-picker { top: 70px; }
+
+    .main-content { padding: 1rem; }
+}
+
+@media (max-width: 768px) {
+    .navbar { padding: 1rem; }
+    .nav-brand a { font-size: 1.15rem; }
+    .diwan-title-nav { padding: 0.1rem 0.5rem; font-size: 0.95rem; }
+    .huruf-title-nav { font-size: 0.95rem; }
+
+    .verse-line { font-size: 1.2rem; line-height: 2.1; }
+    .verse-item { padding: 0.85rem 1rem; }
+
+    .verse-navigation { gap: 0.5rem; }
+    .nav-arrow.next-btn { padding: 0.65rem 1.5rem; font-size: 1.15rem; }
 
     .theme-options,
     .font-options,
@@ -1116,61 +775,24 @@ html[lang="fr"] .nav-menu {
         flex-direction: column;
         align-items: stretch;
     }
-
     .theme-btn,
     .font-btn,
-    .language-btn {
-        width: 100%;
-    }
+    .language-btn { width: 100%; }
 
-    .font-size-control {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .font-size-control label {
-        text-align: center;
-    }
-
-    .font-size-control input[type="range"] {
-        max-width: 100%;
-    }
+    .font-size-control { flex-direction: column; align-items: stretch; }
+    .font-size-control label { text-align: center; }
+    .font-size-control input[type="range"] { max-width: 100%; }
 }
 
 @media (max-width: 480px) {
-    .nav-brand a {
-        font-size: 1rem;
-        flex-direction: column;
-        gap: 0.2rem;
-    }
+    .nav-brand a { font-size: 1.05rem; }
+    .diwan-title-nav { font-size: 0.9rem; }
+    .huruf-title-nav { font-size: 0.9rem; }
 
-    .diwan-title-nav {
-        font-size: 0.9rem;
-        padding: 0.1rem 0.5rem;
-    }
-
-    .huruf-title-nav {
-        font-size: 0.9rem;
-        margin: 0;
-    }
-
-    .verse-line {
-        font-size: 1.1rem;
-        line-height: 2;
-    }
-
-    .nav-arrow.next-btn {
-        font-size: 1.1rem;
-        padding: 0.75rem 1.5rem;
-    }
-
-    .progress-container {
-        top: 55px;
-    }
+    .verse-line { font-size: 1.1rem; line-height: 2; }
+    .nav-arrow.next-btn { font-size: 1.05rem; padding: 0.6rem 1.25rem; }
 
     .theme-picker,
     .font-picker,
-    .language-picker {
-        top: 60px;
-    }
+    .language-picker { top: 60px; }
 }

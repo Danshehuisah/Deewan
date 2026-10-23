@@ -1,9 +1,7 @@
 /* ===== CSS Variables & Themes ===== */
 :root {
-    /* Base font size control */
-    --base-font-size: 20px; /* Default */
-    
-    /* Light Theme (Default) */
+    --base-font-size: 20px;
+
     --bg-primary: #f8f9fa;
     --bg-secondary: #ffffff;
     --text-primary: #2c3e50;
@@ -31,7 +29,6 @@
     --letter-spacing: 0.5px;
 }
 
-/* Dark Theme */
 [data-theme="dark"] {
     --bg-primary: #1a1e2b;
     --bg-secondary: #2d3349;
@@ -57,10 +54,8 @@
     --next-btn-text: #1a1e2b;
     --prev-btn-bg: #2d3349;
     --prev-btn-text: #e9ecef;
-    --letter-spacing: 0.5px;
 }
 
-/* Sepia Theme */
 [data-theme="sepia"] {
     --bg-primary: #f4ecd8;
     --bg-secondary: #e8dccc;
@@ -86,10 +81,8 @@
     --next-btn-text: #f4ecd8;
     --prev-btn-bg: #faf0e2;
     --prev-btn-text: #5b4636;
-    --letter-spacing: 0.5px;
 }
 
-/* Green Theme (Eye Comfort) */
 [data-theme="green"] {
     --bg-primary: #e8f0e8;
     --bg-secondary: #d0e0d0;
@@ -115,85 +108,22 @@
     --next-btn-text: #e8f0e8;
     --prev-btn-bg: #f0f8f0;
     --prev-btn-text: #1e3a2e;
-    --letter-spacing: 0.5px;
 }
 
-/* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
-@font-face {
-    font-family: 'Amiri';
-    src: url('../fonts/Amiri-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+/* ===== Fonts ===== */
+@font-face { font-family: 'Amiri'; src: url('../fonts/Amiri-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Amiri'; src: url('../fonts/Amiri-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Scheherazade'; src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Scheherazade'; src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Kufi'; src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Kufi'; src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Naskh'; src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Naskh'; src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
 
-@font-face {
-    font-family: 'Amiri';
-    src: url('../fonts/Amiri-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
+/* ===== Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-@font-face {
-    font-family: 'Scheherazade';
-    src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Scheherazade';
-    src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kufi';
-    src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kufi';
-    src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Naskh';
-    src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Naskh';
-    src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* ===== Base Styles with Font Size Inheritance ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Default font size for root */
-html {
-    font-size: var(--base-font-size, 20px);
-}
+html { font-size: var(--base-font-size, 20px); }
 
 body {
     font-family: 'Scheherazade', serif;
@@ -202,82 +132,36 @@ body {
     line-height: 1.8;
     transition: background-color 0.3s ease, color 0.3s ease;
     letter-spacing: var(--letter-spacing);
-    font-size: 1rem; /* Relative to root */
+    font-size: 1rem;
+    min-height: 100vh;
 }
 
-/* Make all elements use relative units */
-body, 
-body *,
-p, h1, h2, h3, h4, h5, h6,
-a, button, input, textarea,
-.nav-menu a,
-.nav-brand a,
-.huruf-item h3,
-.huruf-preview,
-.continue-card h4,
-.continue-preview,
-.continue-meta,
-.continue-badge,
-.theme-btn,
-.font-btn,
-.language-btn,
-.diwan-full-title,
-.chapter-header h2,
-.loading,
-.error {
-    font-size: 1rem;
+body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea {
     letter-spacing: inherit;
 }
 
-/* Specific elements that might need different sizes */
-.nav-brand a {
-    font-size: 1.5rem;
-}
+.nav-brand a { font-size: 1.5rem; }
+.nav-menu a { font-size: 1.1rem; }
+.chapter-header h2 { font-size: 1.8rem; }
+.diwan-full-title { font-size: 1.2rem; font-style: italic; }
+.huruf-item h3 { font-size: 1.3rem; }
+.continue-card h4 { font-size: 1.2rem; }
+.continue-preview { font-size: 0.95rem; }
+.continue-meta { font-size: 0.85rem; }
+.continue-badge { font-size: 0.8rem; }
+.theme-btn, .font-btn, .language-btn { font-size: 1rem; }
 
-.nav-menu a {
-    font-size: 1.1rem;
-}
-
-.chapter-header h2 {
-    font-size: 1.8rem;
-}
-
-.diwan-full-title {
-    font-size: 1.2rem;
-    font-style: italic;
-}
-
-.huruf-item h3 {
-    font-size: 1.3rem;
-}
-
-.continue-card h4 {
-    font-size: 1.2rem;
-}
-
-.continue-preview {
-    font-size: 0.95rem;
-}
-
-.continue-meta {
-    font-size: 0.85rem;
-}
-
-.continue-badge {
-    font-size: 0.8rem;
-}
-
-.theme-btn, .font-btn, .language-btn {
-    font-size: 1rem;
-}
-
+/* ===== App Shell ===== */
 .app-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ===== Navbar Styles ===== */
+/* ============================================================
+   NAVBAR — HAMBURGER ALWAYS RIGHT, BRAND ALWAYS LEFT
+   (mirrors index.html exactly)
+   ============================================================ */
 .navbar {
     background-color: var(--nav-bg);
     padding: 1rem 2rem;
@@ -289,64 +173,17 @@ a, button, input, textarea,
     top: 0;
     z-index: 1000;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    flex-direction: row;
+    direction: ltr;          /* force LTR so brand=left, hamburger=right */
 }
 
-/* RTL for Arabic - Hamburger on RIGHT, menu on LEFT */
-html[lang="ar"] .navbar {
-    direction: rtl;
-}
-
-html[lang="ar"] .hamburger {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-html[lang="ar"] .nav-menu {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-/* LTR for English/French - Hamburger on LEFT, menu on RIGHT */
-html[lang="en"] .navbar,
-html[lang="fr"] .navbar {
-    direction: ltr;
-}
-
-html[lang="en"] .hamburger,
-html[lang="fr"] .hamburger {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-html[lang="en"] .nav-menu,
-html[lang="fr"] .nav-menu {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 1002;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-primary);
-    margin: 2px 0;
-    transition: 0.3s;
-}
-
+/* Brand — always LEFT */
 .nav-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    order: 1;
+    text-align: left;
     white-space: nowrap;
-    text-align: center;
     z-index: 1001;
+    margin: 0;
 }
 
 .nav-brand a {
@@ -354,12 +191,47 @@ html[lang="fr"] .nav-menu {
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.3s ease;
+    unicode-bidi: plaintext;
 }
 
+/* Hamburger — always RIGHT */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px;
+    margin: 0;
+    background: transparent;
+    border: none;
+    order: 3;
+    z-index: 1002;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Nav menu — horizontal on DESKTOP only */
 .nav-menu {
     display: flex;
     gap: 2rem;
+    order: 2;
     z-index: 1001;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .nav-menu a {
@@ -370,79 +242,42 @@ html[lang="fr"] .nav-menu {
     transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: var(--accent-color);
-}
+.nav-menu a:hover,
+.nav-menu a.active { color: var(--accent-color); }
 
-/* ===== Arabic Text Alignment ===== */
-/* For Arabic language, align text to the right */
-html[lang="ar"] .chapter-header,
-html[lang="ar"] .chapter-header h2,
-html[lang="ar"] .diwan-full-title,
-html[lang="ar"] .huruf-item,
-html[lang="ar"] .huruf-item h3,
-html[lang="ar"] .huruf-preview,
-html[lang="ar"] .continue-reading,
-html[lang="ar"] .continue-reading h3,
-html[lang="ar"] .continue-card,
-html[lang="ar"] .continue-card h4,
-html[lang="ar"] .continue-preview,
-html[lang="ar"] .continue-meta,
-html[lang="ar"] .continue-badge,
-html[lang="ar"] .main-content,
-html[lang="ar"] p,
-html[lang="ar"] h1,
-html[lang="ar"] h2,
-html[lang="ar"] h3 {
+/* Language-aware nav-menu text alignment */
+html[lang="ar"] .nav-menu { text-align: right; }
+html[lang="en"] .nav-menu,
+html[lang="fr"] .nav-menu { text-align: left; }
+
+/* ============================================================
+   PAGE CONTENT — ALL RIGHT-ALIGNED REGARDLESS OF LANGUAGE
+   ============================================================ */
+.chapter-header,
+.chapter-header h2,
+.diwan-full-title,
+.huruf-item,
+.huruf-item h3,
+.huruf-preview,
+.continue-reading,
+.continue-reading h3,
+.continue-card,
+.continue-card h4,
+.continue-preview,
+.main-content {
     text-align: right;
 }
 
-/* For English/French, keep normal alignment (left for LTR) */
-html[lang="en"] .chapter-header,
-html[lang="en"] .chapter-header h2,
-html[lang="en"] .diwan-full-title,
-html[lang="en"] .huruf-item,
-html[lang="en"] .huruf-item h3,
-html[lang="en"] .huruf-preview,
-html[lang="en"] .continue-reading,
-html[lang="en"] .continue-reading h3,
-html[lang="en"] .continue-card,
-html[lang="en"] .continue-card h4,
-html[lang="en"] .continue-preview,
-html[lang="en"] .continue-meta,
-html[lang="en"] .continue-badge,
-html[lang="fr"] .chapter-header,
-html[lang="fr"] .chapter-header h2,
-html[lang="fr"] .diwan-full-title,
-html[lang="fr"] .huruf-item,
-html[lang="fr"] .huruf-item h3,
-html[lang="fr"] .huruf-preview,
-html[lang="fr"] .continue-reading,
-html[lang="fr"] .continue-reading h3,
-html[lang="fr"] .continue-card,
-html[lang="fr"] .continue-card h4,
-html[lang="fr"] .continue-preview,
-html[lang="fr"] .continue-meta,
-html[lang="fr"] .continue-badge {
-    text-align: left;
+.continue-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start; /* stay on the right in RTL-style layout */
+    flex-direction: row;
+    color: var(--text-secondary);
 }
 
-/* Center align specific elements regardless of language */
-.chapter-header {
-    text-align: center !important;
-}
-
-.chapter-header h2 {
-    text-align: center !important;
-}
-
-/* For the continue card badge - keep it as is */
-.continue-badge {
-    display: inline-block;
-    text-align: center;
-}
-
-/* ===== Theme Picker Styles ===== */
+/* ===== Pickers ===== */
 .theme-picker,
 .font-picker,
 .language-picker {
@@ -464,9 +299,7 @@ html[lang="fr"] .continue-badge {
 
 .theme-picker.active,
 .font-picker.active,
-.language-picker.active {
-    display: block;
-}
+.language-picker.active { display: block; }
 
 .theme-picker h3,
 .font-picker h3,
@@ -496,6 +329,7 @@ html[lang="fr"] .continue-badge {
     border-radius: 8px;
     transition: all 0.3s ease;
     min-width: 120px;
+    font-family: inherit;
 }
 
 .theme-btn:hover,
@@ -509,35 +343,15 @@ html[lang="fr"] .continue-badge {
     border-color: var(--accent-color);
 }
 
-/* Light theme button specific */
 .theme-btn.light-theme:hover,
-.theme-btn.light-theme.active {
-    background-color: #8B4513;
-    color: white;
-}
-
-/* Dark theme button specific */
+.theme-btn.light-theme.active { background-color: #8B4513; color: white; }
 .theme-btn.dark-theme:hover,
-.theme-btn.dark-theme.active {
-    background-color: #d4a373;
-    color: #1a1e2b;
-}
-
-/* Sepia theme button specific */
+.theme-btn.dark-theme.active { background-color: #d4a373; color: #1a1e2b; }
 .theme-btn.sepia-theme:hover,
-.theme-btn.sepia-theme.active {
-    background-color: #9b6b43;
-    color: #f4ecd8;
-}
-
-/* Green theme button specific */
+.theme-btn.sepia-theme.active { background-color: #9b6b43; color: #f4ecd8; }
 .theme-btn.green-theme:hover,
-.theme-btn.green-theme.active {
-    background-color: #2e7d5e;
-    color: #e8f0e8;
-}
+.theme-btn.green-theme.active { background-color: #2e7d5e; color: #e8f0e8; }
 
-/* Font size control */
 .font-size-control {
     display: flex;
     align-items: center;
@@ -547,10 +361,7 @@ html[lang="fr"] .continue-badge {
     margin-top: 1rem;
 }
 
-.font-size-control label {
-    color: var(--text-secondary);
-    min-width: 80px;
-}
+.font-size-control label { color: var(--text-secondary); min-width: 80px; }
 
 .font-size-control input[type="range"] {
     flex: 1;
@@ -569,7 +380,6 @@ html[lang="fr"] .continue-badge {
     background: var(--accent-color);
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .font-size-control input[type="range"]::-moz-range-thumb {
@@ -588,13 +398,8 @@ html[lang="fr"] .continue-badge {
     text-align: center;
 }
 
-/* ===== Font Family Styles ===== */
-/* Amiri Font */
+/* ===== Font families ===== */
 [data-font="amiri"] body,
-[data-font="amiri"] .verse-line,
-[data-font="amiri"] .diwan-title,
-[data-font="amiri"] .huruf-item h3,
-[data-font="amiri"] .continue-card h4,
 [data-font="amiri"] button,
 [data-font="amiri"] a,
 [data-font="amiri"] p,
@@ -602,21 +407,9 @@ html[lang="fr"] .continue-badge {
 [data-font="amiri"] h2,
 [data-font="amiri"] h3,
 [data-font="amiri"] .nav-menu a,
-[data-font="amiri"] .back-btn,
-[data-font="amiri"] .nav-arrow,
-[data-font="amiri"] .verse-item,
-[data-font="amiri"] .diwan-btn,
-[data-font="amiri"] .huruf-item,
-[data-font="amiri"] .continue-card {
-    font-family: 'Amiri', serif;
-}
+[data-font="amiri"] .huruf-item { font-family: 'Amiri', serif !important; }
 
-/* Scheherazade Font */
 [data-font="scheherazade"] body,
-[data-font="scheherazade"] .verse-line,
-[data-font="scheherazade"] .diwan-title,
-[data-font="scheherazade"] .huruf-item h3,
-[data-font="scheherazade"] .continue-card h4,
 [data-font="scheherazade"] button,
 [data-font="scheherazade"] a,
 [data-font="scheherazade"] p,
@@ -624,21 +417,9 @@ html[lang="fr"] .continue-badge {
 [data-font="scheherazade"] h2,
 [data-font="scheherazade"] h3,
 [data-font="scheherazade"] .nav-menu a,
-[data-font="scheherazade"] .back-btn,
-[data-font="scheherazade"] .nav-arrow,
-[data-font="scheherazade"] .verse-item,
-[data-font="scheherazade"] .diwan-btn,
-[data-font="scheherazade"] .huruf-item,
-[data-font="scheherazade"] .continue-card {
-    font-family: 'Scheherazade', serif;
-}
+[data-font="scheherazade"] .huruf-item { font-family: 'Scheherazade', serif !important; }
 
-/* Kufi Font */
 [data-font="kufi"] body,
-[data-font="kufi"] .verse-line,
-[data-font="kufi"] .diwan-title,
-[data-font="kufi"] .huruf-item h3,
-[data-font="kufi"] .continue-card h4,
 [data-font="kufi"] button,
 [data-font="kufi"] a,
 [data-font="kufi"] p,
@@ -646,21 +427,9 @@ html[lang="fr"] .continue-badge {
 [data-font="kufi"] h2,
 [data-font="kufi"] h3,
 [data-font="kufi"] .nav-menu a,
-[data-font="kufi"] .back-btn,
-[data-font="kufi"] .nav-arrow,
-[data-font="kufi"] .verse-item,
-[data-font="kufi"] .diwan-btn,
-[data-font="kufi"] .huruf-item,
-[data-font="kufi"] .continue-card {
-    font-family: 'Kufi', sans-serif;
-}
+[data-font="kufi"] .huruf-item { font-family: 'Kufi', sans-serif !important; }
 
-/* Naskh Font */
 [data-font="naskh"] body,
-[data-font="naskh"] .verse-line,
-[data-font="naskh"] .diwan-title,
-[data-font="naskh"] .huruf-item h3,
-[data-font="naskh"] .continue-card h4,
 [data-font="naskh"] button,
 [data-font="naskh"] a,
 [data-font="naskh"] p,
@@ -668,16 +437,9 @@ html[lang="fr"] .continue-badge {
 [data-font="naskh"] h2,
 [data-font="naskh"] h3,
 [data-font="naskh"] .nav-menu a,
-[data-font="naskh"] .back-btn,
-[data-font="naskh"] .nav-arrow,
-[data-font="naskh"] .verse-item,
-[data-font="naskh"] .diwan-btn,
-[data-font="naskh"] .huruf-item,
-[data-font="naskh"] .continue-card {
-    font-family: 'Naskh', serif;
-}
+[data-font="naskh"] .huruf-item { font-family: 'Naskh', serif !important; }
 
-/* ===== Main Content Styles ===== */
+/* ===== Main content ===== */
 .main-content {
     flex: 1;
     padding: 2rem;
@@ -686,9 +448,9 @@ html[lang="fr"] .continue-badge {
     width: 100%;
 }
 
-/* ===== Chapter Header Styles ===== */
+/* ===== Chapter header ===== */
 .chapter-header {
-    text-align: center;
+    text-align: right;
     margin-bottom: 2rem;
 }
 
@@ -706,13 +468,14 @@ html[lang="fr"] .continue-badge {
     transition: color 0.3s ease;
 }
 
-/* ===== Continue Reading Section ===== */
+/* ===== Continue reading ===== */
 .continue-reading {
     margin-bottom: 2rem;
     padding: 1rem;
     background-color: var(--continue-bg);
     border-radius: 12px;
     border-right: 4px solid var(--accent-color);
+    text-align: right;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -728,10 +491,10 @@ html[lang="fr"] .continue-badge {
     padding: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-align: right;
 }
 
 .continue-card:hover {
-    transform: translateX(-5px);
     border-color: var(--accent-color);
     box-shadow: 0 2px 10px var(--shadow-color);
 }
@@ -749,13 +512,6 @@ html[lang="fr"] .continue-badge {
     text-overflow: ellipsis;
 }
 
-.continue-meta {
-    display: flex;
-    gap: 1rem;
-    color: var(--text-secondary);
-    align-items: center;
-}
-
 .continue-badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -765,13 +521,12 @@ html[lang="fr"] .continue-badge {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ===== Huruf List Styles ===== */
+/* ===== Huruf list ===== */
 .huruf-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;
-    
 }
 
 .huruf-item {
@@ -780,13 +535,15 @@ html[lang="fr"] .continue-badge {
     border-radius: 12px;
     padding: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, transform 0.2s ease;
     border-right: 4px solid var(--accent-color);
+    text-align: right;
 }
 
-.huruf-item:hover {
+.huruf-item:hover,
+.huruf-item:focus-visible {
     border-color: var(--accent-color);
-    transform: translateX(-5px);
+    outline: none;
 }
 
 .huruf-item h3 {
@@ -805,35 +562,21 @@ html[lang="fr"] .continue-badge {
 .picker-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1400;
 }
 
-.picker-overlay.active {
-    display: block;
-}
+.picker-overlay.active { display: block; }
 
 /* ===== Animations ===== */
 @keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-/* ===== Loading States ===== */
 .loading {
     text-align: center;
     padding: 2rem;
@@ -852,7 +595,6 @@ html[lang="fr"] .continue-badge {
     animation: spin 1s linear infinite;
 }
 
-/* ===== Error States ===== */
 .error {
     text-align: center;
     padding: 2rem;
@@ -862,36 +604,11 @@ html[lang="fr"] .continue-badge {
     margin: 1rem 0;
 }
 
-/* ===== Mobile Responsive ===== */
-@media (max-width: 768px) {
-    body {
-        font-size: 1rem;
-    }
-
-    .navbar {
-        padding: 1rem;
-        position: sticky;
-        top: 0;
-    }
-
-    .theme-picker,
-    .font-picker,
-    .language-picker {
-        top: 70px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-brand {
-        position: static;
-        transform: none;
-    }
-
-    .nav-brand a {
-        font-size: 1.2rem;
-    }
+/* ============================================================
+   TABLET / MOBILE (≤ 1024px): keep hamburger, collapsible menu
+   ============================================================ */
+@media (max-width: 1024px) {
+    .hamburger { display: flex; }
 
     .nav-menu {
         display: none;
@@ -901,46 +618,45 @@ html[lang="fr"] .continue-badge {
         right: 0;
         background-color: var(--nav-bg);
         flex-direction: column;
+        align-items: stretch;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0;
         box-shadow: 0 5px 10px var(--shadow-color);
         z-index: 1100;
         border: 1px solid var(--border-color);
         max-height: 80vh;
         overflow-y: auto;
+        margin: 0;
     }
 
-    .nav-menu.active {
-        display: flex;
+    .nav-menu a {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
     }
 
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
+    .nav-menu a:last-child { border-bottom: none; }
 
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
+    /* Language-aware text alignment inside the dropdown */
+    html[lang="ar"] .nav-menu a { text-align: right; }
+    html[lang="en"] .nav-menu a,
+    html[lang="fr"] .nav-menu a { text-align: left; }
 
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
+    .nav-menu.active { display: flex; }
 
-    .main-content {
-        padding: 1rem;
-    }
+    .theme-picker,
+    .font-picker,
+    .language-picker { top: 70px; }
+}
 
-    .chapter-header h2 {
-        font-size: 1.5rem;
-    }
+@media (max-width: 768px) {
+    .navbar { padding: 1rem; }
+    .nav-brand a { font-size: 1.2rem; }
 
-    .diwan-full-title {
-        font-size: 1rem;
-    }
+    .main-content { padding: 1rem; }
+    .chapter-header h2 { font-size: 1.5rem; }
+    .diwan-full-title { font-size: 1rem; }
 
-    .continue-meta {
-        flex-wrap: wrap;
-    }
+    .continue-meta { flex-wrap: wrap; }
 
     .theme-options,
     .font-options,
@@ -951,32 +667,17 @@ html[lang="fr"] .continue-badge {
 
     .theme-btn,
     .font-btn,
-    .language-btn {
-        width: 100%;
-    }
+    .language-btn { width: 100%; }
 
-    .font-size-control {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .font-size-control label {
-        text-align: center;
-    }
-
-    .font-size-control input[type="range"] {
-        max-width: 100%;
-    }
+    .font-size-control { flex-direction: column; align-items: stretch; }
+    .font-size-control label { text-align: center; }
+    .font-size-control input[type="range"] { max-width: 100%; }
 }
 
 @media (max-width: 480px) {
-    .nav-brand a {
-        font-size: 1.1rem;
-    }
+    .nav-brand a { font-size: 1.1rem; }
 
     .theme-picker,
     .font-picker,
-    .language-picker {
-        top: 60px;
-    }
+    .language-picker { top: 60px; }
 }

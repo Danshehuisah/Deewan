@@ -5,83 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ديوان الشيخ إبراهيم إنياس</title>
     <link rel="stylesheet" href="css/main.css">
-    <!-- Add these for maximum performance -->
-    <link rel="preload" href="../fonts/Amiri-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="../fonts/ScheherazadeNew-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="../css/main.css" as="style">
-    <link rel="preload" href="../js/main.js" as="script">
 
-    <!-- Cache control for offline -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <!-- Preload core assets -->
+    <link rel="preload" href="fonts/Amiri-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="fonts/ScheherazadeNew-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="css/main.css" as="style">
 
-    <!-- For index.html (root), use: -->
+    <!-- PWA -->
     <link rel="manifest" href="manifest.json">
-    
-    <!-- iOS specific icons -->
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/icons/apple-touch-icon-167x167.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180x180.png">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    
-    <!-- iOS meta tags -->
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ديوان إنياس">
-    
-    <!-- Windows meta tags -->
     <meta name="msapplication-TileColor" content="#8B4513">
-    <meta name="msapplication-TileImage" content="/icons/icon-144x144.webp">
+    <meta name="msapplication-TileImage" content="icons/icon-144x144.webp">
     <meta name="theme-color" content="#8B4513">
 </head>
 <body>
     <!-- Language Selection Modal (First Time Only) -->
-<div class="language-modal" id="languageModal">
-    <div class="modal-content">
-        <h2>🇸🇦🇬🇧🇫🇷</h2>
-        <h3 data-i18n="modal.welcome">مرحباً بكم في ديوان الشيخ إبراهيم إنياس</h3>
-        <p data-i18n="modal.choose">الرجاء اختيار لغتك المفضلة</p>
-        <p data-i18n="modal.choose-sub" class="modal-subtitle">Please choose your preferred language</p>
-        
-        <div class="modal-language-options">
-            <button class="modal-language-btn" data-lang="ar">
-                <span class="flag">🇸🇦</span>
-                <span class="lang-name" data-i18n="language.arabic">العربية</span>
-                <span class="lang-desc">Arabic</span>
-            </button>
-            
-            <button class="modal-language-btn" data-lang="en">
-                <span class="flag">🇬🇧</span>
-                <span class="lang-name">English</span>
-                <span class="lang-desc">English</span>
-            </button>
-            
-            <button class="modal-language-btn" data-lang="fr">
-                <span class="flag">🇫🇷</span>
-                <span class="lang-name">Français</span>
-                <span class="lang-desc">French</span>
-            </button>
+    <div class="language-modal" id="languageModal">
+        <div class="modal-content">
+            <h2>🌐</h2>
+            <h3 data-i18n="modal.welcome">مرحباً بكم في ديوان الشيخ إبراهيم إنياس</h3>
+            <p data-i18n="modal.choose">الرجاء اختيار لغتك المفضلة</p>
+            <p data-i18n="modal.choose-sub" class="modal-subtitle">Please choose your preferred language</p>
+
+            <div class="modal-language-options">
+                <button class="modal-language-btn" data-lang="ar">
+                    <span class="flag">🇸🇦</span>
+                    <span class="lang-name" data-i18n="language.arabic">العربية</span>
+                    <span class="lang-desc">Arabic</span>
+                </button>
+                <button class="modal-language-btn" data-lang="en">
+                    <span class="flag">🇬🇧</span>
+                    <span class="lang-name">English</span>
+                    <span class="lang-desc">English</span>
+                </button>
+                <button class="modal-language-btn" data-lang="fr">
+                    <span class="flag">🇫🇷</span>
+                    <span class="lang-name">Français</span>
+                    <span class="lang-desc">French</span>
+                </button>
+            </div>
+
+            <p class="modal-note" data-i18n="modal.note">يمكنك تغيير اللغة لاحقاً من القائمة</p>
+            <p class="modal-note-sub">You can change language later from the menu</p>
         </div>
-        
-        <p class="modal-note" data-i18n="modal.note">يمكنك تغيير اللغة لاحقاً من القائمة</p>
-        <p class="modal-note-sub">You can change language later from the menu</p>
     </div>
-</div>
-<!-- Home -->
+
+    <!-- App -->
     <div class="app-container" id="home">
         <!-- Navbar -->
         <nav class="navbar">
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
             <div class="nav-brand">
                 <h1 data-i18n="app.title">ديوان الشيخ إبراهيم إنياس</h1>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div class="nav-menu" id="navMenu">
                 <a href="#" class="active" data-i18n="nav.home">الرئيسية</a>
                 <a href="#" id="themeToggle" data-i18n="nav.theme">المظهر</a>
@@ -132,10 +120,8 @@
         <main class="main-content">
             <h2 class="welcome-title" data-i18n="welcome.title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
             <p class="welcome-subtitle" data-i18n="welcome.subtitle">اخْتَرِ الدِّيوَانَ لِلْقِرَاءَةِ</p>
-            
-            <div class="diwan-grid" id="diwanGrid">
-                <!-- Diwan buttons will be added by JavaScript -->
-            </div>
+
+            <div class="diwan-grid" id="diwanGrid"></div>
         </main>
 
         <!-- Footer -->
@@ -146,18 +132,13 @@
 
     <script src="js/main.js"></script>
     <script>
-    // Register service worker for offline support
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('ServiceWorker registered successfully');
-                })
-                .catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('SW registered:', reg.scope))
+                .catch(err => console.log('SW registration failed:', err));
         });
     }
-</script>
+    </script>
 </body>
 </html>

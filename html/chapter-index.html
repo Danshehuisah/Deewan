@@ -5,43 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فُصُولُ الدِّيوَانِ</title>
     <link rel="stylesheet" href="../css/chapter.css">
-    <!-- Add these for maximum performance -->
+
+    <!-- Preload core assets -->
     <link rel="preload" href="../fonts/Amiri-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="../fonts/ScheherazadeNew-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="../css/main.css" as="style">
-    <link rel="preload" href="../js/main.js" as="script">
 
-    <!-- Cache control for offline -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
-    <!-- Add to index.html, chapter-index.html, huruf-view.html -->
+    <!-- PWA -->
     <link rel="manifest" href="../manifest.json">
-
-    <!-- Apple touch icons for iOS -->
-    <link rel="apple-touch-icon" href="../icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon-180x180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ديوان إنياس">
-
-    <!-- Microsoft Tiles -->
     <meta name="msapplication-TileColor" content="#8B4513">
-    <meta name="msapplication-TileImage" content="../icons/icon-144x144.png">
+    <meta name="msapplication-TileImage" content="../icons/icon-144x144.webp">
     <meta name="theme-color" content="#8B4513">
 </head>
 <body>
     <div class="app-container">
         <!-- Navbar -->
         <nav class="navbar">
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
             <div class="nav-brand">
                 <a href="../index.html" data-i18n="app.title">ديوان الشيخ إبراهيم إنياس</a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div class="nav-menu" id="navMenu">
                 <a href="../index.html" data-i18n="nav.home">الرئيسية</a>
                 <a href="#" id="themeToggle" data-i18n="nav.theme">المظهر</a>
@@ -55,24 +50,24 @@
         <div class="theme-picker" id="themePicker">
             <h3 data-i18n="theme.title">اخْتَرِ الْمَظْهَرَ</h3>
             <div class="theme-options">
-                <button class="theme-btn light-theme" data-theme="light">🌞 فَاتِحٌ</button>
-                <button class="theme-btn dark-theme" data-theme="dark">🌙 دَاكِنٌ</button>
-                <button class="theme-btn sepia-theme" data-theme="sepia">📜 سِيبِيَا</button>
-                <button class="theme-btn green-theme" data-theme="green">🌿 أَخْضَرُ مُرِيحٌ</button>
+                <button class="theme-btn light-theme" data-theme="light" data-i18n="theme.light">🌞 فَاتِحٌ</button>
+                <button class="theme-btn dark-theme" data-theme="dark" data-i18n="theme.dark">🌙 دَاكِنٌ</button>
+                <button class="theme-btn sepia-theme" data-theme="sepia" data-i18n="theme.sepia">📜 سِيبِيَا</button>
+                <button class="theme-btn green-theme" data-theme="green" data-i18n="theme.green">🌿 أَخْضَرُ مُرِيحٌ</button>
             </div>
         </div>
 
         <!-- Font Picker -->
         <div class="font-picker" id="fontPicker">
             <h3 data-i18n="font.title">اخْتَرِ الْخَطَّ الْعَرَبِيَّ</h3>
-        <div class="font-options">
-                <button class="font-btn" data-font="amiri">📝 أَمِيرِي</button>
-                <button class="font-btn" data-font="scheherazade">📖 شَهْرَزَادَ</button>
-                <button class="font-btn" data-font="kufi">🕌 كُوفِي</button>
-                <button class="font-btn" data-font="naskh">📜 نَسْخٌ</button>
+            <div class="font-options">
+                <button class="font-btn" data-font="amiri" data-i18n="font.amiri">📝 أَمِيرِي</button>
+                <button class="font-btn" data-font="scheherazade" data-i18n="font.scheherazade">📖 شَهْرَزَادَ</button>
+                <button class="font-btn" data-font="kufi" data-i18n="font.kufi">🕌 كُوفِي</button>
+                <button class="font-btn" data-font="naskh" data-i18n="font.naskh">📜 نَسْخٌ</button>
             </div>
             <div class="font-size-control">
-                <label for="fontSizeSlider">حَجْمُ الْخَطِّ</label>
+                <label for="fontSizeSlider" data-i18n="font.size">حَجْمُ الْخَطِّ</label>
                 <input type="range" id="fontSizeSlider" min="14" max="32" value="20" step="1">
                 <span class="font-size-value" id="fontSizeValue">20</span>
             </div>
@@ -93,34 +88,27 @@
             <!-- Continue Reading Section (hidden by default) -->
             <div class="continue-reading" id="continueReading" style="display: none;">
                 <h3 data-i18n="diwan.continue">📖 مُتَابَعَةُ الْقِرَاءَةِ</h3>
-                <div class="continue-card" id="continueCard">
-                    <!-- Will be populated by JS -->
-                </div>
+                <div class="continue-card" id="continueCard"></div>
             </div>
 
             <div class="chapter-header">
                 <h2 id="diwanTitle">الديوان</h2>
                 <div class="diwan-full-title" id="diwanFullTitle"></div>
             </div>
-            
-            <div class="huruf-list" id="hurufList">
-                <!-- Chapters will be loaded here -->
-            </div>
+
+            <div class="huruf-list" id="hurufList"></div>
         </main>
     </div>
 
     <script src="../js/chapter.js"></script>
     <script>
-// Register service worker for offline support
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('../sw.js').then(registration => {
-      console.log('ServiceWorker registered');
-    }).catch(err => {
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}
-</script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('../sw.js')
+                .then(reg => console.log('SW registered:', reg.scope))
+                .catch(err => console.log('SW registration failed:', err));
+        });
+    }
+    </script>
 </body>
 </html>

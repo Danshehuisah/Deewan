@@ -38,7 +38,8 @@ const diwanTitles = {
     5: "شِفَاءُ الْأَسْقَامِ",
     6: "مَنَاسِكُ أَهْلِ الْوِدَادِ",
     7: "نُورُ الْحَقِّ",
-    8: "سَيْرُ الْقَلْبِ"
+    8: "سَيْرُ الْقَلْبِ",
+    9: "كَنْزُ الْعَارِفِين"
 };
 
 // Translation cache
@@ -178,29 +179,16 @@ if (modalLanguageBtns) {
 
 // ===== FUNCTION: Close All Menus and Pickers =====
 function closeAllMenus() {
-    // Close mobile menu
-    if (navMenu && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-    }
+    if (navMenu && navMenu.classList.contains('active')) navMenu.classList.remove('active');
     if (hamburger && hamburger.classList.contains('active')) {
         hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
     }
-    
-    // Close all pickers
-    if (themePicker && themePicker.classList.contains('active')) {
-        themePicker.classList.remove('active');
-    }
-    if (fontPicker && fontPicker.classList.contains('active')) {
-        fontPicker.classList.remove('active');
-    }
-    if (languagePicker && languagePicker.classList.contains('active')) {
-        languagePicker.classList.remove('active');
-    }
-    
-    // Hide overlay
+    if (themePicker) themePicker.classList.remove('active');
+    if (fontPicker) fontPicker.classList.remove('active');
+    if (languagePicker) languagePicker.classList.remove('active');
     overlay.classList.remove('active');
 }
-
 // ===== FUNCTION: Close Pickers When Nav Opens =====
 function closePickersWhenNavOpens() {
     if (navMenu && navMenu.classList.contains('active')) {
@@ -288,10 +276,9 @@ async function initializeLanguage(lang) {
 if (hamburger) {
     hamburger.addEventListener('click', (e) => {
         e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        
-        // Close all pickers when nav menu opens
+        const open = hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
         closePickersWhenNavOpens();
     });
 }
@@ -467,7 +454,7 @@ function loadDiwanGrid() {
     
     diwanGrid.innerHTML = '';
     
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 9; i++) {
         const button = document.createElement('div');
         button.className = 'diwan-btn';
         button.innerHTML = `

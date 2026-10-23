@@ -1,9 +1,7 @@
 /* ===== CSS Variables & Themes ===== */
 :root {
-    /* Base font size control */
-    --base-font-size: 20px; /* Default */
-    
-    /* Light Theme (Default) */
+    --base-font-size: 20px;
+
     --bg-primary: #f8f9fa;
     --bg-secondary: #ffffff;
     --text-primary: #2c3e50;
@@ -31,7 +29,6 @@
     --letter-spacing: 0.5px;
 }
 
-/* Dark Theme */
 [data-theme="dark"] {
     --bg-primary: #1a1e2b;
     --bg-secondary: #2d3349;
@@ -57,10 +54,8 @@
     --next-btn-text: #1a1e2b;
     --prev-btn-bg: #2d3349;
     --prev-btn-text: #e9ecef;
-    --letter-spacing: 0.5px;
 }
 
-/* Sepia Theme */
 [data-theme="sepia"] {
     --bg-primary: #f4ecd8;
     --bg-secondary: #e8dccc;
@@ -86,10 +81,8 @@
     --next-btn-text: #f4ecd8;
     --prev-btn-bg: #faf0e2;
     --prev-btn-text: #5b4636;
-    --letter-spacing: 0.5px;
 }
 
-/* Green Theme (Eye Comfort) */
 [data-theme="green"] {
     --bg-primary: #e8f0e8;
     --bg-secondary: #d0e0d0;
@@ -115,84 +108,22 @@
     --next-btn-text: #e8f0e8;
     --prev-btn-bg: #f0f8f0;
     --prev-btn-text: #1e3a2e;
-    --letter-spacing: 0.5px;
 }
 
-/* ===== Self-Hosted Fonts (Offline Ready - TTF Format) ===== */
-@font-face {
-    font-family: 'Amiri';
-    src: url('../fonts/Amiri-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+/* ===== Fonts ===== */
+@font-face { font-family: 'Amiri'; src: url('../fonts/Amiri-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Amiri'; src: url('../fonts/Amiri-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Scheherazade'; src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Scheherazade'; src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Kufi'; src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Kufi'; src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Naskh'; src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Naskh'; src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype'); font-weight: bold; font-style: normal; font-display: swap; }
 
-@font-face {
-    font-family: 'Amiri';
-    src: url('../fonts/Amiri-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
+/* ===== Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-@font-face {
-    font-family: 'Scheherazade';
-    src: url('../fonts/ScheherazadeNew-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Scheherazade';
-    src: url('../fonts/ScheherazadeNew-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kufi';
-    src: url('../fonts/NotoKufiArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Kufi';
-    src: url('../fonts/NotoKufiArabic-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Naskh';
-    src: url('../fonts/NotoNaskhArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Naskh';
-    src: url('../fonts/NotoNaskhArabic-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* ===== Base Styles ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: var(--base-font-size, 20px);
-}
+html { font-size: var(--base-font-size, 20px); }
 
 body {
     font-family: 'Scheherazade', 'Traditional Arabic', 'Times New Roman', serif;
@@ -202,33 +133,30 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
     letter-spacing: var(--letter-spacing);
     font-size: 1rem;
+    min-height: 100vh;
 }
 
-/* ===== Language Selection Modal ===== */
+/* ===== Language Modal ===== */
 .language-modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 9999;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(5px);
+    padding: 1rem;
 }
 
-.language-modal.active {
-    display: flex;
-}
+.language-modal.active { display: flex; }
 
 .modal-content {
     background-color: var(--bg-secondary);
     border-radius: 20px;
     padding: 2rem;
     max-width: 500px;
-    width: 90%;
+    width: 100%;
     text-align: center;
     box-shadow: 0 10px 40px var(--shadow-color);
     animation: modalPop 0.4s ease;
@@ -236,46 +164,18 @@ body {
 }
 
 @keyframes modalPop {
-    from {
-        opacity: 0;
-        transform: scale(0.8) translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+    from { opacity: 0; transform: scale(0.8) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.modal-content h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    line-height: 1;
-}
-
-.modal-content h3 {
-    color: var(--accent-color);
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-}
-
-.modal-content p {
-    color: var(--text-secondary);
-    margin-bottom: 0.25rem;
-}
-
-.modal-subtitle {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 1.5rem !important;
-}
+.modal-content h2 { font-size: 3rem; margin-bottom: 1rem; line-height: 1; }
+.modal-content h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 0.5rem; line-height: 1.4; }
+.modal-content p { color: var(--text-secondary); margin-bottom: 0.25rem; }
+.modal-subtitle { font-size: 0.9rem; opacity: 0.8; margin-bottom: 1.5rem !important; }
 
 .modal-language-options {
-    display: flex;
-    gap: 1rem;
-    margin: 2rem 0;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: flex; gap: 1rem; margin: 2rem 0;
+    flex-wrap: wrap; justify-content: center;
 }
 
 .modal-language-btn {
@@ -285,12 +185,12 @@ body {
     padding: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    flex: 1;
-    min-width: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    flex: 1; min-width: 120px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.5rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
 }
 
 .modal-language-btn:hover {
@@ -299,127 +199,37 @@ body {
     box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-.modal-language-btn .flag {
-    font-size: 2.5rem;
-    line-height: 1;
-}
+.modal-language-btn .flag { font-size: 2.5rem; line-height: 1; }
+.modal-language-btn .lang-name { font-weight: bold; color: var(--text-primary); font-size: 1.1rem; }
+.modal-language-btn .lang-desc { font-size: 0.85rem; color: var(--text-secondary); }
 
-.modal-language-btn .lang-name {
-    font-weight: bold;
-    color: var(--text-primary);
-    font-size: 1.1rem;
-}
+.modal-note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; opacity: 0.8; }
+.modal-note-sub { font-size: 0.8rem; color: var(--text-secondary); opacity: 0.6; }
 
-.modal-language-btn .lang-desc {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.modal-note {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-top: 1rem;
-    opacity: 0.8;
-}
-
-.modal-note-sub {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    opacity: 0.6;
-}
-
-
-/* Make all elements use relative units */
-body, 
-body *,
-p, h1, h2, h3, h4, h5, h6,
-a, button, input, textarea,
-.nav-menu a,
-.nav-brand h1,
-.diwan-title,
-.diwan-number,
-.theme-btn,
-.font-btn,
-.language-btn,
-.welcome-title,
-.welcome-subtitle,
-.footer p,
-.loading,
-.error {
-    font-size: 1rem;
+/* ===== Typography defaults (rem-based) ===== */
+body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea {
     letter-spacing: inherit;
 }
 
-/* Specific elements that might need different sizes */
-.nav-brand h1 {
-    font-size: 1.5rem;
+.nav-brand h1 { font-size: 1.5rem; }
+.nav-menu a   { font-size: 1.1rem; }
+.diwan-number { font-size: 2rem; }
+.diwan-title  { font-size: 1.2rem; }
+.welcome-title { font-size: 2rem; }
+.welcome-subtitle { font-size: 1.2rem; }
+.theme-btn, .font-btn, .language-btn { font-size: 1rem; }
+
+/* ===== App Shell ===== */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.nav-menu a {
-    font-size: 1.1rem;
-}
-
-.diwan-number {
-    font-size: 2rem;
-}
-
-.diwan-title {
-    font-size: 1.2rem;
-}
-
-.welcome-title {
-    font-size: 2rem;
-}
-
-.welcome-subtitle {
-    font-size: 1.2rem;
-}
-
-.theme-btn, .font-btn, .language-btn {
-    font-size: 1rem;
-}
-
-/* RTL/LTR Direction Handling */
-html[lang="ar"] {
-    direction: rtl;
-}
-
-html[lang="ar"] .navbar {
-    direction: rtl;
-}
-
-html[lang="ar"] .hamburger {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-html[lang="ar"] .nav-menu {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-html[lang="en"], html[lang="fr"] {
-    direction: ltr;
-}
-
-html[lang="en"] .navbar,
-html[lang="fr"] .navbar {
-    direction: ltr;
-}
-
-html[lang="en"] .hamburger,
-html[lang="fr"] .hamburger {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-html[lang="en"] .nav-menu,
-html[lang="fr"] .nav-menu {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-/* ===== Navbar Styles ===== */
+/* ============================================================
+   NAVBAR — HAMBURGER ALWAYS RIGHT, BRAND ALWAYS LEFT
+   (no language-based flipping)
+   ============================================================ */
 .navbar {
     background-color: var(--nav-bg);
     padding: 1rem 2rem;
@@ -431,31 +241,18 @@ html[lang="fr"] .nav-menu {
     top: 0;
     z-index: 1000;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Layout order is enforced by DOM order + flex, not by direction */
+    flex-direction: row;      /* left → right in the visual box */
+    direction: ltr;           /* force LTR so brand=left, hamburger=right */
 }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 1002;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-primary);
-    margin: 2px 0;
-    transition: 0.3s;
-}
-
+/* Brand — always on the LEFT */
 .nav-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    order: 1;
+    text-align: left;
     white-space: nowrap;
-    text-align: center;
     z-index: 1001;
+    margin: 0;
 }
 
 .nav-brand h1 {
@@ -463,12 +260,48 @@ html[lang="fr"] .nav-menu {
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.3s ease;
+    /* Allow Arabic text to render RTL inside its own box */
+    unicode-bidi: plaintext;
 }
 
+/* Hamburger — always on the RIGHT */
+.hamburger {
+    display: none;              /* visible on ≤1024px */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px;
+    margin: 0;
+    background: transparent;
+    border: none;
+    order: 3;
+    z-index: 1002;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Nav menu — horizontal on DESKTOP only, drop-down under hamburger below that */
 .nav-menu {
     display: flex;
     gap: 2rem;
+    order: 2;
     z-index: 1001;
+    margin-left: auto;         /* push towards the right on desktop */
+    margin-right: 0;
 }
 
 .nav-menu a {
@@ -477,6 +310,7 @@ html[lang="fr"] .nav-menu {
     cursor: pointer;
     white-space: nowrap;
     transition: color 0.3s ease;
+    font-size: 1.1rem;
 }
 
 .nav-menu a:hover,
@@ -484,7 +318,12 @@ html[lang="fr"] .nav-menu {
     color: var(--accent-color);
 }
 
-/* ===== Theme Picker Styles ===== */
+/* Nav menu text alignment inside the dropdown, language-aware */
+html[lang="ar"] .nav-menu { text-align: right; }
+html[lang="en"] .nav-menu,
+html[lang="fr"] .nav-menu { text-align: left; }
+
+/* ===== Pickers ===== */
 .theme-picker,
 .font-picker,
 .language-picker {
@@ -506,9 +345,7 @@ html[lang="fr"] .nav-menu {
 
 .theme-picker.active,
 .font-picker.active,
-.language-picker.active {
-    display: block;
-}
+.language-picker.active { display: block; }
 
 .theme-picker h3,
 .font-picker h3,
@@ -538,6 +375,7 @@ html[lang="fr"] .nav-menu {
     border-radius: 8px;
     transition: all 0.3s ease;
     min-width: 120px;
+    font-family: inherit;
 }
 
 .theme-btn:hover,
@@ -561,10 +399,7 @@ html[lang="fr"] .nav-menu {
     margin-top: 1rem;
 }
 
-.font-size-control label {
-    color: var(--text-secondary);
-    min-width: 80px;
-}
+.font-size-control label { color: var(--text-secondary); min-width: 80px; }
 
 .font-size-control input[type="range"] {
     flex: 1;
@@ -583,7 +418,6 @@ html[lang="fr"] .nav-menu {
     background: var(--accent-color);
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .font-size-control input[type="range"]::-moz-range-thumb {
@@ -602,64 +436,56 @@ html[lang="fr"] .nav-menu {
     text-align: center;
 }
 
-/* ===== Font Family Styles ===== */
+/* ===== Font families ===== */
 [data-font="amiri"] body,
-[data-font="amiri"] .verse-line,
-[data-font="amiri"] .diwan-title,
-[data-font="amiri"] .huruf-item h3,
 [data-font="amiri"] button,
 [data-font="amiri"] a,
 [data-font="amiri"] p,
 [data-font="amiri"] h1,
 [data-font="amiri"] h2,
 [data-font="amiri"] h3,
-[data-font="amiri"] .nav-menu a {
+[data-font="amiri"] .nav-menu a,
+[data-font="amiri"] .diwan-title {
     font-family: 'Amiri', serif !important;
 }
 
 [data-font="scheherazade"] body,
-[data-font="scheherazade"] .verse-line,
-[data-font="scheherazade"] .diwan-title,
-[data-font="scheherazade"] .huruf-item h3,
 [data-font="scheherazade"] button,
 [data-font="scheherazade"] a,
 [data-font="scheherazade"] p,
 [data-font="scheherazade"] h1,
 [data-font="scheherazade"] h2,
 [data-font="scheherazade"] h3,
-[data-font="scheherazade"] .nav-menu a {
+[data-font="scheherazade"] .nav-menu a,
+[data-font="scheherazade"] .diwan-title {
     font-family: 'Scheherazade', serif !important;
 }
 
 [data-font="kufi"] body,
-[data-font="kufi"] .verse-line,
-[data-font="kufi"] .diwan-title,
-[data-font="kufi"] .huruf-item h3,
 [data-font="kufi"] button,
 [data-font="kufi"] a,
 [data-font="kufi"] p,
 [data-font="kufi"] h1,
 [data-font="kufi"] h2,
 [data-font="kufi"] h3,
-[data-font="kufi"] .nav-menu a {
+[data-font="kufi"] .nav-menu a,
+[data-font="kufi"] .diwan-title {
     font-family: 'Kufi', sans-serif !important;
 }
 
 [data-font="naskh"] body,
-[data-font="naskh"] .verse-line,
-[data-font="naskh"] .diwan-title,
-[data-font="naskh"] .huruf-item h3,
 [data-font="naskh"] button,
 [data-font="naskh"] a,
 [data-font="naskh"] p,
 [data-font="naskh"] h1,
 [data-font="naskh"] h2,
 [data-font="naskh"] h3,
-[data-font="naskh"] .nav-menu a {
+[data-font="naskh"] .nav-menu a,
+[data-font="naskh"] .diwan-title {
     font-family: 'Naskh', serif !important;
 }
 
-/* ===== Main Content Styles ===== */
+/* ===== Main content ===== */
 .main-content {
     flex: 1;
     padding: 2rem;
@@ -682,7 +508,7 @@ html[lang="fr"] .nav-menu {
     transition: color 0.3s ease;
 }
 
-/* ===== Diwan Grid Styles ===== */
+/* ===== Diwan grid ===== */
 .diwan-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -698,15 +524,18 @@ html[lang="fr"] .nav-menu {
     border-radius: 12px;
     padding: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     box-shadow: 0 2px 5px var(--shadow-color);
     width: 100%;
+    text-align: center;
 }
 
-.diwan-btn:hover {
+.diwan-btn:hover,
+.diwan-btn:focus-visible {
     transform: translateY(-3px);
     box-shadow: 0 4px 10px var(--shadow-color);
     border-color: var(--accent-color);
+    outline: none;
 }
 
 .diwan-number {
@@ -714,7 +543,6 @@ html[lang="fr"] .nav-menu {
     color: var(--accent-color);
     margin-bottom: 0.5rem;
     text-align: center;
-    transition: color 0.3s ease;
 }
 
 .diwan-title {
@@ -722,7 +550,6 @@ html[lang="fr"] .nav-menu {
     text-align: center;
     line-height: 1.6;
     word-break: break-word;
-    transition: color 0.3s ease;
 }
 
 /* ===== Footer ===== */
@@ -733,62 +560,31 @@ html[lang="fr"] .nav-menu {
     color: var(--text-secondary);
     border-top: 1px solid var(--border-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 0.9rem;
 }
 
 /* ===== Overlay ===== */
 .picker-overlay {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1400;
 }
 
-.picker-overlay.active {
-    display: block;
-}
+.picker-overlay.active { display: block; }
 
 /* ===== Animations ===== */
 @keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== Mobile Responsive ===== */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 1rem;
-        position: sticky;
-        top: 0;
-    }
-
-    .theme-picker,
-    .font-picker,
-    .language-picker {
-        top: 70px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-brand {
-        position: static;
-        transform: none;
-    }
-
-    .nav-brand h1 {
-        font-size: 1.2rem;
-    }
+/* ============================================================
+   TABLET / MOBILE (≤ 1024px): keep hamburger, collapsible menu
+   ============================================================ */
+@media (max-width: 1024px) {
+    .hamburger { display: flex; }
 
     .nav-menu {
         display: none;
@@ -798,38 +594,43 @@ html[lang="fr"] .nav-menu {
         right: 0;
         background-color: var(--nav-bg);
         flex-direction: column;
+        align-items: stretch;
         padding: 1rem;
-        gap: 1rem;
+        gap: 0;
         box-shadow: 0 5px 10px var(--shadow-color);
         z-index: 1100;
         border: 1px solid var(--border-color);
         max-height: 80vh;
         overflow-y: auto;
+        margin: 0;
     }
 
-    .nav-menu.active {
-        display: flex;
+    .nav-menu a {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
     }
 
-    .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
+    .nav-menu a:last-child { border-bottom: none; }
 
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
+    /* Language-aware text alignment inside the dropdown */
+    html[lang="ar"] .nav-menu a { text-align: right; }
+    html[lang="en"] .nav-menu a,
+    html[lang="fr"] .nav-menu a { text-align: left; }
 
-    .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
+    .nav-menu.active { display: flex; }
 
-    .main-content {
-        padding: 1rem;
-    }
+    .theme-picker,
+    .font-picker,
+    .language-picker { top: 70px; }
+}
 
-    .diwan-grid {
-        max-width: 100%;
-    }
+@media (max-width: 768px) {
+    .navbar { padding: 1rem; }
+
+    .nav-brand h1 { font-size: 1.2rem; }
+
+    .main-content { padding: 1rem; }
+    .diwan-grid { max-width: 100%; }
 
     .theme-options,
     .font-options,
@@ -840,63 +641,29 @@ html[lang="fr"] .nav-menu {
 
     .theme-btn,
     .font-btn,
-    .language-btn {
-        width: 100%;
-    }
+    .language-btn { width: 100%; }
 
-    .font-size-control {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .font-size-control label {
-        text-align: center;
-    }
-
-    .font-size-control input[type="range"] {
-        max-width: 100%;
-    }
+    .font-size-control { flex-direction: column; align-items: stretch; }
+    .font-size-control label { text-align: center; }
+    .font-size-control input[type="range"] { max-width: 100%; }
 }
 
 @media (max-width: 480px) {
-    .modal-content {
-        padding: 1.5rem;
-    }
-    
-    .modal-content h3 {
-        font-size: 1.2rem;
-    }
-    
-    .modal-language-options {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
+    .modal-content { padding: 1.5rem; }
+    .modal-content h3 { font-size: 1.2rem; }
+    .modal-language-options { flex-direction: column; gap: 0.5rem; }
     .modal-language-btn {
         flex-direction: row;
         justify-content: flex-start;
         padding: 0.75rem;
     }
-    
-    .modal-language-btn .flag {
-        font-size: 1.8rem;
-        width: 40px;
-    }
-    .diwan-btn {
-        padding: 1.2rem;
-    }
-    
-    .diwan-number {
-        font-size: 1.8rem;
-    }
+    .modal-language-btn .flag { font-size: 1.8rem; width: 40px; }
 
-    .nav-brand h1 {
-        font-size: 1.1rem;
-    }
+    .diwan-btn { padding: 1.2rem; }
+    .diwan-number { font-size: 1.8rem; }
+    .nav-brand h1 { font-size: 1.1rem; }
 
     .theme-picker,
     .font-picker,
-    .language-picker {
-        top: 60px;
-    }
+    .language-picker { top: 60px; }
 }
