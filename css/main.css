@@ -184,17 +184,26 @@ body {
 }
 .nav-left { justify-self: start; }
 .nav-right { justify-self: end; }
-.nav-center { justify-self: center; display: flex; justify-content: center; }
+.nav-center { justify-self: center; display: flex; justify-content: center;  min-width: 0;
+    width: 100%;}
 
 .nav-brand h1 {
     color: var(--accent-color); text-decoration: none; white-space: nowrap;
     transition: color 0.3s ease; unicode-bidi: plaintext; font-size: 20px; font-weight: bold;
 }
 
+.nav-brand-link, .nav-brand h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
 /* Hamburger */
 .hamburger {
     display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 6px;
-    background: transparent; border: none; z-index: 1600; transition: opacity 0.2s ease;
+    background: transparent; border: none; z-index: 1600; transition: opacity 0.2s ease; flex-shrink: 0; 
+    width: 40px; 
 }
 .hamburger span { display: block; width: 25px; height: 3px; background-color: var(--text-primary); border-radius: 2px; }
 
@@ -312,4 +321,11 @@ body {
     .font-size-control { flex-direction: column; align-items: stretch; }
     .font-size-control label { text-align: center; }
     .font-size-control input[type="range"] { max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .nav-brand h1, .diwan-short-title {
+        font-size: 1.1rem !important; /* Forces a strict size */
+        line-height: 1.4 !important;  /* Prevents vertical stretching */
+    }
 }

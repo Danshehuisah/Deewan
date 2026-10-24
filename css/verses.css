@@ -135,7 +135,8 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 
 .nav-left { justify-self: start; }
 .nav-right { justify-self: end; }
-.nav-center { justify-self: center; display: flex; justify-content: center; }
+.nav-center { justify-self: center; display: flex; justify-content: center;  min-width: 0;
+    width: 100%;}
 
 .nav-brand-link {
     color: var(--accent-color);
@@ -145,6 +146,12 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
     gap: 0.75rem; /* Increased gap between short title and full title */
     white-space: nowrap;
     unicode-bidi: plaintext;
+}
+.nav-brand-link, .nav-brand h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }
 .diwan-title-nav {
     font-weight: bold;
@@ -184,6 +191,8 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
     border: none;
     z-index: 1600;
     transition: opacity 0.2s ease;
+    flex-shrink: 0; 
+    width: 40px; 
 }
 .hamburger span {
     display: block;
@@ -450,3 +459,10 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 .loading { text-align: center; padding: 2rem; color: var(--text-secondary); }
 .loading::after { content: ''; display: inline-block; width: 20px; height: 20px; margin-right: 10px; border: 2px solid var(--accent-color); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; }
 .error { text-align: center; padding: 2rem; color: #dc3545; background-color: rgba(220, 53, 69, 0.1); border-radius: 8px; margin: 1rem 0; }
+
+@media (max-width: 768px) {
+    .nav-brand h1, .diwan-short-title {
+        font-size: 1.1rem !important; /* Forces a strict size */
+        line-height: 1.4 !important;  /* Prevents vertical stretching */
+    }
+}
