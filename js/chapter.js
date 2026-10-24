@@ -2,30 +2,25 @@
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const diwanTitle = document.getElementById('diwanTitle');
-const diwanFullTitle = document.getElementById('diwanFullTitle');
 const hurufList = document.getElementById('hurufList');
 const continueReading = document.getElementById('continueReading');
 let continueCard = document.getElementById('continueCard');
 const continueHeading = document.querySelector('.continue-reading h3');
 
-// Theme elements
 const themeToggle = document.getElementById('themeToggle');
 const themePicker = document.getElementById('themePicker');
 const themeBtns = document.querySelectorAll('.theme-btn');
 
-// Font elements
 const fontToggle = document.getElementById('fontToggle');
 const fontPicker = document.getElementById('fontPicker');
 const fontBtns = document.querySelectorAll('.font-btn');
 const fontSizeSlider = document.getElementById('fontSizeSlider');
 const fontSizeValue = document.getElementById('fontSizeValue');
 
-// Language elements
 const languageToggle = document.getElementById('languageToggle');
 const languagePicker = document.getElementById('languagePicker');
 const languageBtns = document.querySelectorAll('.language-btn');
 
-// Overlay
 const overlay = document.createElement('div');
 overlay.className = 'picker-overlay';
 document.body.appendChild(overlay);
@@ -34,11 +29,11 @@ document.body.appendChild(overlay);
 const urlParams = new URLSearchParams(window.location.search);
 const diwanId = urlParams.get('diwan');
 
-// ===== Diwan titles =====
+// ===== Diwan titles (Short Versions) =====
 const diwanTitles = {
     1: "تَيْسِيرُ الْوُصُولِ",
     2: "إِكْسِيرُ السَّعَادَاتِ",
-    3: "سَلْوَةُ الشُّجُونِ",
+    3: "سَلْوَةُ الشُّجُونِ",
     4: "أَوْثَقُ الْعُرَى",
     5: "شِفَاءُ الْأَسْقَامِ",
     6: "مَنَاسِكُ أَهْلِ الْوِدَادِ",
@@ -48,14 +43,12 @@ const diwanTitles = {
 };
 
 // ===== Hardcoded chapter counts =====
-const DIWAN_CHAPTER_COUNTS = {
-    1: 28, 2: 32, 3: 37, 4: 29, 5: 30, 6: 29, 7: 28, 8: 25, 9: 6
-};
+const DIWAN_CHAPTER_COUNTS = { 1: 28, 2: 32, 3: 37, 4: 29, 5: 30, 6: 29, 7: 28, 8: 25, 9: 6 };
 
 // ===== State =====
 let translations = {};
 let totalChapters = DIWAN_CHAPTER_COUNTS[diwanId] || 0;
-let diwanIndex = null;   // loaded index.json array, or null
+let diwanIndex = null;
 
 // ===== Path helper =====
 function dataPath(file) {
@@ -78,8 +71,9 @@ document.documentElement.setAttribute('data-theme', savedTheme);
 document.documentElement.setAttribute('data-font', savedFont);
 document.documentElement.setAttribute('lang', savedLanguage);
 document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
-document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
-document.documentElement.style.fontSize = savedFontSize + 'px';
+// Note: We do not apply the root font size anymore to prevent UI breakage
+// document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
+// document.documentElement.style.fontSize = savedFontSize + 'px';
 
 if (fontSizeSlider) fontSizeSlider.value = savedFontSize;
 if (fontSizeValue) fontSizeValue.textContent = savedFontSize;
@@ -91,7 +85,7 @@ languageBtns.forEach(btn => { if (btn.dataset.lang === savedLanguage) btn.classL
 // ===== Menu helpers =====
 function closeAllMenus() {
     if (navMenu) navMenu.classList.remove('active');
-    if (hamburger && hamburger.classList.contains('active')) {
+    if (hamburger) {
         hamburger.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
     }
@@ -101,55 +95,30 @@ function closeAllMenus() {
     overlay.classList.remove('active');
 }
 
-function closePickersWhenNavOpens() {
-    if (navMenu && navMenu.classList.contains('active')) {
-        if (themePicker) themePicker.classList.remove('active');
-        if (fontPicker) fontPicker.classList.remove('active');
-        if (languagePicker) languagePicker.classList.remove('active');
-        overlay.classList.remove('active');
-    }
-}
-
 function togglePicker(pickerToShow) {
-    if (themePicker) themePicker.classList.remove('active');
-    if (fontPicker) fontPicker.classList.remove('active');
-    if (languagePicker) languagePicker.classList.remove('active');
-
-    if (navMenu && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        if (hamburger) {
-            hamburger.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        }
-    }
-
+    closeAllMenus();
     if (pickerToShow) {
         pickerToShow.classList.add('active');
         overlay.classList.add('active');
-    } else {
-        overlay.classList.remove('active');
     }
 }
 
-// ===== Translations (localStorage-cached) =====
+// ===== Translations =====
 function localeCacheKey(lang) { return `locale_${lang}_v1`; }
 
 async function loadTranslations() {
     try {
         const cached = localStorage.getItem(localeCacheKey(savedLanguage));
         if (cached) {
-            try {
-                translations = JSON.parse(cached);
-                applyTranslations();
-                return;
-            } catch {}
+            translations = JSON.parse(cached);
+            applyTranslations();
+            return;
         }
-
         const path = window.location.pathname.includes('html/') ? '../locales/' : 'locales/';
         const response = await fetch(`${path}${savedLanguage}.json`);
         if (!response.ok) throw new Error('Failed to load translations');
         translations = await response.json();
-        try { localStorage.setItem(localeCacheKey(savedLanguage), JSON.stringify(translations)); } catch {}
+        localStorage.setItem(localeCacheKey(savedLanguage), JSON.stringify(translations));
         applyTranslations();
     } catch (error) {
         console.error('Error loading translations:', error);
@@ -178,9 +147,8 @@ function applyTranslations() {
     updateContinueCard();
 }
 
-// ===== Load index.json (with localStorage cache) =====
+// ===== Load index.json =====
 async function loadDiwanIndex() {
-    // Try localStorage first — instant
     const cached = localStorage.getItem(getIndexCacheKey());
     if (cached) {
         try {
@@ -192,7 +160,6 @@ async function loadDiwanIndex() {
         } catch {}
     }
 
-    // Fetch from disk
     try {
         const res = await fetch(dataPath('index.json'));
         if (!res.ok) throw new Error('index.json not found');
@@ -202,68 +169,38 @@ async function loadDiwanIndex() {
             try { localStorage.setItem(getIndexCacheKey(), JSON.stringify(data)); } catch {}
         }
     } catch (err) {
-        console.warn('index.json missing for diwan', diwanId, '— falling back to titles only');
+        console.warn('index.json missing', err);
         diwanIndex = null;
     }
 }
 
-// ===== Load chapters list (instant) =====
+// ===== Load chapters =====
 async function loadChapters() {
-    if (!diwanId) {
-        window.location.href = '../index.html';
-        return;
-    }
+    if (!diwanId) { window.location.href = '../index.html'; return; }
 
-              // Now we just grab the exact string you defined
+    // Apply Short Title directly
     const shortTitle = diwanTitles[diwanId] || `الديوان ${diwanId}`;
-    
     const shortEl = document.getElementById('diwanShortTitle');
-    if (shortEl) {
-        shortEl.textContent = shortTitle;
-    }
-    
-    // If you removed the long title from the navbar HTML, you can delete this part.
-    // But if you kept it, it will just display the same short title.
-    if (diwanFullTitle) {
-        diwanFullTitle.textContent = shortTitle;
-    }
-   
+    if (shortEl) shortEl.textContent = shortTitle;
 
-    // Load translations and index in parallel
-    const [, ] = await Promise.all([
-        loadTranslations(),
-        loadDiwanIndex()
-    ]);
+    const [, ] = await Promise.all([ loadTranslations(), loadDiwanIndex() ]);
 
-    // Now that translations are loaded, refresh header text
     if (diwanTitle) {
         diwanTitle.textContent = `${translations.diwan?.title || 'الديوان'}`;
     }
 
-    if (!totalChapters) {
-        totalChapters = await detectTotalChaptersFallback();
-    }
+    if (totalChapters === 0) totalChapters = await detectTotalChaptersFallback();
 
     if (totalChapters === 0) {
-        if (hurufList) {
-            hurufList.innerHTML = `<div class="error">${translations.diwan?.error || 'لَا تُوجَدُ فُصُولٌ'}</div>`;
-        }
+        if (hurufList) hurufList.innerHTML = `<div class="error">${translations.diwan?.error || 'لَا تُوجَدُ فُصُولٌ'}</div>`;
         return;
     }
 
-        renderChapters();
+    renderChapters();
     loadLastRead();
-
-    // Restore scroll position if coming back from verses page
-    // const savedY = sessionStorage.getItem(`diwan_${diwanId}_scroll_y`);
-    // if (savedY !== null) {
-    //     window.scrollTo(0, parseInt(savedY, 10));
-    //     Optional: clear it so it doesn't force scroll forever
-    //     sessionStorage.removeItem(`diwan_${diwanId}_scroll_y`);
-    // }
 }
 
-// Fallback probe — only used if counts map is missing the diwan
+// Fallback probe
 async function fileExists(n) {
     try {
         const res = await fetch(dataPath(`${n}.json`), { method: 'HEAD' });
@@ -287,7 +224,7 @@ async function detectTotalChaptersFallback() {
     return low;
 }
 
-// ===== Render chapters — title + preview from index.json =====
+// ===== Render chapters =====
 function renderChapters() {
     if (!hurufList) return;
     hurufList.innerHTML = '';
@@ -295,9 +232,7 @@ function renderChapters() {
     const frag = document.createDocumentFragment();
 
     for (let i = 0; i < totalChapters; i++) {
-        const index = i;   // 0-based URL param
-
-        // Pull title and preview from index.json when available
+        const index = i;
         let title = '';
         let preview = '';
 
@@ -309,7 +244,6 @@ function renderChapters() {
             }
         }
 
-        // Fallbacks
         if (!title || !title.trim()) {
             title = `${translations.diwan?.huruf || 'الْحَرْفُ'} ${i + 1}`;
         }
@@ -328,19 +262,14 @@ function renderChapters() {
         frag.appendChild(item);
     }
 
-     hurufList.appendChild(frag);
+    hurufList.appendChild(frag);
 
-    // --- NEW: Restore exact scroll position ---
+    // Restore exact scroll position
     const savedY = sessionStorage.getItem(`diwan_${diwanId}_scroll_y`);
     if (savedY !== null) {
-        // Hide content briefly to prevent flashing at the top
         hurufList.style.opacity = '0';
-        
-        // Jump instantly
         document.documentElement.style.scrollBehavior = 'auto';
         window.scrollTo(0, parseInt(savedY, 10));
-        
-        // Fade back in
         requestAnimationFrame(() => {
             hurufList.style.opacity = '1';
             setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 50);
@@ -375,7 +304,7 @@ function updateContinueCard(chapterIndex, chapterTitle, versePreview) {
     const t = translations.diwan;
 
     if (chapterIndex !== undefined && chapterTitle && versePreview) {
-               continueCard.innerHTML = `
+        continueCard.innerHTML = `
             <h4>${chapterTitle}</h4>
             <div class="continue-preview">
                 <span class="continue-text">${versePreview}</span>
@@ -394,90 +323,61 @@ function updateContinueCard(chapterIndex, chapterTitle, versePreview) {
 }
 
 // ===== Event listeners =====
-if (hamburger) {
+if (hamburger && navMenu) {
     hamburger.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
-        const open = hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active', open);
-        hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        closePickersWhenNavOpens();
+        
+        const isOpen = !navMenu.classList.contains('active');
+        navMenu.classList.toggle('active', isOpen);
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        
+        if (themePicker) themePicker.classList.remove('active');
+        if (fontPicker) fontPicker.classList.remove('active');
+        if (languagePicker) languagePicker.classList.remove('active');
+        overlay.classList.remove('active');
     });
 }
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', (e) => {
-        e.preventDefault(); e.stopPropagation();
-        if (themePicker && !themePicker.classList.contains('active')) togglePicker(themePicker);
-        else togglePicker(null);
-    });
-}
+if (themeToggle) themeToggle.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); togglePicker(themePicker); });
+if (fontToggle) fontToggle.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); togglePicker(fontPicker); });
+if (languageToggle) languageToggle.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); togglePicker(languagePicker); });
 
-if (fontToggle) {
-    fontToggle.addEventListener('click', (e) => {
-        e.preventDefault(); e.stopPropagation();
-        if (fontPicker && !fontPicker.classList.contains('active')) togglePicker(fontPicker);
-        else togglePicker(null);
-    });
-}
+themeBtns.forEach(btn => btn.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', btn.dataset.theme);
+    localStorage.setItem('theme', btn.dataset.theme);
+    themeBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
+    closeAllMenus();
+}));
 
-if (languageToggle) {
-    languageToggle.addEventListener('click', (e) => {
-        e.preventDefault(); e.stopPropagation();
-        if (languagePicker && !languagePicker.classList.contains('active')) togglePicker(languagePicker);
-        else togglePicker(null);
-    });
-}
+fontBtns.forEach(btn => btn.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-font', btn.dataset.font);
+    localStorage.setItem('font', btn.dataset.font);
+    fontBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
+    closeAllMenus();
+}));
 
-themeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const theme = btn.dataset.theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        themeBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        closeAllMenus();
-    });
-});
-
-fontBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const font = btn.dataset.font;
-        document.documentElement.setAttribute('data-font', font);
-        localStorage.setItem('font', font);
-        fontBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        closeAllMenus();
-    });
-});
-
-languageBtns.forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-        e.preventDefault(); e.stopPropagation();
-        const lang = btn.dataset.lang;
-        localStorage.setItem('language', lang);
-        localStorage.setItem('hasVisited', 'true');
-        document.documentElement.setAttribute('lang', lang);
-        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-        savedLanguage = lang;
-        languageBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        await loadTranslations();
-        closeAllMenus();
-                const fullTitle = diwanTitles[diwanId] || '';
-    // Take the first 2 words for the short version
-    const shortTitle = fullTitle.split(' ').slice(0, 2).join(' ');
+languageBtns.forEach(btn => btn.addEventListener('click', async (e) => {
+    e.preventDefault(); e.stopPropagation();
+    const lang = btn.dataset.lang;
+    localStorage.setItem('language', lang); localStorage.setItem('hasVisited', 'true');
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    savedLanguage = lang;
+    languageBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
+    await loadTranslations(); closeAllMenus();
     
+    // Update short title on language change
+    const shortTitle = diwanTitles[diwanId] || `الديوان ${diwanId}`;
     const shortEl = document.getElementById('diwanShortTitle');
-    if (shortEl) {
-        // Removed the ${diwanId} so only the short title shows
-        shortEl.textContent = shortTitle || 'الديوان'; 
-    }
-   
-        renderChapters();
-        loadLastRead();
-    });
-});
+    if (shortEl) shortEl.textContent = shortTitle;
 
+    renderChapters();
+    loadLastRead();
+}));
+
+// Isolated font slider
 if (fontSizeSlider) {
     let timeout;
     fontSizeSlider.addEventListener('input', (e) => {
@@ -485,9 +385,9 @@ if (fontSizeSlider) {
         if (fontSizeValue) fontSizeValue.textContent = size;
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            document.documentElement.style.setProperty('--base-font-size', size + 'px');
-            document.documentElement.style.fontSize = size + 'px';
             localStorage.setItem('fontSize', size);
+            // We can safely apply it to just the previews if we want
+            // document.querySelectorAll('.huruf-preview').forEach(p => p.style.fontSize = (size * 0.8) + 'px');
         }, 50);
     });
 }
@@ -501,13 +401,14 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
         }
         closeAllMenus();
         if (link.getAttribute('href') === '../index.html') {
+            sessionStorage.removeItem(`diwan_${diwanId}_scroll_y`); // Clear scroll on Home nav
             window.location.href = '../index.html';
         }
     });
 });
 
 document.addEventListener('click', (e) => {
-    if (!e.target.closest('.navbar') && !e.target.closest('.nav-menu a') && navMenu?.classList.contains('active')) {
+    if (!e.target.closest('.navbar') && !e.target.closest('.nav-menu') && navMenu?.classList.contains('active')) {
         closeAllMenus();
     }
 });
@@ -520,13 +421,11 @@ document.addEventListener('visibilitychange', () => {
     if (!document.hidden && diwanId) loadLastRead();
 });
 
-document.addEventListener('DOMContentLoaded', loadChapters);
-
-// Add this at the very bottom of chapter.js
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    if (link.getAttribute('href') === '../index.html' || link.dataset.i18n === 'nav.home') {
-        link.addEventListener('click', (e) => {
-            sessionStorage.removeItem(`diwan_${diwanId}_scroll_y`);
-        });
-    }
+// ===== Hardware Back Button (Android) =====
+document.addEventListener('DOMContentLoaded', () => {
+    window.history.pushState({ page: 'chapters' }, '', window.location.href);
+    window.addEventListener('popstate', () => {
+        window.location.href = `../index.html`;
+    });
+    loadChapters();
 });

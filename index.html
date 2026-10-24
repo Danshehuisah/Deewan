@@ -9,19 +9,14 @@
     <!-- Preload core assets -->
     <link rel="preload" href="fonts/Amiri-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="fonts/ScheherazadeNew-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="css/main.css" as="style">
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ديوان الشيخ إبراهيم إنياس">
     <meta name="msapplication-TileColor" content="#8B4513">
-    <meta name="msapplication-TileImage" content="icons/icon-144x144.webp">
     <meta name="theme-color" content="#8B4513">
 </head>
 <body>
@@ -60,22 +55,25 @@
     <div class="app-container" id="home">
         <!-- Navbar -->
         <nav class="navbar">
-            <div class="nav-brand">
+            <div class="nav-left"></div>
+            
+            <div class="nav-center nav-brand">
                 <h1 data-i18n="app.title">ديوان الشيخ إبراهيم إنياس</h1>
             </div>
 
-            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-right">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
             <div class="nav-menu" id="navMenu">
                 <a href="#" class="active" data-i18n="nav.home">الرئيسية</a>
                 <a href="#" id="themeToggle" data-i18n="nav.theme">المظهر</a>
                 <a href="#" id="fontToggle" data-i18n="nav.font">الخط</a>
                 <a href="#" id="languageToggle" data-i18n="nav.language">اللغة</a>
-                <!-- <a href="#" data-i18n="nav.community">المجتمع</a> -->
             </div>
         </nav>
 
@@ -118,16 +116,8 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- <h2 class="welcome-title" data-i18n="welcome.title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
-            <p class="welcome-subtitle" data-i18n="welcome.subtitle">اخْتَرِ الدِّيوَانَ لِلْقِرَاءَةِ</p> -->
-
             <div class="diwan-grid" id="diwanGrid"></div>
         </main>
-
-        <!-- Footer -->
-        <!-- <footer class="footer">
-            <p data-i18n="app.footer">جميع الحقوق محفوظة © 2026 | ديوان الشيخ إبراهيم إنياس</p>
-        </footer> -->
     </div>
 
     <script src="js/main.js"></script>
@@ -139,11 +129,6 @@
                 .catch(err => console.log('SW registration failed:', err));
         });
     }
-
-
-    // Clear any saved reading positions when arriving at the home screen
-    sessionStorage.clear(); 
     </script>
-    
 </body>
 </html>
