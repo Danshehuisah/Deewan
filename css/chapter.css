@@ -273,7 +273,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
         padding: 1rem 1.5rem; 
         border-bottom: 1px solid var(--border-color); 
         color: var(--text-primary);
-        font-size: 18px;
+        font-size: 20px;
         text-decoration: none;
     }
     .nav-menu a:last-child { border-bottom: none; }
