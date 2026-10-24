@@ -471,7 +471,7 @@ html[lang="fr"] .nav-menu { text-align: left; }
 /* ===== Continue reading ===== */
 .continue-reading {
     margin-bottom: 2rem;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: var(--continue-bg);
     border-radius: 12px;
     border-right: 4px solid var(--accent-color);
@@ -481,14 +481,15 @@ html[lang="fr"] .nav-menu { text-align: left; }
 
 .continue-reading h3 {
     color: var(--accent-color);
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
 }
 
 .continue-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 1rem;
+    padding: 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: right;
@@ -501,24 +502,28 @@ html[lang="fr"] .nav-menu { text-align: left; }
 
 .continue-card h4 {
     color: var(--accent-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .continue-preview {
+    display: flex;
+    align-items: center;
+    direction: rtl; /* Forces Arabic text layout regardless of site language */
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .continue-badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.1rem 0.65rem;
     background-color: var(--badge-bg);
     color: var(--badge-text);
     border-radius: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    margin-right: auto; /* In RTL mode, auto margin on the right pushes it to the far LEFT */
+    margin-left: 0.5rem;
+    flex-shrink: 0;
 }
 
 /* ===== Huruf list ===== */
@@ -552,6 +557,9 @@ html[lang="fr"] .nav-menu { text-align: left; }
 }
 
 .huruf-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;               /* clamp to 2 lines */
+    -webkit-box-orient: vertical;
     color: var(--text-secondary);
     white-space: nowrap;
     overflow: hidden;
@@ -681,3 +689,37 @@ html[lang="fr"] .nav-menu { text-align: left; }
     .font-picker,
     .language-picker { top: 60px; }
 }
+
+/* ===== Navbar Brand Cleanup ===== */
+.nav-brand-link {
+    display: flex;
+    align-items: baseline; /* Aligns the text nicely on the same line */
+    gap: 0.75rem;          /* Spacing between the short and full title */
+    text-decoration: none;
+}
+
+.diwan-short-title {
+    font-size: 1.4rem;     /* Larger for the main title */
+    font-weight: bold;
+    color: var(--accent-color);
+    white-space: nowrap;
+}
+
+.diwan-full-title {
+    font-size: 0.9rem;     /* Smaller for the secondary title */
+    color: var(--text-secondary);
+    font-weight: normal;
+    white-space: nowrap;
+    /* Removed the italics to make it look cleaner */
+}
+
+/* On mobile (screens smaller than 768px), hide the long title to save space */
+@media (max-width: 768px) {
+    .diwan-full-title {
+        display: none; 
+    }
+    .diwan-short-title {
+        font-size: 1.2rem;
+    }
+}
+

@@ -11,33 +11,42 @@
 
     <link rel="manifest" href="../manifest.json">
     <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="../icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon-180x180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="ديوان إنياس">
-    <meta name="msapplication-TileColor" content="#8B4513">
-    <meta name="msapplication-TileImage" content="../icons/icon-144x144.webp">
+    <meta name="apple-mobile-web-app-title" content="ديوان الشيخ إبراهيم إنياس">
     <meta name="theme-color" content="#8B4513">
 </head>
 <body>
     <div class="app-container">
         <!-- Navbar -->
         <nav class="navbar">
-            <div class="nav-brand">
-                <a href="../index.html" id="navbarBrand" class="navbar-brand-link">
-                    <span class="diwan-title-nav">ديوان الشيخ</span>
+            <div class="nav-left">
+                <button class="back-btn" id="backToChapters" aria-label="Back">
+                    ←
+                </button>
+            </div>
+
+            <div class="nav-center nav-brand">
+                <a href="../index.html" id="navbarBrand" class="nav-brand-link">
+                    <span class="diwan-title-nav">ديوان الشيخ إبراهيم</span>
                     <span class="huruf-title-nav"></span>
                 </a>
             </div>
 
-            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-right">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
+            <!-- Progress Bar (Inside Navbar, at bottom) -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Nav Menu (Drawer) -->
             <div class="nav-menu" id="navMenu">
                 <a href="../index.html" data-i18n="nav.home">الرئيسية</a>
                 <a href="#" id="themeToggle" data-i18n="nav.theme">المظهر</a>
@@ -86,22 +95,14 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="progress-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="back-btn" id="backToChapters">
-                    ← الْعَوْدَةُ لِلْفُصُولِ
-                </button>
-            </div>
-
+            <!-- Verses -->
             <div class="verses-container" id="versesContainer"></div>
 
+            <!-- Chapter Navigation -->
             <div class="verse-navigation" id="verseNavigation">
-                <button class="nav-arrow next-btn" id="nextChapter">الْحِزْبُ التَّالِي</button>
-                <button class="nav-arrow prev-btn" id="prevChapter" disabled>الْحِزْبُ السَّابِقُ</button>
+                <button class="nav-arrow prev-btn" id="prevChapter" disabled>← السابق</button>
                 <span id="currentPosition"></span>
+                <button class="nav-arrow next-btn" id="nextChapter">التالي →</button>
             </div>
         </main>
     </div>

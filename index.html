@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="ديوان إنياس">
+    <meta name="apple-mobile-web-app-title" content="ديوان الشيخ إبراهيم إنياس">
     <meta name="msapplication-TileColor" content="#8B4513">
     <meta name="msapplication-TileImage" content="icons/icon-144x144.webp">
     <meta name="theme-color" content="#8B4513">
@@ -118,16 +118,16 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <h2 class="welcome-title" data-i18n="welcome.title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
-            <p class="welcome-subtitle" data-i18n="welcome.subtitle">اخْتَرِ الدِّيوَانَ لِلْقِرَاءَةِ</p>
+            <!-- <h2 class="welcome-title" data-i18n="welcome.title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h2>
+            <p class="welcome-subtitle" data-i18n="welcome.subtitle">اخْتَرِ الدِّيوَانَ لِلْقِرَاءَةِ</p> -->
 
             <div class="diwan-grid" id="diwanGrid"></div>
         </main>
 
         <!-- Footer -->
-        <footer class="footer">
-            <p data-i18n="app.footer">جميع الحقوق محفوظة © 2024 | ديوان الشيخ إبراهيم إنياس</p>
-        </footer>
+        <!-- <footer class="footer">
+            <p data-i18n="app.footer">جميع الحقوق محفوظة © 2026 | ديوان الشيخ إبراهيم إنياس</p>
+        </footer> -->
     </div>
 
     <script src="js/main.js"></script>
@@ -139,6 +139,11 @@
                 .catch(err => console.log('SW registration failed:', err));
         });
     }
+
+
+    // Clear any saved reading positions when arriving at the home screen
+    sessionStorage.clear(); 
     </script>
+    
 </body>
 </html>

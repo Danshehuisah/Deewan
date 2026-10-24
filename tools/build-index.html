@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Generator — Diwan</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            padding: 2rem;
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h1 { color: #8B4513; margin-bottom: 1rem; }
+        h2 { color: #8B4513; font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+        .card {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        label { display: block; margin-bottom: 0.35rem; font-weight: 600; font-size: 0.95rem; }
+        input[type="number"], input[type="range"] {
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100px;
+        }
+        input[type="file"] {
+            border: 2px dashed #8B4513;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 100%;
+            background: #faf0e2;
+            cursor: pointer;
+        }
+        button {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button:hover:not(:disabled) { background: #a65d2a; }
+        .result {
+            background: #e8f0e8;
+            border-right: 4px solid #2e7d5e;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .error {
+            background: #fce8e8;
+            border-right: 4px solid #dc3545;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .counts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+        .counts label { font-weight: 400; font-size: 0.85rem; }
+        .counts input { width: 60px; padding: 0.35rem; }
+        .num-badge {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            border-radius: 50%;
+            width: 26px; height: 26px;
+            line-height: 26px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>📇 Index Generator</h1>
+    <p>Reads your chapter JSONs locally, produces one <code>index.json</code> per diwan, with <b>title</b> + <b>first verse line</b>. No upload — everything stays on your machine.</p>
+
+    <div class="card">
+        <h2>1. Preview length</h2>
+        <label for="previewLen">Characters per preview</label>
+        <input type="range" id="previewLen" min="20" max="120" step="10" value="60" oninput="updatePreviewLen(this.value)">
+        <span id="previewLenLabel" style="margin-right:1rem; color:#8B4513; font-weight:bold;">60</span>
+    </div>
+
+    <div class="card">
+        <h2>2. Chapter count per diwan</h2>
+        <div class="counts" id="countsGrid"></div>
+    </div>
+
+    <div class="card">
+        <h2>3. Upload chapter JSONs</h2>
+        <p style="font-size:0.9rem; color:#495057; margin-bottom:0.75rem;">
+            Select <b>all</b> of your chapter JSON files at once (from all diwan folders). The file names must follow the pattern <code>{diwanId}/{n}.json</code> — e.g. <code>1/1.json</code>, <code>1/2.json</code>, <code>2/1.json</code>.
+            <br>
+            <b>Tip:</b> in the file picker, hold Ctrl (Windows) or Cmd (Mac) to select multiple files. Chrome keeps the parent folder name in the file's <code>webkitRelativePath</code>.
+            <br>
+            <b>Simpler option:</b> pick a folder per diwan using the numbered inputs below.
+        </p>
+
+        <div id="folderInputs"></div>
+
+        <button id="generateBtn" disabled>Generate & Download All</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // ---------------- Defaults ----------------
+        const DEFAULT_COUNTS = {
+            1: 28, 2: 32, 3: 37, 4: 29, 5: 30,
+            6: 29, 7: 28, 8: 25, 9: 6
+        };
+
+        let previewLength = 60;
+        const loadedFiles = {};   // { diwanId: { n: parsedChapter } }
+
+        // ---------------- UI: counts ----------------
+        const countsGrid = document.getElementById('countsGrid');
+        Object.entries(DEFAULT_COUNTS).forEach(([id, n]) => {
+            const wrap = document.createElement('div');
+            wrap.innerHTML = `
+                <label>ديوان ${id}
+                    <span class="num-badge">${id}</span>
+                </label>
+                <input type="number" min="1" max="500" value="${n}" data-diwan="${id}" class="countInput">
+            `;
+            countsGrid.appendChild(wrap);
+        });
+
+        // ---------------- UI: folder inputs ----------------
+        const folderInputs = document.getElementById('folderInputs');
+        for (let id = 1; id <= 9; id++) {
+            const wrap = document.createElement('div');
+            wrap.style.marginBottom = '0.75rem';
+            wrap.innerHTML = `
+                <label>Folder for diwan ${id} — expects files <code>1.json</code> … <code>${DEFAULT_COUNTS[id]}.json</code></label>
+                <input type="file" multiple accept=".json,application/json"
+                       id="folderInput-${id}"
+                       webkitdirectory directory>
+            `;
+            folderInputs.appendChild(wrap);
+        }
+
+        // Rebind listeners when ready
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let id = 1; id <= 9; id++) {
+                const inp = document.getElementById(`folderInput-${id}`);
+                inp.addEventListener('change', (e) => handleFolderInput(id, e));
+            }
+        });
+
+        function updatePreviewLen(v) {
+            previewLength = parseInt(v, 10);
+            document.getElementById('previewLenLabel').textContent = previewLength;
+        }
+
+        // ---------------- Read files ----------------
+        async function handleFolderInput(diwanId, evt) {
+            const files = Array.from(evt.target.files);
+            if (!files.length) return;
+
+            if (!loadedFiles[diwanId]) loadedFiles[diwanId] = {};
+
+            for (const file of files) {
+                // Extract numeric N from file.name like "12.json"
+                const m = file.name.match(/^(\d+)\.json$/i);
+                if (!m) continue;
+                const n = parseInt(m[1], 10);
+                try {
+                    const text = await file.text();
+                    const data = JSON.parse(text);
+                    loadedFiles[diwanId][n] = data;
+                } catch (e) {
+                    console.warn(`Skipping ${file.name}:`, e.message);
+                }
+            }
+
+            refreshStatus();
+        }
+
+        function refreshStatus() {
+            const btn = document.getElementById('generateBtn');
+            const status = document.getElementById('status');
+            const diwanIds = Object.keys(loadedFiles);
+
+            if (!diwanIds.length) {
+                btn.disabled = true;
+                status.innerHTML = '';
+                return;
+            }
+
+            let html = '<div class="result"><b>Loaded:</b><br>';
+            for (const id of diwanIds) {
+                const n = Object.keys(loadedFiles[id]).length;
+                html += `ديوان ${id}: ${n} files<br>`;
+            }
+            html += '</div>';
+            status.innerHTML = html;
+            btn.disabled = false;
+        }
+
+        // ---------------- Generate ----------------
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const counts = {};
+            document.querySelectorAll('.countInput').forEach(inp => {
+                counts[inp.dataset.diwan] = parseInt(inp.value, 10) || 0;
+            });
+
+            const outStatus = document.getElementById('status');
+            outStatus.innerHTML = '';
+
+            for (const [id, total] of Object.entries(counts)) {
+                if (!total) continue;
+                const files = loadedFiles[id];
+                if (!files) {
+                    outStatus.innerHTML += `<div class="error">ديوان ${id}: no folder uploaded, skipped.</div>`;
+                    continue;
+                }
+
+                const index = [];
+                let missing = [];
+
+                for (let n = 1; n <= total; n++) {
+                    const ch = files[n];
+                    if (!ch) {
+                        missing.push(n);
+                        index.push({ n, title: `حرف ${n}`, preview: '' });
+                        continue;
+                    }
+
+                    const title = (ch.title && String(ch.title).trim()) || `حرف ${n}`;
+                    let preview = '';
+                    if (Array.isArray(ch.huruf) && Array.isArray(ch.huruf[0]) && ch.huruf[0][0]) {
+                        preview = String(ch.huruf[0][0]).slice(0, previewLength);
+                        if (String(ch.huruf[0][0]).length > previewLength) preview += '…';
+                    }
+                    index.push({ n, title, preview });
+                }
+
+                // Download
+                const blob = new Blob([JSON.stringify(index, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `index.json`;    // you'll rename into the right folder
+                a.click();
+                URL.revokeObjectURL(url);
+
+                outStatus.innerHTML += `
+                    <div class="result">
+                        <b>✅ ديوان ${id}</b> — ${index.length} entries generated (downloaded as <code>index.json</code>).
+                        ${missing.length ? `<br><span style="color:#b00020;">Missing chapters: ${missing.join(', ')}</span>` : ''}
+                        <br><small>Rename to <code>${id}/index.json</code> in your project.</small>
+                    </div>
+                `;
+
+                // Small delay so the browser doesn't block multiple downloads
+                await new Promise(r => setTimeout(r, 400));
+            }
+        });
+    </script>
+</body>
+</html>
