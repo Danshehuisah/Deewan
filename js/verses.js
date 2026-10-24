@@ -62,8 +62,19 @@ document.documentElement.setAttribute('data-theme', savedTheme);
 document.documentElement.setAttribute('data-font', savedFont);
 document.documentElement.setAttribute('lang', savedLanguage);
 document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
-document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px');
-document.documentElement.style.fontSize = savedFontSize + 'px';
+
+// Don't change the root font size, leave the UI elements alone
+// document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px'); 
+// document.documentElement.style.fontSize = savedFontSize + 'px';
+
+// Instead, we wait for the DOM to load, then apply the saved size to the verses
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.verses-container');
+    if (container) container.style.fontSize = savedFontSize + 'px';
+});
+
+
+
 
 if (fontSizeSlider) fontSizeSlider.value = savedFontSize;
 if (fontSizeValue) fontSizeValue.textContent = savedFontSize;
@@ -392,19 +403,22 @@ languageBtns.forEach(btn => btn.addEventListener('click', async (e) => {
     await loadTranslations(); closeAllMenus(); updateNavbarWithBothTitles();
 }));
 
+// ===== Font size slider (Targeted to Verses Only) =====
 if (fontSizeSlider) {
     let timeout;
     fontSizeSlider.addEventListener('input', (e) => {
-        const size = e.target.value; if (fontSizeValue) fontSizeValue.textContent = size;
+        const size = e.target.value; 
+        if (fontSizeValue) fontSizeValue.textContent = size;
+        
+        // Apply the font size directly to the verses container, not the whole app
+        document.querySelector('.verses-container').style.fontSize = size + 'px';
+        
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            document.documentElement.style.setProperty('--base-font-size', size + 'px');
-            document.documentElement.style.fontSize = size + 'px';
             localStorage.setItem('fontSize', size);
         }, 50);
     });
 }
-
 overlay.addEventListener('click', closeAllMenus);
 
 document.addEventListener('click', (e) => { 

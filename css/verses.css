@@ -119,16 +119,18 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
    ============================================================ */
 .navbar {
     background-color: var(--nav-bg);
-    padding: 1rem 2rem;
+    padding: 1rem 1rem; /* Outer padding slightly reduced to give room */
     display: grid;
-    grid-template-columns: 1fr auto 1fr; /* Left / Center / Right */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     box-shadow: 0 2px 5px var(--shadow-color);
     position: sticky;
     top: 0;
-    z-index: 1500; /* Raised above overlay and menu */
-    direction: ltr; /* Force LTR layout for predictable positioning */
+    z-index: 1500;
+    direction: ltr;
     transition: background-color 0.3s ease;
+    /* INCREASED INNER SPACING between elements */
+    column-gap: 1.5rem; 
 }
 
 .nav-left { justify-self: start; }
@@ -140,7 +142,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem; /* Increased gap between short title and full title */
     white-space: nowrap;
     unicode-bidi: plaintext;
 }
@@ -180,7 +182,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
     padding: 6px;
     background: transparent;
     border: none;
-    z-index: 1600; /* Above the drawer */
+    z-index: 1600;
     transition: opacity 0.2s ease;
 }
 .hamburger span {
@@ -197,13 +199,13 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 @media (min-width: 1025px) {
     .navbar {
         grid-template-columns: auto minmax(0, 1fr) auto;
-        column-gap: 1.5rem;
+        column-gap: 2rem; /* Wider spacing on desktop */
         padding: 0.75rem 2rem;
     }
     
     .nav-left { grid-column: 1; grid-row: 1; }
     .nav-center { grid-column: 2; grid-row: 1; }
-    .nav-right { display: none; } /* Hide hamburger container on desktop */
+    .nav-right { display: none; }
     
     .nav-menu {
         grid-column: 1 / -1;
@@ -212,7 +214,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 1.5rem;
+        gap: 2rem; /* Wider spacing */
         width: 100%;
         padding: 0.5rem 0 0.25rem;
         position: static;
@@ -232,7 +234,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 }
 
 /* ============================================================
-   MOBILE LAYOUT (max-width: 1024px) - PUSHED TO TOP DRAWER
+   MOBILE LAYOUT (max-width: 1024px) - RIGHT-SIDE DRAWER
    ============================================================ */
 @media (max-width: 1024px) {
     .hamburger { display: flex; }
@@ -240,48 +242,46 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
     .nav-menu {
         display: flex;
         flex-direction: column;
-        position: fixed; /* Fixed to cover the screen */
-        top: 0; /* Pushed to the very top */
-        right: 0;
+        position: fixed; 
+        top: 0; 
+        right: 0; 
         left: auto;
         width: 75%;
         max-width: 320px;
-        height: 100vh; /* Full height */
+        height: 100vh;
         background-color: var(--nav-bg);
-        box-shadow: 2px 5px 15px var(--shadow-color);
-        z-index: 1550; /* Above navbar, below hamburger */
+        box-shadow: -2px 5px 15px var(--shadow-color);
+        z-index: 1550; 
         overflow-y: auto;
-        padding: 4rem 0 1rem 0; /* Top padding pushes links below the hamburger */
-        font-size: 1.1rem !important; /* Lock size */
-        /* Hidden state: off-screen to the right */
+        padding: 4rem 0 1rem 0; 
+        font-size: 1.1rem !important;
+        
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* html[lang="ar"] .nav-menu { right: 0; transform: translateX(100%); } */
-    /* html[lang="en"] .nav-menu, html[lang="fr"] .nav-menu { left: 0; transform: translateX(-100%); } */
-
     .nav-menu.active { 
+        transform: translateX(0); 
         opacity: 1; 
         pointer-events: auto; 
-        transform: translateX(0); 
-        /* visibility: visible; */
     }
     
     .nav-menu a { 
         padding: 1rem 1.5rem; 
         border-bottom: 1px solid var(--border-color); 
-        /* text-align: inherit;  */
         color: var(--text-primary);
         text-decoration: none;
     }
     .nav-menu a:last-child { border-bottom: none; }
+
+    html[lang="ar"] .nav-menu { direction: rtl; text-align: right; }
+    html[lang="en"] .nav-menu, html[lang="fr"] .nav-menu { direction: ltr; text-align: left; }
 }
 
 /* ============================================================
-   PROGRESS BAR (At bottom of Navbar)
+   PROGRESS BAR
    ============================================================ */
 .progress-container {
     position: absolute;
@@ -325,56 +325,99 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 [data-font="kufi"] body, [data-font="kufi"] button, [data-font="kufi"] a, [data-font="kufi"] p, [data-font="kufi"] h1, [data-font="kufi"] h2, [data-font="kufi"] h3, [data-font="kufi"] .nav-menu a, [data-font="kufi"] .verse-line { font-family: 'Kufi', sans-serif !important; }
 [data-font="naskh"] body, [data-font="naskh"] button, [data-font="naskh"] a, [data-font="naskh"] p, [data-font="naskh"] h1, [data-font="naskh"] h2, [data-font="naskh"] h3, [data-font="naskh"] .nav-menu a, [data-font="naskh"] .verse-line { font-family: 'Naskh', serif !important; }
 
-/* ===== Main Content ===== */
-.main-content { flex: 1; padding: 1.5rem 2rem 2rem 2rem; max-width: 900px; margin: 0 auto; width: 100%; }
+/* ===== Main Content (Wider Container) ===== */
+.main-content { 
+    flex: 1; 
+    /* Reduced outer padding to give verses more horizontal room */
+    padding: 1rem 0.5rem 2rem 0.5rem; 
+    max-width: 900px; 
+    margin: 0 auto; 
+    width: 100%; 
+}
 
 /* ===== Verses ===== */
-.verses-container { margin: 1.5rem 0 2rem; direction: rtl; }
+.verses-container { 
+    margin: 1rem 0 4rem 0; /* Added large bottom margin to prevent accidental clicks on Next */
+    direction: rtl; 
+}
 .verse-item {
-    margin-bottom: 1rem; padding: 1rem 1.25rem; background-color: var(--card-bg); border-radius: 12px;
-    border: 1px solid var(--verse-border); box-shadow: 0 2px 5px var(--shadow-color);
-    overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem; 
+    padding: 1rem 0.5rem; /* Slightly tighter inner padding, more space for text */
+    background-color: var(--card-bg); 
+    border-radius: 12px;
+    border: 1px solid var(--verse-border); 
+    box-shadow: 0 2px 5px var(--shadow-color);
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    -webkit-overflow-scrolling: touch;
+    
+    /* Hide Scrollbar visually, keep functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
 }
-.verse-item::-webkit-scrollbar { height: 6px; }
-.verse-item::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 3px; opacity: 0.6; }
-.verse-line {
-    text-align: center; line-height: 2.3; padding: 0.4rem 0.25rem; color: var(--text-primary);
-    transition: color 0.3s ease; white-space: nowrap; font-size: 1.3rem;
+.verse-item::-webkit-scrollbar { 
+    display: none; /* Chrome/Safari */
 }
-.verse-line:first-child { border-bottom: 1px dashed var(--verse-border); margin-bottom: 0.4rem; padding-bottom: 0.6rem; }
 
-/* ===== Verse Navigation (Grid Layout) ===== */
+.verse-line {
+    text-align: center; /* Centered as requested */
+    line-height: 2.3; 
+    padding: 0.4rem 0.25rem; 
+    color: var(--text-primary);
+    transition: color 0.3s ease; 
+    white-space: nowrap; 
+    font-size: inherit;
+}
+.verse-line:first-child { 
+    border-bottom: 1px dashed var(--verse-border); 
+    margin-bottom: 0.4rem; 
+    padding-bottom: 0.6rem; 
+}
+
+/* ===== Verse Navigation ===== */
 .verse-navigation {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr; /* Left / Center / Right */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
     padding: 1rem 0;
-    direction: ltr; /* Always left-to-right */
-}
-.nav-arrow.prev-btn {
-    justify-self: start;
-    background-color: var(--prev-btn-bg); color: var(--prev-btn-text);
-    border: 1px solid var(--border-color); padding: 0.6rem 1rem; border-radius: 8px;
-    cursor: pointer; font-family: inherit; unicode-bidi: plaintext;
-}
-.nav-arrow.next-btn {
-    justify-self: end;
-    background-color: var(--next-btn-bg); color: var(--next-btn-text);
-    border: none; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: bold;
-    box-shadow: 0 4px 10px var(--shadow-color); cursor: pointer; font-family: inherit; unicode-bidi: plaintext;
+    direction: ltr;
 }
 
-/* Add arrows via CSS so JSON doesn't duplicate them */
-/* .nav-arrow.prev-btn::before { content: '← '; } */
-.nav-arrow.next-btn::after { content: ' →'; }
+/* Previous Button (Muted, smaller) */
+.nav-arrow.prev-btn {
+    background-color: var(--prev-btn-bg); 
+    color: var(--prev-btn-text);
+    border: 1px solid var(--border-color); 
+    padding: 0.4rem 0.8rem; /* Reduced padding */
+    font-size: 0.85rem; /* Reduced font size */
+    border-radius: 8px;
+    cursor: pointer; 
+    font-family: inherit; 
+    unicode-bidi: plaintext;
+    opacity: 0.8;
+}
+
+/* Next Button (Spotlight, unchanged size) */
+.nav-arrow.next-btn {
+    background-color: var(--next-btn-bg); 
+    color: var(--next-btn-text);
+    border: none; 
+    padding: 0.6rem 1.5rem; /* Kept original size */
+    border-radius: 8px; 
+    font-weight: bold;
+    box-shadow: 0 4px 10px var(--shadow-color); 
+    cursor: pointer; 
+    font-family: inherit; 
+    unicode-bidi: plaintext;
+}
+
+/* Removed CSS Arrows */
+.nav-arrow.prev-btn::before, .nav-arrow.next-btn::after { content: ''; }
 
 .nav-arrow:disabled { opacity: 0.5; cursor: not-allowed; }
 
-#currentPosition {
-    justify-self: center;
-    color: var(--text-secondary); font-size: 0.95rem; white-space: nowrap; unicode-bidi: plaintext;
-}
+/* Removed #currentPosition styling since it's moving */
 
 /* ===== Holy Names (Version A) ===== */
 .holy-name-allah, .holy-name-muhammad, .holy-name-ahmad, .holy-name-rasool, .holy-name-nabi { font-weight: bold; display: inline-block; transition: color 0.3s ease; }
