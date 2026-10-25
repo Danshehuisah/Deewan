@@ -206,25 +206,25 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 /* ===== Holy Names (Version A) ===== */
 .holy-name-allah, .holy-name-muhammad, .holy-name-ahmad, .holy-name-rasool, .holy-name-nabi { font-weight: bold; display: inline-block; transition: color 0.3s ease; }
 .holy-name-allah[data-theme="light"], .holy-name-allah:not([data-theme]) { color: #8B4513; }
-.holy-name-muhammad[data-theme="light"], .holy-name-muhammad:not([data-theme]) { color: #2c5f2d; }
-.holy-name-ahmad[data-theme="light"], .holy-name-ahmad:not([data-theme]) { color: #9d6b3e; }
-.holy-name-rasool[data-theme="light"], .holy-name-rasool:not([data-theme]) { color: #b85e0e; }
-.holy-name-nabi[data-theme="light"], .holy-name-nabi:not([data-theme]) { color: #7d5136; }
+.holy-name-muhammad[data-theme="light"], .holy-name-muhammad:not([data-theme]) { color: #8B4513; }
+.holy-name-ahmad[data-theme="light"], .holy-name-ahmad:not([data-theme]) { color: #8B4513; }
+.holy-name-rasool[data-theme="light"], .holy-name-rasool:not([data-theme]) { color: #8B4513; }
+.holy-name-nabi[data-theme="light"], .holy-name-nabi:not([data-theme]) { color: #8B4513; }
 [data-theme="dark"] .holy-name-allah, .holy-name-allah[data-theme="dark"] { color: #e6b17e !important; }
 [data-theme="dark"] .holy-name-muhammad, .holy-name-muhammad[data-theme="dark"] {  color: #e6b17e !important; }
 [data-theme="dark"] .holy-name-ahmad, .holy-name-ahmad[data-theme="dark"] {  color: #e6b17e !important; }
 [data-theme="dark"] .holy-name-rasool, .holy-name-rasool[data-theme="dark"] {  color: #e6b17e !important; }
 [data-theme="dark"] .holy-name-nabi, .holy-name-nabi[data-theme="dark"] {  color: #e6b17e !important; }
 [data-theme="sepia"] .holy-name-allah, .holy-name-allah[data-theme="sepia"] { color: #9d6b3e !important; }
-[data-theme="sepia"] .holy-name-muhammad, .holy-name-muhammad[data-theme="sepia"] { color: #5f7b4a !important; }
-[data-theme="sepia"] .holy-name-ahmad, .holy-name-ahmad[data-theme="sepia"] { color: #b77b4a !important; }
-[data-theme="sepia"] .holy-name-rasool, .holy-name-rasool[data-theme="sepia"] { color: #b77b4a !important; }
-[data-theme="sepia"] .holy-name-nabi, .holy-name-nabi[data-theme="sepia"] { color: #8b6b4a !important; }
-[data-theme="green"] .holy-name-allah, .holy-name-allah[data-theme="green"] { color: #c17b3d !important; }
+[data-theme="sepia"] .holy-name-muhammad, .holy-name-muhammad[data-theme="sepia"] { color: #9d6b3e !important; }
+[data-theme="sepia"] .holy-name-ahmad, .holy-name-ahmad[data-theme="sepia"] { color: #9d6b3e !important; }
+[data-theme="sepia"] .holy-name-rasool, .holy-name-rasool[data-theme="sepia"] { color: #9d6b3e !important; }
+[data-theme="sepia"] .holy-name-nabi, .holy-name-nabi[data-theme="sepia"] { color: #9d6b3e !important; }
+[data-theme="green"] .holy-name-allah, .holy-name-allah[data-theme="green"] { color: #1e6b3e !important; }
 [data-theme="green"] .holy-name-muhammad, .holy-name-muhammad[data-theme="green"] { color: #1e6b3e !important; }
-[data-theme="green"] .holy-name-ahmad, .holy-name-ahmad[data-theme="green"] { color: #d98c4a !important; }
-[data-theme="green"] .holy-name-rasool, .holy-name-rasool[data-theme="green"] { color: #d98c4a !important; }
-[data-theme="green"] .holy-name-nabi, .holy-name-nabi[data-theme="green"] { color: #4a7042 !important; }
+[data-theme="green"] .holy-name-ahmad, .holy-name-ahmad[data-theme="green"] { color: #1e6b3e !important; }
+[data-theme="green"] .holy-name-rasool, .holy-name-rasool[data-theme="green"] { color: #1e6b3e !important; }
+[data-theme="green"] .holy-name-nabi, .holy-name-nabi[data-theme="green"] { color: #1e6b3e !important; }
 
 /* Overlay / Animations */
 .picker-overlay { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.5); z-index: 1400; }
