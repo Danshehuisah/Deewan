@@ -28,30 +28,44 @@
 }
 
 [data-theme="dark"] {
-    --bg-primary: #1a1e2b;
-    --bg-secondary: #2d3349;
-    --text-primary: #e9ecef;
-    --text-secondary: #ced4da;
-    --accent-color: #d4a373;
-    --accent-light: #e9b384;
-    --border-color: #495057;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --hover-color: #3d435b;
-    --progress-bg: #3d435b;
-    --progress-fill: #d4a373;
-    --nav-bg: #2d3349;
-    --card-bg: #2d3349;
-    --verse-border: #495057;
-    --header-bg: rgba(45, 51, 73, 0.95);
-    --continue-bg: #3d435b;
-    --badge-bg: #d4a373;
-    --badge-text: #1a1e2b;
-    --back-btn-bg: #2d3349;
-    --back-btn-text: #e9ecef;
-    --next-btn-bg: #d4a373;
-    --next-btn-text: #1a1e2b;
-    --prev-btn-bg: #2d3349;
-    --prev-btn-text: #e9ecef;
+    /* 1. ONE seamless background for everything */
+    --bg-primary: #12151e;      /* Very deep navy/black (Body) */
+    --bg-secondary: #12151e;    /* Same as body (for Pickers) */
+    --nav-bg: #12151e;          /* Same as body (for Navbar) */
+    --card-bg: #12151e;         /* Same as body (for Cards) */
+    
+    /* 2. Soft text colors for high contrast */
+    --text-primary: #e2e8f0;    /* Soft white */
+    --text-secondary: #94a3b8;  /* Muted grey-blue */
+    
+    /* 3. A warm, glowing gold accent */
+    --accent-color: #e0b88a;    /* Softer than #d4a373 */
+    --accent-light: #f1d4b3;
+    
+    /* 4. Subtle borders to separate cards without using different backgrounds */
+    --border-color: #2d3748;    /* Visible but soft */
+    --verse-border: #2d3748;
+    --continue-border: #2d3748;
+    --continue-bg: #1a1e2b;     /* Slightly lighter for the continue card only */
+    
+    /* 5. Shadows (crucial for dark mode) */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --hover-color: #1e2330;
+    
+    /* UI Elements */
+    --progress-bg: #2d3748;
+    --progress-fill: #e0b88a;
+    --header-bg: rgba(18, 21, 30, 0.95);
+    --badge-bg: #e0b88a;
+    --badge-text: #12151e;
+    
+    /* Navigation Buttons */
+    --back-btn-bg: #12151e;
+    --back-btn-text: #e2e8f0;
+    --next-btn-bg: #e0b88a;
+    --next-btn-text: #12151e;
+    --prev-btn-bg: #12151e;
+    --prev-btn-text: #e2e8f0;
 }
 
 [data-theme="sepia"] {
@@ -127,7 +141,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 /* ============================================================
    NAVBAR & MENU (STICKY + DRAWER)
    ============================================================ */
-.navbar { background-color: var(--nav-bg); padding: 16px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; box-shadow: 0 2px 5px var(--shadow-color); position: sticky; top: 0; z-index: 1500; direction: ltr; transition: background-color 0.3s ease; column-gap: 24px; }
+.navbar { background-color: var(--nav-bg); padding: 16px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; box-shadow: none; position: sticky; top: 0; z-index: 1500; direction: ltr; transition: background-color 0.3s ease; column-gap: 24px; border-bottom: 1px solid var(--border-color);}
 .nav-left { justify-self: start; }
 .nav-right { justify-self: end; }
 .nav-center { justify-self: center; display: flex; justify-content: center; min-width: 0; width: 100%; }

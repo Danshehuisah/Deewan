@@ -23,25 +23,44 @@
 }
 
 [data-theme="dark"] {
-    --bg-primary: #1a1e2b;
-    --bg-secondary: #2d3349;
-    --text-primary: #e9ecef;
-    --text-secondary: #ced4da;
-    --accent-color: #d4a373;
-    --accent-light: #e9b384;
-    --border-color: #495057;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --progress-bg: #3d435b;
-    --progress-fill: #d4a373;
-    --nav-bg: #2d3349;
-    --card-bg: #2d3349;
-    --verse-border: #495057;
-    --back-btn-bg: #2d3349;
-    --back-btn-text: #e9ecef;
-    --next-btn-bg: #d4a373;
-    --next-btn-text: #1a1e2b;
-    --prev-btn-bg: #2d3349;
-    --prev-btn-text: #e9ecef;
+    /* 1. ONE seamless background for everything */
+    --bg-primary: #12151e;      /* Very deep navy/black (Body) */
+    --bg-secondary: #12151e;    /* Same as body (for Pickers) */
+    --nav-bg: #12151e;          /* Same as body (for Navbar) */
+    --card-bg: #12151e;         /* Same as body (for Cards) */
+    
+    /* 2. Soft text colors for high contrast */
+    --text-primary: #e2e8f0;    /* Soft white */
+    --text-secondary: #94a3b8;  /* Muted grey-blue */
+    
+    /* 3. A warm, glowing gold accent */
+    --accent-color: #e0b88a;    /* Softer than #d4a373 */
+    --accent-light: #f1d4b3;
+    
+    /* 4. Subtle borders to separate cards without using different backgrounds */
+    --border-color: #2d3748;    /* Visible but soft */
+    --verse-border: #2d3748;
+    --continue-border: #2d3748;
+    --continue-bg: #1a1e2b;     /* Slightly lighter for the continue card only */
+    
+    /* 5. Shadows (crucial for dark mode) */
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --hover-color: #1e2330;
+    
+    /* UI Elements */
+    --progress-bg: #2d3748;
+    --progress-fill: #e0b88a;
+    --header-bg: rgba(18, 21, 30, 0.95);
+    --badge-bg: #e0b88a;
+    --badge-text: #12151e;
+    
+    /* Navigation Buttons */
+    --back-btn-bg: #12151e;
+    --back-btn-text: #e2e8f0;
+    --next-btn-bg: #e0b88a;
+    --next-btn-text: #12151e;
+    --prev-btn-bg: #12151e;
+    --prev-btn-text: #e2e8f0;
 }
 
 [data-theme="sepia"] {
@@ -107,7 +126,7 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 /* ============================================================
    NAVBAR & MENU (STICKY + DRAWER + PROGRESS BAR)
    ============================================================ */
-.navbar { background-color: var(--nav-bg); padding: 16px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; box-shadow: 0 2px 5px var(--shadow-color); position: sticky; top: 0; z-index: 1500; direction: ltr; transition: background-color 0.3s ease; column-gap: 24px; }
+.navbar { background-color: var(--nav-bg); padding: 16px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; box-shadow: none; position: sticky; top: 0; z-index: 1500; direction: ltr; transition: background-color 0.3s ease; column-gap: 24px;border-bottom: 1px solid var(--border-color); }
 .nav-left { justify-self: start; }
 .nav-right { justify-self: end; }
 .nav-center { justify-self: center; display: flex; justify-content: center; min-width: 0; width: 100%; }
@@ -192,10 +211,10 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
 .holy-name-rasool[data-theme="light"], .holy-name-rasool:not([data-theme]) { color: #b85e0e; }
 .holy-name-nabi[data-theme="light"], .holy-name-nabi:not([data-theme]) { color: #7d5136; }
 [data-theme="dark"] .holy-name-allah, .holy-name-allah[data-theme="dark"] { color: #e6b17e !important; }
-[data-theme="dark"] .holy-name-muhammad, .holy-name-muhammad[data-theme="dark"] { color: #8bc34a !important; }
-[data-theme="dark"] .holy-name-ahmad, .holy-name-ahmad[data-theme="dark"] { color: #d4a373 !important; }
-[data-theme="dark"] .holy-name-rasool, .holy-name-rasool[data-theme="dark"] { color: #ffb74d !important; }
-[data-theme="dark"] .holy-name-nabi, .holy-name-nabi[data-theme="dark"] { color: #d4a373 !important; }
+[data-theme="dark"] .holy-name-muhammad, .holy-name-muhammad[data-theme="dark"] {  color: #e6b17e !important; }
+[data-theme="dark"] .holy-name-ahmad, .holy-name-ahmad[data-theme="dark"] {  color: #e6b17e !important; }
+[data-theme="dark"] .holy-name-rasool, .holy-name-rasool[data-theme="dark"] {  color: #e6b17e !important; }
+[data-theme="dark"] .holy-name-nabi, .holy-name-nabi[data-theme="dark"] {  color: #e6b17e !important; }
 [data-theme="sepia"] .holy-name-allah, .holy-name-allah[data-theme="sepia"] { color: #9d6b3e !important; }
 [data-theme="sepia"] .holy-name-muhammad, .holy-name-muhammad[data-theme="sepia"] { color: #5f7b4a !important; }
 [data-theme="sepia"] .holy-name-ahmad, .holy-name-ahmad[data-theme="sepia"] { color: #b77b4a !important; }
@@ -224,3 +243,4 @@ body, body *, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea { letter-spa
     .font-size-control input[type="range"] { max-width: 100%; }
     .nav-brand h1, .diwan-short-title { font-size: 1.1rem !important; line-height: 1.4 !important; }
 }
+
