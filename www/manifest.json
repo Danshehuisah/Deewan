@@ -1,7 +1,7 @@
 {
   "id": "index.html",
   "name": "ديوان الشيخ إبراهيم إنياس | Diwan of Shaykh Ibrahim Inyass",
-  "short_name": "ديوان إنياس",
+  "short_name": "ديوان",
   "description": "المجموعة الكاملة لدواوين الشيخ إبراهيم إنياس - Complete collection of Diwans by Shaykh Ibrahim Inyass",
   "start_url": "index.html",
   "display": "standalone",
@@ -67,14 +67,35 @@
       "sizes": "1080x1920",
       "type": "image/jpeg",
       "platform": "wide",
-      "label": "الصفحة الرئيسية - Home screen with diwan grid"
+      "label": "الصفحة الرئيسية - Home screen"
     },
     {
-      "src": "screenshots/chapters.jpg",
+      "src": "screenshots/chapter sections.jpg",
       "sizes": "1080x1920",
       "type": "image/jpeg",
       "platform": "wide",
-      "label": "قائمة الفصول - Chapters list view"
+      "label": "قائمة الفصول - Chapters list"
+    },
+    {
+      "src": "screenshots/verses.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "الأبيات - Verses view"
+    },
+    {
+      "src": "screenshots/home-dark-mode.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "الصفحة الرئيسية (الوضع الليلي) - Home dark mode"
+    },
+    {
+      "src": "screenshots/verses-dark-mode.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "الأبيات (الوضع الليلي) - Verses dark mode"
     }
   ]
 }

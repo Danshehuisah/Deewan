@@ -6,10 +6,11 @@
     },
     "nav": {
         "home": "Home",
-        "theme": "Theme",
+        "theme": "Themes",
         "font": "Font",
         "language": "Language",
-        "community": "Community"
+        "community": "Community",
+        "rate": "Rate App"
     },
     "theme": {
         "title": "Choose Theme",

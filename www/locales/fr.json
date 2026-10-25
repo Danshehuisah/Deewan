@@ -6,10 +6,11 @@
     },
     "nav": {
         "home": "Accueil",
-        "theme": "Thème",
+        "theme": "Thèmes",
         "font": "Police",
         "language": "Langue",
-        "community": "Communauté"
+        "community": "Communauté",
+        "rate": "Évaluer l'app"
     },
     "theme": {
         "title": "Choisir le thème",

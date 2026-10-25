@@ -450,3 +450,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadChapter();
 });
+
+// ===== RATE APP LOGIC =====
+const rateAppBtn = document.getElementById('rateAppBtn');
+
+if (rateAppBtn) {
+    rateAppBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        // Close the menu if it's open
+        if (typeof closeAllMenus === 'function') {
+            closeAllMenus();
+        }
+
+        // Your unique Android package ID (from Capacitor config)
+        const packageId = 'com.yourname.diwan'; 
+        
+        // 1. Try to use Capacitor Native App Launcher (For Android App)
+        if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
+            try {
+                // Opens the Play Store directly to your app's review page
+                await window.Capacitor.Plugins.App.openUrl({
+                    url: `market://details?id=${packageId}&showAllReviews=true`
+                });
+                return;
+            } catch (err) {
+                console.error('Capacitor App Plugin failed', err);
+            }
+        }
+
+        // 2. Fallback for Web Browsers (or if the App plugin fails)
+        window.open(`https://play.google.com/store/apps/details?id=${packageId}`, '_blank');
+    });
+}
