@@ -36,7 +36,7 @@ const chapterIndex = parseInt(urlParams.get('chapter')) || 0;
 const diwanTitles = {
     1: "تَيْسِيرُ الْوُصُولِ",
     2: "إِكْسِيرُ السَّعَادَاتِ",
-    3: "سَلْوَةُ الشُّجُونِ",
+    3: "سَلْوَةُ الشُّجُونِ",
     4: "أَوْثَقُ الْعُرَى",
     5: "شِفَاءُ الْأَسْقَامِ",
     6: "مَنَاسِكُ أَهْلِ الْوِدَادِ",
@@ -63,18 +63,10 @@ document.documentElement.setAttribute('data-font', savedFont);
 document.documentElement.setAttribute('lang', savedLanguage);
 document.documentElement.setAttribute('dir', savedLanguage === 'ar' ? 'rtl' : 'ltr');
 
-// Don't change the root font size, leave the UI elements alone
-// document.documentElement.style.setProperty('--base-font-size', savedFontSize + 'px'); 
-// document.documentElement.style.fontSize = savedFontSize + 'px';
-
-// Instead, we wait for the DOM to load, then apply the saved size to the verses
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.verses-container');
     if (container) container.style.fontSize = savedFontSize + 'px';
 });
-
-
-
 
 if (fontSizeSlider) fontSizeSlider.value = savedFontSize;
 if (fontSizeValue) fontSizeValue.textContent = savedFontSize;
@@ -136,7 +128,6 @@ function applyTranslations() {
         if (value) element.textContent = value;
     });
 
-    // Arrows are handled via CSS, just set the text here
     if (prevChapter) prevChapter.innerHTML = t.diwan?.prev || 'الْحِزْبُ السَّابِقُ';
     if (nextChapter) nextChapter.innerHTML = t.diwan?.next || 'الْحِزْبُ التَّالِي';
 
@@ -154,19 +145,19 @@ function updatePositionDisplay() {
 }
 
 // ============================================================
-// HOLY NAME STYLING — Index-Map Solution (Preserves Diacritics)
+// HOLY NAME STYLING — Whole-Word Matching (Fixes broken joining)
 // ============================================================
 
-// 1. Define name groups with their specific CSS classes
+// 1. Name groups
 const NAME_GROUPS = [
-    { class: 'holy-name-allah', names: ["الله", "إِلَهِي", "الْإِلَهُ", "رَبِّي", "الرَّبُّ", "رَبٌّ", "رَبُّ الْعَالَمِينَ", "رَبُّ النَّاسِ", "الْمَوْلَى", "الرَّحْمَنُ", "الْمَنَّانُ", "الْمَلِيكُ", "الدَّيَّانُ", "الْحَقُّ", "الْجَلِيلُ", "الْخَالِقُ", "الْبَارِي", "الْمُهَيْمِنُ", "الْمَعْبُودُ"] },
+    { class: 'holy-name-allah', names: ["الله", "إِلَهِي", "الْإِلَهُ", "رَبِّي", "الرَّبُّ", "رَبٌّ", "رَبُّ الْعَالَمِينَ", "رَبُّ النَّاسِ", "الْمَوْلَى", "الرَّحْمَنُ", "الْمَنَّانُ", "الْمَلِيكُ", "الدَّيَّانُ", "الْحَقُّ", "الْجَلِيلُ", "الْخَالِقُ", "الْبَارِي", "الْمُهَيْمِنُ", "الْمَعْبُودُ", "رَبِّ", "رَبَّ", "رَبُّ", "رَبَّنَا", "رَبِّهِ", "رَبُّهُم"] },
     { class: 'holy-name-ahmad', names: ["أَحْمَدُ", "أَحْمَدَ", "أَحْمَدِ"] },
     { class: 'holy-name-rasool', names: ["رَسُولُ اللهِ", "رَسُولُ الْعَالَمِينَ", "رَسُولُ إِلَهِ الْعَرْشِ", "رَسُول", "رَسُولِ", "رَسُولَ", "رَسُولُ"] },
     { class: 'holy-name-nabi', names: ["نَبِيُّنَا", "نَبِي", "نَبِيِّ", "نَبِيَّ", "نَبِيُّ"] },
     { class: 'holy-name-muhammad', names: ["مُحَمَّدٌ", "مُحَمَّدٍ", "مُحَمَّدًا", "مُحَمَّدُ", "مُحَمَّدِ", "طَهَ", "طَاهَ", "الْمُصْطَفَى", "الْمُخْتَارُ", "الْأَمِينُ", "الْمَأْمُونُ", "الْمَاحِي", "الْمَحْمُودُ", "أَبُو الْقَاسِمِ", "الْهَاشِمِيُّ", "عَبْدُ اللهِ", "السِّرَاجُ", "الْمُقَفَّى", "الْمُنْحَمِنَّا", "عَبْدُ الْإِلَهِ", "حَبِيبُ اللهِ", "أَمِينُ اللهِ", "الْمَنْصُورُ", "الْإِمَامُ الْهَاشِمِيُّ", "الصَّادِقُ الْمَصْدُوقُ", "الْهَادِي", "هَادِي الْبَرِيَّةِ", "خَيْرُ النَّاسِ", "خَيْرُ الْأَنَامِ", "خَيْرُ الْعَالَمِينَ", "خَيْرُ الْوَرَى", "خَيْرُ الْخَلاَئِقِ", "كَنْزُ الْبَرَايَا", "الشَّفِيعُ", "بَشِيرٌ نَذِيرٌ", "الْمُنْذِرُ الْمُبَشِّرُ", "الْقَرْمُ", "مَاحِ", "مَاحِي"] }
 ];
 
-// Flatten and sort by length descending
+// 2. Flatten and sort by length descending (longest phrases first)
 const ALL_NAMES = [];
 NAME_GROUPS.forEach(group => {
     group.names.forEach(name => {
@@ -175,83 +166,42 @@ NAME_GROUPS.forEach(group => {
 });
 ALL_NAMES.sort((a, b) => b.text.length - a.text.length);
 
-// Strip diacritics for matching
+// 3. Helper to strip diacritics (tashkeel) and tatweel
 function stripDiacritics(str) {
-    return str.replace(/[\u064B-\u065F\u0670]/g, '');
+    return str.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g, '');
 }
 
-// Build a regex with a capture group for each name
-const ALL_NAMES_REGEX = new RegExp(`(${ALL_NAMES.map(n => stripDiacritics(n.text).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g');
+// Pre-process the names to have their stripped versions ready for fast comparison
+const PROCESSED_NAMES = ALL_NAMES.map(item => ({
+    stripped: stripDiacritics(item.text),
+    class: item.class
+}));
 
+// 4. Apply highlights by checking the WHOLE word (prevents breaking Arabic letters)
 function applyHolySpans(text, theme) {
-    // 1. Escape HTML to prevent injection
-    const escapedText = String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    if (!text) return "";
     
-    // 2. Create a normalized version and a map back to original indices
-    let normalized = '';
-    const indexMap = []; // Maps normalized index -> original index
-    
-    for (let i = 0; i < escapedText.length; i++) {
-        const char = escapedText[i];
-        if (!/[\u064B-\u065F\u0670]/.test(char)) {
-            normalized += char;
-            indexMap.push(i);
+    // Split by spaces, preserving the spaces so the layout doesn't collapse
+    const tokens = text.split(/(\s+)/);
+
+    return tokens.map(token => {
+        // If it's just whitespace, return as is
+        if (/^\s+$/.test(token)) return token;
+
+        // Strip diacritics from this word (also remove common punctuation)
+        const cleanWord = stripDiacritics(token).replace(/[،,.:؛"“”()]/g, "");
+
+        // Check if the clean word matches any of our holy names
+        const match = PROCESSED_NAMES.find(n => n.stripped === cleanWord);
+
+        if (match) {
+            // We found a match! Wrap the ENTIRE original token (with diacritics) in the span.
+            return `<span class="${match.class}" data-theme="${theme}">${token}</span>`;
         }
-    }
-    indexMap.push(escapedText.length); // Sentinel for end of string
 
-    // 3. Find matches in the normalized string
-    let match;
-    const matches = [];
-    ALL_NAMES_REGEX.lastIndex = 0; 
-    
-    while ((match = ALL_NAMES_REGEX.exec(normalized)) !== null) {
-        const startNorm = match.index;
-        const endNorm = startNorm + match[0].length;
-        
-        // Map back to original indices
-        const origStart = indexMap[startNorm];
-        const origEnd = indexMap[endNorm];
-        
-        matches.push({
-            start: origStart,
-            end: origEnd,
-            text: match[0]
-        });
-    }
-
-    if (matches.length === 0) return escapedText;
-
-    // 4. Resolve overlaps (keep longest matches)
-    matches.sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start));
-    const validMatches = [];
-    let currentEnd = -1;
-    
-    for (const m of matches) {
-        if (m.start >= currentEnd) {
-            validMatches.push(m);
-            currentEnd = m.end;
-        }
-    }
-
-    // 5. Build the final HTML in one pass
-    let result = '';
-    let lastIndex = 0;
-    
-    for (const m of validMatches) {
-        // Determine class based on normalized match text
-        const normalizedMatch = stripDiacritics(m.text);
-        const group = ALL_NAMES.find(n => stripDiacritics(n.text) === normalizedMatch);
-        const cls = group ? group.class : 'holy-name-muhammad'; 
-        
-        result += escapedText.slice(lastIndex, m.start);
-        const originalText = escapedText.slice(m.start, m.end);
-        result += `<span class="${cls}" data-theme="${theme}">${originalText}</span>`;
-        lastIndex = m.end;
-    }
-    result += escapedText.slice(lastIndex);
-    
-    return result;
+        // No match: return the original word untouched
+        return token;
+    }).join("");
 }
 
 function updateHolyNamesForTheme() {
@@ -354,19 +304,14 @@ function goToNextChapter() { saveScrollPosition(); if (chapterIndex < totalChapt
 function goBackToChapters() { saveScrollPosition(); window.location.href = `chapter-index.html?diwan=${diwanId}`; }
 
 // ===== Event Listeners =====
-// ===== Event Listeners =====
 if (hamburger && navMenu) {
     hamburger.addEventListener('click', (e) => { 
         e.preventDefault();
         e.stopPropagation(); 
-        
-        // 1. Toggle the menu and hamburger icon
         const isOpen = !navMenu.classList.contains('active');
         navMenu.classList.toggle('active', isOpen); 
         hamburger.classList.toggle('active', isOpen);
         hamburger.setAttribute('aria-expanded', String(isOpen));
-        
-        // 2. Close auxiliary pickers WITHOUT closing the nav menu
         if (themePicker) themePicker.classList.remove('active');
         if (fontPicker) fontPicker.classList.remove('active');
         if (languagePicker) languagePicker.classList.remove('active');
@@ -403,24 +348,18 @@ languageBtns.forEach(btn => btn.addEventListener('click', async (e) => {
     await loadTranslations(); closeAllMenus(); updateNavbarWithBothTitles();
 }));
 
-// ===== Font size slider (Targeted to Verses Only) =====
 if (fontSizeSlider) {
     let timeout;
     fontSizeSlider.addEventListener('input', (e) => {
         const size = e.target.value; 
         if (fontSizeValue) fontSizeValue.textContent = size;
-        
-        // Apply the font size directly to the verses container, not the whole app
         document.querySelector('.verses-container').style.fontSize = size + 'px';
-        
         clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            localStorage.setItem('fontSize', size);
-        }, 50);
+        timeout = setTimeout(() => { localStorage.setItem('fontSize', size); }, 50);
     });
 }
-overlay.addEventListener('click', closeAllMenus);
 
+overlay.addEventListener('click', closeAllMenus);
 document.addEventListener('click', (e) => { 
     if (!e.target.closest('.navbar') && !e.target.closest('.nav-menu') && navMenu?.classList.contains('active')) {
         closeAllMenus(); 
@@ -453,33 +392,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== RATE APP LOGIC =====
 const rateAppBtn = document.getElementById('rateAppBtn');
-
 if (rateAppBtn) {
     rateAppBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        
-        // Close the menu if it's open
-        if (typeof closeAllMenus === 'function') {
-            closeAllMenus();
-        }
-
-        // Your unique Android package ID (from Capacitor config)
+        if (typeof closeAllMenus === 'function') closeAllMenus();
         const packageId = 'com.yourname.diwan'; 
-        
-        // 1. Try to use Capacitor Native App Launcher (For Android App)
         if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
             try {
-                // Opens the Play Store directly to your app's review page
-                await window.Capacitor.Plugins.App.openUrl({
-                    url: `market://details?id=${packageId}&showAllReviews=true`
-                });
+                await window.Capacitor.Plugins.App.openUrl({ url: `market://details?id=${packageId}&showAllReviews=true` });
                 return;
-            } catch (err) {
-                console.error('Capacitor App Plugin failed', err);
-            }
+            } catch (err) { console.error('Capacitor App Plugin failed', err); }
         }
-
-        // 2. Fallback for Web Browsers (or if the App plugin fails)
         window.open(`https://play.google.com/store/apps/details?id=${packageId}`, '_blank');
     });
 }
