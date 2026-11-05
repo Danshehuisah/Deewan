@@ -145,10 +145,9 @@ function updatePositionDisplay() {
 }
 
 // ============================================================
-// HOLY NAME STYLING — Whole-Word Matching (Fixes broken joining)
+// HOLY NAME STYLING — Whole-Word Matching
 // ============================================================
 
-// 1. Name groups
 const NAME_GROUPS = [
     { class: 'holy-name-allah', names: ["الله", "إِلَهِي", "الْإِلَهُ", "رَبِّي", "الرَّبُّ", "رَبٌّ", "رَبُّ الْعَالَمِينَ", "رَبُّ النَّاسِ", "الْمَوْلَى", "الرَّحْمَنُ", "الْمَنَّانُ", "الْمَلِيكُ", "الدَّيَّانُ", "الْحَقُّ", "الْجَلِيلُ", "الْخَالِقُ", "الْبَارِي", "الْمُهَيْمِنُ", "الْمَعْبُودُ", "رَبِّ", "رَبَّ", "رَبُّ", "رَبَّنَا", "رَبِّهِ", "رَبُّهُم"] },
     { class: 'holy-name-ahmad', names: ["أَحْمَدُ", "أَحْمَدَ", "أَحْمَدِ"] },
@@ -157,7 +156,6 @@ const NAME_GROUPS = [
     { class: 'holy-name-muhammad', names: ["مُحَمَّدٌ", "مُحَمَّدٍ", "مُحَمَّدًا", "مُحَمَّدُ", "مُحَمَّدِ", "طَهَ", "طَاهَ", "الْمُصْطَفَى", "الْمُخْتَارُ", "الْأَمِينُ", "الْمَأْمُونُ", "الْمَاحِي", "الْمَحْمُودُ", "أَبُو الْقَاسِمِ", "الْهَاشِمِيُّ", "عَبْدُ اللهِ", "السِّرَاجُ", "الْمُقَفَّى", "الْمُنْحَمِنَّا", "عَبْدُ الْإِلَهِ", "حَبِيبُ اللهِ", "أَمِينُ اللهِ", "الْمَنْصُورُ", "الْإِمَامُ الْهَاشِمِيُّ", "الصَّادِقُ الْمَصْدُوقُ", "الْهَادِي", "هَادِي الْبَرِيَّةِ", "خَيْرُ النَّاسِ", "خَيْرُ الْأَنَامِ", "خَيْرُ الْعَالَمِينَ", "خَيْرُ الْوَرَى", "خَيْرُ الْخَلاَئِقِ", "كَنْزُ الْبَرَايَا", "الشَّفِيعُ", "بَشِيرٌ نَذِيرٌ", "الْمُنْذِرُ الْمُبَشِّرُ", "الْقَرْمُ", "مَاحِ", "مَاحِي"] }
 ];
 
-// 2. Flatten and sort by length descending (longest phrases first)
 const ALL_NAMES = [];
 NAME_GROUPS.forEach(group => {
     group.names.forEach(name => {
@@ -166,40 +164,27 @@ NAME_GROUPS.forEach(group => {
 });
 ALL_NAMES.sort((a, b) => b.text.length - a.text.length);
 
-// 3. Helper to strip diacritics (tashkeel) and tatweel
 function stripDiacritics(str) {
     return str.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g, '');
 }
 
-// Pre-process the names to have their stripped versions ready for fast comparison
 const PROCESSED_NAMES = ALL_NAMES.map(item => ({
     stripped: stripDiacritics(item.text),
     class: item.class
 }));
 
-// 4. Apply highlights by checking the WHOLE word (prevents breaking Arabic letters)
 function applyHolySpans(text, theme) {
     if (!text) return "";
-    
-    // Split by spaces, preserving the spaces so the layout doesn't collapse
     const tokens = text.split(/(\s+)/);
 
     return tokens.map(token => {
-        // If it's just whitespace, return as is
         if (/^\s+$/.test(token)) return token;
-
-        // Strip diacritics from this word (also remove common punctuation)
         const cleanWord = stripDiacritics(token).replace(/[،,.:؛"“”()]/g, "");
-
-        // Check if the clean word matches any of our holy names
         const match = PROCESSED_NAMES.find(n => n.stripped === cleanWord);
 
         if (match) {
-            // We found a match! Wrap the ENTIRE original token (with diacritics) in the span.
             return `<span class="${match.class}" data-theme="${theme}">${token}</span>`;
         }
-
-        // No match: return the original word untouched
         return token;
     }).join("");
 }
@@ -209,17 +194,37 @@ function updateHolyNamesForTheme() {
     document.querySelectorAll('.holy-name-allah, .holy-name-muhammad, .holy-name-ahmad, .holy-name-rasool, .holy-name-nabi').forEach(name => name.setAttribute('data-theme', currentTheme));
 }
 
-// ===== Fetching & Loading =====
+// ===== Fetching & Loading (With In-Memory Cache) =====
+const chapterCache = new Map();
+
 async function fetchChapter(index) {
+    if (chapterCache.has(index)) return chapterCache.get(index);
+    
     const file = `${index + 1}.json`;
     const res = await fetch(dataPath(file));
     if (!res.ok) throw new Error(`Chapter ${index + 1} not found`);
-    return await res.json();
+    
+    const data = await res.json();
+    chapterCache.set(index, data);
+    
+    // Keep memory clean (delete oldest if cache gets too big)
+    if (chapterCache.size > 8) {
+        const oldest = chapterCache.keys().next().value;
+        chapterCache.delete(oldest);
+    }
+    return data;
 }
 
 function schedulePrefetch(indices) {
-    const run = () => { indices.forEach(idx => { if (idx >= 0 && idx < totalChapters) fetch(dataPath(`${idx + 1}.json`)).catch(() => {}); }); };
-    if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2000 }); else setTimeout(run, 500);
+    const run = () => { 
+        indices.forEach(idx => { 
+            if (idx >= 0 && idx < totalChapters && !chapterCache.has(idx)) {
+                fetchChapter(idx).catch(() => {}); 
+            }
+        }); 
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2000 }); 
+    else setTimeout(run, 500);
 }
 
 async function loadChapter() {
@@ -253,29 +258,24 @@ function updateNavbarWithBothTitles() {
     `;
 }
 
+// ===== Render (Single-String Injection) =====
 function renderCurrentChapter() {
     if (!versesContainer || !currentChapter) return;
-    versesContainer.innerHTML = '';
     if (!currentChapter.huruf || !Array.isArray(currentChapter.huruf)) return;
 
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    const frag = document.createDocumentFragment();
+    
+    // Build the entire HTML string first
+    const html = currentChapter.huruf.map(verse => {
+        if (!Array.isArray(verse) || verse.length < 2) return '';
+        return `<div class="verse-item">
+                  <div class="verse-line">${applyHolySpans(verse[0], currentTheme)}</div>
+                  <div class="verse-line">${applyHolySpans(verse[1], currentTheme)}</div>
+                </div>`;
+    }).join("");
 
-    currentChapter.huruf.forEach(verse => {
-        if (!Array.isArray(verse) || verse.length < 2) return;
-        const verseDiv = document.createElement('div');
-        verseDiv.className = 'verse-item';
-        const line1 = document.createElement('div');
-        line1.className = 'verse-line';
-        line1.innerHTML = applyHolySpans(verse[0], currentTheme);
-        const line2 = document.createElement('div');
-        line2.className = 'verse-line';
-        line2.innerHTML = applyHolySpans(verse[1], currentTheme);
-        verseDiv.appendChild(line1);
-        verseDiv.appendChild(line2);
-        frag.appendChild(verseDiv);
-    });
-    versesContainer.appendChild(frag);
+    // Apply it all at once
+    versesContainer.innerHTML = html;
 }
 
 function updateProgress() {
